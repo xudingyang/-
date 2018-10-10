@@ -19,8 +19,9 @@
   // 3、Date的toString()与valueOf()
 //  date_test()
   // 4、Number的toString()与valueOf()
-  number_test()
-  // 5
+//  number_test()
+  // 5、Boolean的toString()与valueOf()
+  boolean_test()
 
   function object_test() {
     console.log('\n ***********以下是o************')
@@ -172,7 +173,11 @@
     console.log(typeof num.valueOf())      // number
     console.log(typeof num.toString())     // string
   }
-
+  function boolean_test () {
+    var boo = new Boolean(22)
+    console.log(boo.toString())   // true  字符串
+    console.log(boo.valueOf())    // true  Boolean值
+  }
 </script>
 </body>
 </html>

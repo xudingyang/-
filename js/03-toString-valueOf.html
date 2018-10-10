@@ -5,6 +5,96 @@
   <title>Title</title>
 </head>
 <body>
+<script>
+  // toString()    valueOf()   都是Object.prototype里的方法
+  // toString()    返回对象的字符串
+  // valueOf()     返回对象的原始值
 
+  // 1、 Object的toString()与valueOf()
+  console.log('\n ***********以下是o************')
+  var o = {
+    name: '张三'
+  }
+  console.log(o.toString())    //  打印  [object Object]
+  console.log(o.valueOf())     //  打印  {name: "张三"}
+  console.log('=============')
+  console.log(12 + o)          //  打印  12[object Object]    直接调用toString()，还是先valueOf再toString ??
+  console.log(12 - o)          //  NaN
+
+  console.log('\n ***********以下是oo************')
+  var oo = {
+    name: '张三',
+    toString: function () {
+      console.log('我是重写的toSting')
+    },
+    valueOf: function () {
+      console.log('我是重写的valueOf')
+    }
+  }
+  console.log(oo)               //  直接得到obj的字符串形式，没有调用这两个方法
+  console.log(oo.toString())    //  得到   undefined , 因为toString()没有返回值
+  console.log(oo.valueOf())     //  得到   undefined , 没有返回值嘛
+  console.log('=============')
+  console.log(12 + oo)          //  NaN    只调用valueOf。  因为undefined也算原始值，所以不再调用toString
+  console.log('#######3')
+  alert(oo + 12)                // 只调用valueOf()。因为undefined也算原始值，所以不再调用toString
+
+  console.log('\n ***********以下是obj************')
+  var obj = {
+    name: '张三',
+    toString: function () {
+      console.log('我是重写的toSting')
+      return Object.prototype.toString.apply(this)
+    },
+    valueOf: function () {
+      console.log('我是重写的valueOf')
+      return Object.prototype.valueOf.apply(this)
+    }
+  }
+  console.log(obj)               //  直接得到obj的字符串形式，没有调用这两个方法
+  console.log(obj.toString())    //  打印  [object Object]
+  console.log(obj.valueOf())     //  打印  {name: "张三", toString: ƒ, valueOf: ƒ}
+  console.log('=============')
+  console.log(12 + obj)          //  打印  12[object Object]    先调用valueOf，没有得到原始值，再调用toString
+  console.log(12 - obj)          //  打印  NaN                  依然是先调用valueOf，没有得到原始值，再调用toString
+  document.writeln(obj)          //  只调用toString()            这里指名道姓要字符串，直接调用toString()
+  console.log('%%%%%%%%%%%%%%%%%')
+//  alert(obj + 12)                // 先调用valueOf，再调用toString。
+  console.log(obj == 12)           // 先调用valueOf，再调用toString。注意，这里是两个等号，会隐式转换，所以会这样。
+                                   // 如果是三个等号，那直接返回false
+
+  console.log('\n ***********以下是obj1************')
+  var obj1 = {
+    name: '张三',
+    toString: function () {
+      console.log('我是重写的toSting')
+      return {}
+    },
+    valueOf: function () {
+      console.log('我是重写的valueOf')
+      return Object.prototype.valueOf.apply(this)
+    }
+  }
+  console.log(obj1)               //  直接得到obj的字符串形式，没有调用这两个方法
+  console.log(obj1.toString())    //  打印  {}    toString()返回啥，这里就打印啥
+  console.log(obj1.valueOf())     //  打印  {name: "张三", toString: ƒ, valueOf: ƒ}
+  console.log('=============')
+//  console.log(12 + obj1)          //  打印  12[object Object]    先调用valueOf，没有得到原始值，再调用toString
+                                  //  报错咯。 TypeError: Cannot convert object to primitive value
+//  console.log(12 - obj1)          //  报错。原因同上
+//  document.writeln(obj1)          //  报错。因为这里要字符串，你给一个对象干什么？
+//  console.log('%%%%%%%%%%%%%%%%%')
+//  alert(obj1 + 12)                // 先调用valueOf，再调用toString。报错。原因也是对象不能参与加减运算，这里要原始值。
+
+  // 普通对象总结
+  // (一) 要字符串的时候，直接调用toString()
+  // (二) 有加减等数值运算操作的时候，企图得到可以运算的值(即原始值，对象是不能参与加减操作的)，
+  //        先调用valueOf()，如果得到原始值，那就拿来用了；
+  //           如果valueOf()没有得到原始值，那就继续调用toString()，得到字符串，
+  //              然后企图把得到的字符串转成数字类型并返回。如果返回的原始值不是数字类型，那就NaN喽。
+  //                 如果返回的连原始值都不是，那就报错咯。TypeError: Cannot convert object to primitive value
+
+  // 2、
+</script>
 </body>
 </html>

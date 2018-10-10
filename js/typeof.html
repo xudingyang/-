@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // typeof操作符
+
+  // typeof可能得到以下6个值 undefined  boolean  string  number  object   function
+  var person = {name: '老四', age: 20}
+  var regexp = /abc/
+  var aaa
+  var func = function () {
+    console.log(123)
+  }
+  var obj = new func()
+  var func1 = new Function()
+
+  console.log(typeof 3.14)       // number
+  console.log(typeof NaN)        // number
+  console.log(typeof 'haha')     // string
+  console.log(typeof NaN)        // number
+  console.log(typeof [1,2])      // object
+  console.log(typeof regexp)     // object
+  console.log(typeof person)     // object
+  console.log(typeof null)       // object
+  console.log(typeof obj)        // object
+  console.log(typeof func)       // function
+  console.log(typeof func1)      // function
+  console.log(typeof aaa)        // undefined
+  console.log(typeof bbb)        // undefined
+  console.log(aaa)
+  //  console.log(bbb)           // bbb is not defined
+
+  // 1、number类型  string类型   object  function 都能得到正确的结果
+  // 注意（Bug）：
+  // 1、null  Array Regexp 的结果都是  object。
+  // 2、当然了，特别古老的浏览器(Safari 5  Chrome 7)，正则表达式得到的是function。现代浏览器都是object了。
+
+  // 另外，通过typeof识别undefined也是不靠谱的。因为未声明也可以得到结果
+
+
+  // 问题来了，null和Array得到的都是object，那么我们怎么识别null和Array呢？
+  // 1 识别null
+  //   直接用  value === null  就行了嘛
+  // 2 识别数组
+  //    方式一，有瑕疵
+  var my_isArray = function (value) {
+    return value && typeof value === 'object' && value.constructor === Array
+  }
+  console.log(my_isArray([2,3]))
+  // 这种方式实际上是从原型链着手的，跟用instanceof方法判断是一个道理。但是有瑕疵。
+  // 这种方法，在同一个页面下是有效的。但是，有多个iframe的时候，就不管用了。
+  // 因为每个iframe都有一个window对象，Array是挂在这个window对象上的。
+  // 所以A页面的Array跟B页面的Array肯定是不同的。如果我在A页面创建一个arr数组，然后在B页面中进行判断构造函数是否是Array，那肯定是错的。
+
+  //    方式二，正常工作。通用方法
+  // 下面这种方式可以准确识别出数组
+  var my_isArray_s = function (value) {
+    return Object.prototype.toString.apply(value) === '[object Array]'
+  }
+  console.log(my_isArray_s([]))
+  // 原理：Object的toString()方法返回的是  '[object ConstructorName]'
+
+  //    方式三，ES5之后，有了原生的isArray()方法
+</script>
+</body>
+</html>

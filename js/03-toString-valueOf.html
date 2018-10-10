@@ -15,9 +15,11 @@
 //  object_test()
 
   // 2、Array的toString()与valueOf()
-  array_test()
+//  array_test()
   // 3、Date的toString()与valueOf()
-  // 4、
+//  date_test()
+  // 4、Number的toString()与valueOf()
+  number_test()
   // 5
 
   function object_test() {
@@ -150,6 +152,25 @@
     // toString()  返回由数组中由每个值的字符串形式拼接而成的一个以逗号分隔的字符串。其实是每项分别调用toString()，然后拼接成的
     // valueOf()   返回的还是数组
 
+  }
+  function date_test () {
+    var date1 = new Date()
+    console.log(date1.toString())    //  打印  Thu Oct 11 2018 00:15:23 GMT+0800 (中国标准时间)
+    console.log(date1.valueOf())     //  打印  毫秒值
+    console.log(date1 + 100)         //  打印  Thu Oct 11 2018 00:17:19 GMT+0800 (中国标准时间)100
+    console.log(100 + date1)         //  打印  100Thu Oct 11 2018 00:17:55 GMT+0800 (中国标准时间)
+
+    // 结论
+    // 因为valueOf能直接得到毫秒值，所以时间可以很方便的加减
+  }
+  function number_test () {
+    var num = 12.345
+    console.log(num.valueOf())             // 12.345  数值型
+    console.log(num.toString())            // 12.345  字符串
+    console.log(num.toString(2))           // 可以带一个参数，表示进制。默认是10进制
+    console.log(num.toString(8))           // 8进制
+    console.log(typeof num.valueOf())      // number
+    console.log(typeof num.toString())     // string
   }
 
 </script>

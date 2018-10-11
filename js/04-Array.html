@@ -101,24 +101,42 @@
   console.log(arr5 === reverseArr)  // true
 
   // *****************************************************
-  // 6、 array.pop()
+  // 6、 array.pop()   删除尾部一个元素，并返回该元素。如果数组为空，返回undefined
   // *****************************************************
   console.log('\n pop()=====================')
+  var arr6 = ['a','b','c']
+  console.log(arr6.pop())            // c
+  console.log(arr6)                  // ["a", "b"]
 
   // *****************************************************
-  // 6、 array.push()
+  // 6、 array.push(item...)   把参数依次添加到数组尾部，并返回数组的长度。如果添加的是数组，不会展开数组
   // *****************************************************
   console.log('\n pop()=====================')
+  var arr7 = ['a','b']
+  var arr8 = ['a','b']
+  console.log(arr7.push('hello', '你好'))   // 4
+  console.log(arr7)                        // ["a", "b", "hello", "你好"]
+  console.log(arr8.push( [1, 2, '哦']))    // 3
+  console.log(arr8)                        // ["a", "b", Array(3)]
 
   // *****************************************************
-  // 6、 array.shift()
+  // 6、 array.shift()     删除第一个元素，并返回该元素。比pop()慢得多
   // *****************************************************
   console.log('\n shift()=====================')
+  var arr9 = ['a','b','c']
+  console.log(arr9.shift())   // a
+  console.log(arr9)           // ["b", "c"]
 
   // *****************************************************
-  // 6、 array.unshift()
+  // 6、 array.unshift(item...)   把参数添加到数组前边，返回数组长度。IE 6返回的不是长度，而是undefined，呵呵。
   // *****************************************************
   console.log('\n unshift()=====================')
+  var arr10 = ['a','b']
+  var arr11 = ['a','b']
+  console.log(arr10.unshift(1, 2))      // 4
+  console.log(arr10)                    // [1, 2, "a", "b"]
+  console.log(arr11.unshift(['a','b'])) // 3
+  console.log(arr11)                    // [Array(2), "a", "b"]
 
   // *****************************************************
   // 6、 array.sort()

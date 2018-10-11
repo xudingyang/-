@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 相同点： concat  slice  splice 都是浅复制
+  // 不同点： concat  slice 会产生新数组。 splice操作的是原数组
+
+  // 操作原数组的方法：splice(), reverse()
+
+  // *****************************************************
+  // 1、 array.concat(item...)      浅复制
+  // *****************************************************
+  console.log('\n 下边是concat()=====================')
+  var arr1 = [1,2,'aa','bb']
+  var concatArr1 = arr1.concat(99,10,88)
+  var concatArr2 = arr1.concat(arr1,100,{age:10})
+  var concatArr3 = arr1.concat()
+  console.log(concatArr1)   // [1, 2, "aa", "bb", 99, 10, 88]
+  console.log(concatArr2)   // [1, 2, "aa", "bb", 1, 2, "aa", "bb", 100, {…}]
+  console.log(concatArr3)   // [1, 2, "aa", "bb"]
+  console.log(arr1)         // [1, 2, "aa", "bb"]
+  console.log(arr1 === concatArr3)  // false
+  // concat()总结
+  // （一）concat()产生的是新数组
+  // （二）参数传什么，就把什么添加到新数组后边。传一个或多个都可以。
+  // （三）如果传的是数组，会把数组各项顺序添加到末尾。如果传的是对象，则把对象整体添加。
+
+  // *****************************************************
+  // 2、 array.join(separator)  略
+  // *****************************************************
+
+
+  // *****************************************************
+  // 3、 array.slice(start,end)   从start开始，到end之前。浅赋值
+  // *****************************************************
+  console.log('\n 下边是slice() =====================')
+  var arr2 = ['一','二','三','四','五','六','七']
+  var sliceArr1 = arr2.slice()        // 若不带参数，相当于复制数组
+  var sliceArr2 = arr2.slice(1,3)     // 从下标1开始，到下标3之前
+  var sliceArr5 = arr2.slice(3,1)     // 反过来。如果end小于等于start(负数都转成了正数再进行比较)，返回空数组
+  var sliceArr3 = arr2.slice(1)       // end参数默认是数组长度
+  var sliceArr4 = arr2.slice(1,-2)    // 相当于 slice(1,5)  若为负数： arr.length + 该负数
+  console.log(sliceArr1)              // ["一", "二", "三", "四", "五", "六", "七"]
+  console.log(sliceArr1 === arr2)     // false
+  console.log(sliceArr2)              // ["二", "三"]
+  console.log(sliceArr5)              // []
+  console.log(sliceArr3)              // ["二", "三", "四", "五", "六", "七"]
+  console.log(sliceArr4)              // ["二", "三", "四", "五"]
+  console.log('%%%%%%%%%验证slice()的浅复制%%%%%%')
+  var arr3 = [{name: '张三'},{name: '李四'},{name: 'Allen'}]
+  var sliceArr5 = arr3.slice(0,1)
+  sliceArr5[0].name = '刘能'
+  console.log(sliceArr5[0])     // {name: "刘能"}
+  console.log(arr3[0])          // {name: "刘能"}  arr3中的name也被改了。说明是浅复制
+  // slice()总结
+  // （一）产生新数组。浅复制
+  // （二）从start开始，到end之前。即含头不含尾。end默认为arr.length
+  // （三）如果参数为负数，则用arr.length + 该负数，转为正数后继续截取
+  // （四）转为正整数后，如果start大于或等于end，返回空数组
+
+  // *****************************************************
+  // 4、 array.splice(start, deleteCount, item...)
+  //      在start位置开始，删除deleteCount个元素，然后把item...这些元素补充进来
+  //      返回被删除元素组成的数组
+  // *****************************************************
+  console.log('\n splice()=====================')
+  var arr4 = ['a','b','c','d','e']
+  var arr44 = ['a','b','c','d','e']
+  var arr444 = ['a','b','c','d','e']
+  var arr4444 = ['a','b','c','d','e']
+  var spliceArr1 = arr4.splice()          // 不加参数，什么也不会删除
+  console.log(spliceArr1)                 // 打印 []  所以返回空该数组
+  console.log(arr4)                       // 打印 ["a", "b", "c", "d", "e"]  原数组没变化
+  var spliceArr2 = arr44.splice(1,2,'加一','加二')     // 从1开始，删除2个，补充进'加二','加二'
+  console.log(spliceArr2)                            // ["b", "c"]
+  console.log(arr44)                                 // ["a", "加一", "加二", "d", "e"]  原数组变化了
+  var spliceArr3 = arr444.splice(1,2)     // 从1开始，删除2个。没有补充新元素。相当于删除操作
+  console.log(spliceArr3)                 // ["b", "c"]
+  console.log(arr444)                     // ["a", "d", "e"]  原数组变化了
+  var spliceArr4 = arr4444.splice(1,2,{name:'老吴'},23,[1,2,3])   // 这里跟concat不同了，这里的数组不会展开添加了
+  console.log(spliceArr4)    // ["b", "c"]
+  console.log(arr4444)       // ["a", {…}, 23, Array(3), "d", "e"]
+  // splice()总结
+  // （一）会改变原数组。直接操作的原数组
+  // （二）从start位置起，删除deleteCount个元素，然后在该位置添加新的元素
+  // （三）可以做删除操作。不传入要添加元素即可
+  // （四）如果添加的是数组，跟concat不同的是，这里新加的数组不会展开了，会当成整个对象添加进去。
+
+  // *****************************************************
+  // 5、 array.reverse()     反转数组。不产生新数组，操作原数组。
+  // *****************************************************
+  console.log('\n reverse()=====================')
+  var arr5 = ['a','b','c','d']
+  var reverseArr = arr5.reverse()
+  console.log(reverseArr)           // ["d", "c", "b", "a"]
+  console.log(arr5)                 // ["d", "c", "b", "a"]
+  console.log(arr5 === reverseArr)  // true
+
+  // *****************************************************
+  // 6、 array.pop()
+  // *****************************************************
+  console.log('\n pop()=====================')
+
+  // *****************************************************
+  // 6、 array.push()
+  // *****************************************************
+  console.log('\n pop()=====================')
+
+  // *****************************************************
+  // 6、 array.shift()
+  // *****************************************************
+  console.log('\n shift()=====================')
+
+  // *****************************************************
+  // 6、 array.unshift()
+  // *****************************************************
+  console.log('\n unshift()=====================')
+
+  // *****************************************************
+  // 6、 array.sort()
+  // *****************************************************
+  console.log('\n sort()=====================')
+</script>
+</body>
+</html>

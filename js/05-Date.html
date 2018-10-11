@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  console.log('\n ================== 预热 ====================')
+  // UTC  GMT  这两个都是指0时区的时间。然后以此为标准，各个时区自己计算时间
+  var utcDate = Date.UTC(1970, 0, 1)    // UTC（0时区的）的1970年1月1号
+  console.log(utcDate)                  // 打印 0
+  var localTime = new Date(1970, 0, 1)    // 这是以当地时间设置的。
+  console.log(localTime.getTime())        // 打印  -28800000
+                      // getTime()返回的是GMT时间    所以我们的1970年1月1号0时，对GMT来讲，就是-8时。所以打印负数。
+  console.log(localTime)                  // 东八区
+
+  var date = new Date(0)        // 只要是unix时间戳，就是指UTC的1970。所以，这里的0毫秒，就是指UTC的0。
+  console.log(date)             // 但是Date构造函数，都是用的当地时间，所以这里打印的是当地时区，打印的是 东八区的8点
+  console.log(date.getTime())   // 打印 0   getTime()获取的是从1970年的毫秒数。所以是GMT
+  // 一会儿当地时区，一会儿UTC，有病？确实，有病。但是还是得用。
+
+  console.log('\n ================== 正式开始 ====================')
+  // *******************************************
+  // 1、构造函数，获取日期对象
+  // *******************************************
+  console.log('\n 构造函数#######################')
+  // 构造函数用的是当地时区
+  console.log(new Date())                  // Thu Oct 11 2018 21:45:07 GMT+0800 (中国标准时间)
+  // 只传一个整数，会当成毫秒值。毫秒值是从Unix时间戳0时开始的。但是，构造出的时间对象是当地时区的
+  console.log(new Date(0))                 // Thu Jan 01 1970 08:00:00 GMT+0800 (中国标准时间)
+  console.log(new Date(1970,0,1,8,0,12))   // Thu Jan 01 1970 08:00:12 GMT+0800 (中国标准时间)
+  console.log(new Date('1970/1/1 12:23:12'))   // Thu Jan 01 1970 12:23:12 GMT+0800 (中国标准时间)
+  console.log(new Date('1970-1-1 12:23:23'))   // Thu Jan 01 1970 12:23:23 GMT+0800 (中国标准时间)
+
+  // *******************************************
+  // 2、获得从1970到当前的毫秒值：4种方式
+  // *******************************************
+  console.log('\n 获得从1970到现在的毫秒值#######################')
+  var date1 = new Date()
+  console.log(date1.getTime())    // 1539267682270
+  console.log(Date.now())         // 1539267682270
+  console.log(+new Date())        // 1539267682270
+  console.log(date1.valueOf())    // 1539267682270   因为Date的valueOf()返回原始值，所以可方便的进行加减、比大小等数学运算
+  // 结论：只要是从1970到某时间的毫秒值，都是以UTC为准的
+
+  // *******************************************
+  // 3、toString()与toLocaleString()与valueOf()
+  // *******************************************
+  console.log('\n toString()与toLocaleString()与valueOf()############################')
+  console.log(date1.toString())         // Thu Oct 11 2018 22:23:55 GMT+0800 (中国标准时间)   跟直接打印date对象一样
+  console.log(date1.valueOf())          // 1539267835329  返回毫秒值
+  console.log(date1.toLocaleString())   // 2018/10/11 下午10:26:17
+
+  // *******************************************
+  // 4、格式化时间。原生的格式化方法都没什么用。要格式化，取得时间小组件了，再去拼接吧。
+  // *******************************************
+  console.log('\n 格式化时间#######################')
+  console.log(date1.toDateString())           // Thu Oct 11 2018
+  console.log(date1.toTimeString())           // 22:43:47 GMT+0800 (中国标准时间)
+  console.log(date1.toLocaleDateString())     // 2018/10/11
+  console.log(date1.toLocaleTimeString())     // 下午10:43:47
+  console.log(date1.toUTCString())            // Thu, 11 Oct 2018 14:43:47 GMT
+
+  // *******************************************
+  // 5、获取时间组件
+  // *******************************************
+  console.log('\n 获取时间组件#######################')
+  // 2018年10月11日 22点53分 星期四
+  console.log(date1.getFullYear())      // 2018
+  console.log(date1.getMonth())         // 9      月份是从0开始的。范围 [0,11]
+  console.log(date1.getDate())          // 11     10月11号
+  console.log(date1.getDay())           // 4      这不是号数。这是星期几。 星期天 0， 星期一 1，星期二 2，...，星期六 6
+  console.log(date1.getHours())         // 22     时
+  console.log(date1.getMinutes())       // 53     分
+  console.log(date1.getSeconds())       // 21     秒
+  console.log(date1.getMilliseconds())  // 830    毫秒
+  var date2 = new Date('2018-10-14')
+  console.log(date2.getDay())
+
+  // *******************************************
+  // 6 设置时间，时间加减。上边都是get。当然还有个set了
+  // *******************************************
+  console.log('\n 设置时间、时间加减#######################')
+  var date3 = new Date('2018-03-02')
+  var date33 = new Date('2018-03-02')
+  console.log(date3)
+  // （一）setMonth()  设置日期的月份。
+  date3.setMonth(12)
+  console.log(date3)      // Wed Jan 02 2019 08:00:00 GMT+0800 (中国标准时间)   第13月，即第二年1月，所以是2019年1月2日
+  //  可以借此完成月份的加减。比如，点一下月份增加按钮，就加一个月
+  date33.setMonth(date33.getMonth() + 1)
+  console.log(date33)     // Mon Apr 02 2018 08:00:00 GMT+0800 (中国标准时间)
+
+</script>
+</body>
+</html>

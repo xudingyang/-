@@ -52,6 +52,10 @@
     return value && typeof value === 'object' && value.constructor === Array
   }
   console.log(my_isArray([2,3]))
+  // 这种方式的原理就是检查原型链，可以简写成下边的if语句。
+  if ([] instanceof Array) {
+    // 跟检测value.constructor === Array 是一样的
+  }
   // 这种方式实际上是从原型链着手的，跟用instanceof方法判断是一个道理。但是有瑕疵。
   // 这种方法，在同一个页面下是有效的。但是，有多个iframe的时候，就不管用了。
   // 因为每个iframe都有一个window对象，Array是挂在这个window对象上的。

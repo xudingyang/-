@@ -189,7 +189,46 @@
   console.log(arr13.lastIndexOf(2))        // 9     就是要从后往前找。只是找的方向变了，数组元素的下标不会跟着反过来
 
   // *****************************************************
+  // 13、 迭代方法
   // *****************************************************
+  // （一）forEach(func(item,index,array))  对数组中每一项运行给定函数。没有返回值。本质上跟for循环一样
+  console.log('\n forEach()迭代方法=====================')
+  var arr14 = ['a',1,2,'vv',['你','好'],{age: 20}]
+  // item: 当前遍历的项
+  // index: 当期遍历项的索引
+  // array: 被遍历的数组
+  arr14.forEach(function (item, index, array) {
+    console.log(array === arr14) // true
+  })
+  // （二）map(func(item,index,array))  对数组中每一项运行给定函数，返回每次函数调用的结果组成的数组
+  // 注意，这是js原生的，不是jQuery的
+  console.log('\n map()迭代方法=====================')
+  var arr15 = [1,2,3,4]
+  var mapTestResult = arr15.map(function (item, index, array) {
+    return item * 2
+  })
+  console.log(mapTestResult)    // [2, 4, 6, 8]
+  // （三）every(func(item,index,array))  每一项运行给定函数，如果所有项的运算结果都返回true，则evary()返回true
+  //      类似 && 运算
+  console.log('\n every()迭代方法=====================')
+  var everyTestResult = arr15.every(function (item, index, array) {
+    return item > 0
+  })
+  console.log(everyTestResult)
+  // （四）some(func(item,index,array))  每一项运行给定函数，如果有一项返回true,则some()返回true
+  //      类似 || 运算
+  console.log('\n some()迭代方法=====================')
+  var someTestResult = arr15.some(function (item, index, array) {
+    return item > 3
+  })
+  console.log(someTestResult)
+  // （五）filter(func(item,index,array))  每一项运行给定函数，返回让该函数返回true的元素，组成的数组
+  console.log('\n filter()迭代方法=====================')
+  var filterTestResult = arr15.filter(function (item, index, array) {
+    return item > 2
+  })
+  console.log(filterTestResult)    // [3, 4]
+
 </script>
 </body>
 </html>

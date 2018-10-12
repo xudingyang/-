@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // Number对象是包装类型，便于操作number类型的是基本值.因为基本类型不是对象，是没有方法的，所以搞个包装类型出来
+  // 同理：String    Boolean   也是string boolean的包装类型
+
+  // 举例：
+  // 当这条语句出现的时候  num1.toString()
+  // 后台会自动完成下边三步：
+  // 1 创建一个Number类型实例    var n = new Number(num1)
+  // 2 用实例调用方法            var n1 = n.toString()
+  // 3 销毁这个实例              n1 = null
+
+  // 这三步都在 num1.toString() 这一句执行的时候完成，
+  // 这一句之后，包装对象就不存在了，想继续调用方法，就要继续创造另外的包装对象
+
+  var num1 = 12
+  var num1Obj = new Number(12)
+  console.log(num1)                // 12
+  console.log(num1Obj)             // Number {12}
+  console.log(num1Obj.toString())  // 12  (字符串)
+  console.log(num1Obj.valueOf())   // 12 （数值）
+  console.log(typeof num1)         // number
+  console.log(typeof num1Obj)      // object
+
+  // *************************************************
+  // Number  的方法
+  // *************************************************
+  console.log('\n Number的方法======================')
+
+  // *************************************************
+  // 1、 toString()   valueOf()  略
+  // *************************************************
+  // 要注意的是，toString()可以带参数，参数为进制
+  console.log('\n toString() valueOf() 略======================')
+
+  // *************************************************
+  // 2、 toFixed(count)  按照指定的count位小数位，返回数值的字符串表示
+  // *************************************************
+  console.log('\n toFixed() ======================')
+  var num1 = 15
+  console.log(num1.toFixed())    // 15
+  console.log(num1.toFixed(1))   // 15.0
+  console.log(num1.toFixed(2))   // 15.00
+  var num2 = 3.1415926
+  console.log(num2.toFixed())     // 3
+  console.log(num2.toFixed(2))    // 3.14   这里四舍五入了
+  console.log(num2.toFixed(3))    // 3.142  这里也四舍五入了
+  // toFixed(count)总结：
+  // 小数位不够，补 0
+  // 小数位太多，四舍五入
+
+  // *************************************************
+  // 3、 toExponential(count)  指数表示法。count为指定小数位数
+  // *************************************************
+  console.log('\n toExponential() ======================')
+  var num3 = 98
+  console.log(num3.toExponential())    // 9.8e+1
+  console.log(num3.toExponential(1))   // 9.8e+1
+  console.log(num3.toExponential(2))   // 9.80e+1
+  console.log(num3.toExponential(6))   // 9.800000e+1
+
+  // *************************************************
+  // 4、 toPrecision(count)  选择合适的方式来表示数字。count为该数值的位数。
+  // *************************************************
+  console.log('\n toPrecision() ======================')
+  var num4 = 98
+  console.log(num4.toPrecision())    // 98         98很明显不需要用指数，直接用98表示更清晰明了，所以是98
+  console.log(num4.toPrecision(1))   // 1e+2       这里要求位数是1，那没办法，只能用指数形式了
+  console.log(num4.toPrecision(2))   // 98         这里要求位数是2，那就是98了
+  console.log(num4.toPrecision(6))   // 98.0000    这里要求位数是6，那就补 0 嘛
+
+  // 实际上，toPrecision()会根据要处理的数值决定到底是调用toFixed()还是toExponential()
+</script>
+</body>
+</html>

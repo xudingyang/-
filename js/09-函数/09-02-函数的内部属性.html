@@ -6,10 +6,28 @@
 </head>
 <body>
 <script>
+  // 1 arguments  由实参组成的伪数组对象。
+  // 2 caller     保存着调动当前函数的函数的引用
+  // 3 name       函数名
+  // 4 length     形参个数
+
+  //***************************************
+  // （一）caller属性。
+  //***************************************
+
+  //***************************************
+  // （二）arguments属性。
+  //***************************************
   // arguments是一个类数组对象
   // arguments.length 实参个数
   // arguments.callee 指向函数本身。在函数体内使用，递归的时候使用
+  // 不要与函数内部属性caller弄混了。es5开始，函数内部有个caller，保存着调动当前函数的函数的引用
 
+  function tt (a,b) {
+    console.log(tt.length)    // 2
+    console.log(tt.name)      // tt
+  }
+  tt()
 
   // 伪数组，存储所有传进来的实参
   function max () {

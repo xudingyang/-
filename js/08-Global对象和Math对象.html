@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // ***************************************
+  // Global对象    全局对象。所有在全局作用域中定义的属性和函数，都是Global对象的属性
+  // ***************************************
+  // 能直接调用的函数，比如isNaN()  isFinite()  parseInt()  parseFloat()  都是Global对象的方法
+  console.log('Global对象的方法不完全举例 ===============================')
+
+  // URI编码方法
+  console.log('URI编码方法 ===============================')
+  // 1、编码。
+  // 编码有两个方法： encodeURI()  encodeURIComponent()
+  // 有效的URI不能包含某些字符，如空格。这两个方法可以对URI进行编码，它们用特殊的UTF-8编码替换所有无效的字符
+  // encodeURI()           一般用于整个URI
+  // encodeURIComponent()  一般用于对URI中的某一段(例如参数)进行编码
+  // 这俩方法的区别，就是编码范围不同。请看下边例子：
+  var uri = 'http://www.qq.com/game lol.html#st国服'
+  console.log(encodeURI(uri))           // http://www.qq.com/game%20lol.html#st%E5%9B%BD%E6%9C%8D
+  console.log(encodeURIComponent(uri))  // http%3A%2F%2Fwww.qq.com%2Fgame%20lol.html%23st%E5%9B%BD%E6%9C%8D
+  // 可以看到，encodeURI只编码特殊字符，uri必须的字符如 / # 等都放过了。
+  // encodeURIComponent把所有特殊字符都编码了，uri完全被破坏。
+  // 所以，如果需要使用整个URI，要使用encodeURI()编码
+  //      如果需要使用参数，就用encodeURIComponent()，看名字中的Component也是这个意思。
+
+  // 问题来了：既然encodeURI不会编错uri必须的字符，那为什么不都用encodeURI呢？encodeURI也可以编码参数啊，不是吗？
+  // 答：如果参数也是一个uri，这时候再用encodeURI编码，那么参数中的 : / # 等字符就不会被编码了。这是不行的
+  var param = 'https://xdy.red/blog/2016/6/6'
+  console.log('https://www.qq.com?userUri=' + encodeURI(param))          // https://www.qq.com?userUri=https://xdy.red/blog/2016/6/6
+  console.log('https://www.qq.com?userUri=' + encodeURIComponent(param)) // https://www.qq.com?userUri=https%3A%2F%2Fxdy.red%2Fblog%2F2016%2F6%2F6
+
+  // 2、解码
+  //  用哪个方法编码，就用对应的方法解码。各回各家，各找各妈
+  console.log('下边是解码***********')
+  console.log(decodeURI('http://www.qq.com/game%20lol.html#st%E5%9B%BD%E6%9C%8D'))
+  console.log(decodeURIComponent('http%3A%2F%2Fwww.qq.com%2Fgame%20lol.html%23st%E5%9B%BD%E6%9C%8D'))
+
+  // eval()方法
+
+  // ***************************************
+  // Math对象
+  // ***************************************
+  console.log('\n Math对象不完全举例================================')
+  // min()  max()
+  // 确定一组数值中的最大值 最小值。参数可以是任意多个数值
+  console.log(Math.min(2, 3, 1, 33))    // 1
+  console.log(Math.max(2, 3, 1, 5, 6))  // 6
+  console.log(Math.max.apply(Math, [2, 3, 1, 4]))  // 4
+
+  // 舍入方法
+  console.log('\n Math对象之舍入方法 ================================')
+  console.log(Math.ceil(23.45))    // 24   向上取整
+  console.log(Math.floor(23.45))   // 23   向下取整
+  console.log(Math.round(23.45))   // 23   四舍五入
+  console.log(Math.round(23.55))   // 24   四舍五入
+
+  // random()方法    返回大于等于0小于1的一个随机数。含0不含1  即 [0,1)
+  console.log('\n Math之随机数 ================================')
+  console.log(Math.random())
+  console.log(Math.floor(Math.random() * 10 + 1))   // 返回 1 到 10 之间的随机数
+  // 选择某个范围内随机数    公式： 值 = Math.floor(Math.randam() * 可能值的总数 + 第一个可能的值)
+  function selectFrom (lowerValue, upperValue) {
+    var choices = upperValue - lowerValue + 1
+    return Math.floor(Math.random() * choices + lowerValue)
+  }
+  var num1 = selectFrom(3,10)   // 3到10之间的随机数
+  console.log(num1)
+
+  // Math的其他方法
+  var num = 98
+  Math.abs(num)      // 绝对值
+  Math.sqrt(num)     // 平方根   开根号
+  Math.pow(num, 5)   // num的5次幂
+  Math.sin(num)
+  Math.asin(num)
+  Math.cos(num)
+  Math.tan(num)
+
+</script>
+</body>
+</html>

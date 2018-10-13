@@ -6,21 +6,30 @@
 </head>
 <body>
 <script>
-  // 1 arguments  由实参组成的伪数组对象。
-  // 2 caller     保存着调动当前函数的函数的引用
-  // 3 name       函数名
-  // 4 length     形参个数
+  // 1 caller     保存着调动当前函数的函数的引用。如果在全局作用域中调用当前函数，它的值为null
+  // 2 arguments  由实参组成的伪数组对象。
+  // 3 name       函数名      略
+  // 4 length     形参个数    略
 
   //***************************************
   // （一）caller属性。
   //***************************************
+  function outer () {
+    inner()
+  }
+  function inner () {
+    console.log(inner.caller)  // 打印 outer的函数体
+  }
+  outer()
+
 
   //***************************************
   // （二）arguments属性。
   //***************************************
   // arguments是一个类数组对象
-  // arguments.length 实参个数
-  // arguments.callee 指向函数本身。在函数体内使用，递归的时候使用
+  // arguments.length 实参个数。  funcName.length 是形参个数
+  // arguments.callee 指向函数本身。在函数体内使用，递归的时候使用。严格模式下会导致错误。
+  // ES5还定义了arguments.caller属性，为了与函数的caller区分。
   // 不要与函数内部属性caller弄混了。es5开始，函数内部有个caller，保存着调动当前函数的函数的引用
 
   function tt (a,b) {

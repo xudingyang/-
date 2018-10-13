@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 一句话：函数是对象，函数名是指针
+  // js的函数实际上是对象，都是Function类型的实例
+  // 所以，函数名是对象的引用，不会与某个函数绑定。因此，没有函数重载。前后两个同名函数，只是改变了函数指针的指向，前一个函数体被抛弃了。
+
+  // 创建函数的3中方式：
+  // 1 函数声明。有函数提升;
+  // 2 函数表达式。没有函数提升;
+  // 3 new Function('num1', 'num2', ... , 'retuan num1 + num2') 前边的参数都是函数参数，最后一个参数是函数体。不要用这种方式
+  //   如果不传参数，那就是空函数。如果只传一个参数，那就必须是函数体
+
+  /*
+   * Function函数所有的参数都是字符串
+   * Function函数的作用就是将所有的参数组合起来，变成一个函数
+   *
+   * 1 如果只传一个参数，这个参数必须是函数体
+   * 2 如果传多个参数，那么最后一个参数表示函数体，前边的参数代表将要创建的函数的参数
+   * 3 如果不传参数，表示创建一个空函数
+   * */
+
+  // 1 空参数
+  var fun = new Function()
+  // 2 一个参数
+  var fun1 = new Function('console.log("我只传一个参数，参数是函数体")')
+  fun1()
+  // 3 多个参数
+  var fun2 = new Function('a', 'b', 'return a + b;')
+  console.log(fun2(1, 2))
+
+  // 问题：如果参数很多，或者说函数体很长，怎么写到参数里面？
+  // 解决：我们最终要做的就是往Function()的括号里放字符串，所以只要把这个字符串写的格式好看就行了
+  // 1 换行，字符串拼接
+  var max = new Function('arr',
+    'var maxNum = arr[0];' +
+    'for(var i=0;i<arr.length;i++){' +
+    'if(maxNum<arr[i]){' +
+    'maxNum=arr[i];' +
+    '}' +
+    '}' +
+    'return maxNum;',
+  )
+  console.log(max([1, 2, 3, 4, 67, 2, 9]))
+
+  // 2 模板
+  // 这里要读取页面元素，必须要加载window了
+  window.onload = function () {
+    var str1 = document.getElementById('funcContent').innerHTML
+    var max1 = new Function('arr', str1)
+    console.log(max1([1, 2, 99, 4, 67, 2, 9]))
+  }
+
+  // 3 `函数体`
+  // 这种方式有兼容问题，慎用。从ES6开始支持。
+  var max2 = new Function('arr', `
+            var maxNum = arr[0];
+            for (var i = 0; i < arr.length; i++) {
+                 if (maxNum < arr[i]) {
+                     maxNum = arr[i];
+                 }
+            }
+            return maxNum;
+    `)
+  console.log(max2([199, 2, 99, 4, 67, 2, 9]))
+</script>
+
+<script type="text/template" id="funcContent">
+  var maxNum = arr[0];
+  for (var i = 0; i < arr.length; i++) {
+  if (maxNum < arr[i]) {
+  maxNum = arr[i];
+  }
+  }
+  return maxNum;
+</script>
+</body>
+</html>

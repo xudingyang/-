@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // arguments是一个类数组对象
+  // arguments.length 实参个数
+  // arguments.callee 指向函数本身。在函数体内使用，递归的时候使用
+
+
+  // 伪数组，存储所有传进来的实参
+  function max () {
+    var maxNum = arguments[0]
+    for (var i = 0; i < arguments.length; i++) {
+      if (maxNum < arguments[i]) {
+        maxNum = arguments[i]
+      }
+    }
+    return maxNum
+  }
+
+  console.log(max(1, 2, 3, 5, 34, 8, 9))
+
+  // 应用：使用Function创建一个函数，传入任意个参数，去重，然后返回去重后的数组
+  var quchong = new Function(`
+        var arr = [];
+        for (var i = 0; i < arguments.length; i++) {
+             if (arr.indexOf(arguments[i]) == -1) {
+                arr.push(arguments[i]);
+             }
+        }
+        return arr;
+    `)
+  console.log(quchong(1, 2, 3, 1, 2, 2, 5, 6, 9, 12))
+
+  // 关于arguments伪数组
+  // 其实它是字典，形式如下
+  var obj = {
+    0: '参数1',
+    1: '参数2',
+    2: '参数3',
+    length: 3,
+  }
+  console.log(obj[0])  // 打印  参数1
+  // obj[0]等价于 obj.0
+  // 它的下标刚好与数组下标一直，所以类似数组，伪数组。
+
+  // 递归操作
+  // 求阶乘
+  function factorial (num) {
+    if (num <= 1) {
+      return 1
+    } else {
+      return num * arguments.callee(num - 1)
+    }
+  }
+  console.log(factorial(3))
+
+</script>
+</body>
+</html>

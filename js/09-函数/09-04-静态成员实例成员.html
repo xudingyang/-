@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 静态成员：
+    *   构造函数的属性和方法
+    * 实例成员：
+    *   实例的属性和方法
+    * */
+
+    function Person() {
+        this.name = '李白';
+        this.work = function () {
+            console.log('写诗');
+        }
+    }
+
+    var p = new Person();
+
+    p.name;    // 实例成员
+    Person.prototype;     // 静态成员
+    Person.name;          // 静态成员，这个name和p.name不同。p.name是'李白'；Person.name是'Person'
+</script>
+</body>
+</html>

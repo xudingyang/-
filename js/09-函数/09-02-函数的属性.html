@@ -6,10 +6,14 @@
 </head>
 <body>
 <script>
+  // 先看看函数对象有哪些属性
+  console.log(Object.getOwnPropertyNames(Function))  // 有 length name prototype  都是不可枚举的
+  console.log(Object.getOwnPropertyNames(Function.prototype))  // 也都是不可枚举的。很简单，既然不是你自己写进去的函数体，为什么枚举给你看
   // 1 caller     保存着调动当前函数的函数的引用。如果在全局作用域中调用当前函数，它的值为null
   // 2 arguments  由实参组成的伪数组对象。
   // 3 name       函数名      略
-  // 4 length     形参个数    略
+  // 4 length     形参个数     略
+  // 5 constructor 指向构造函数  略
 
   //***************************************
   // （一）caller属性。
@@ -21,7 +25,6 @@
     console.log(inner.caller)  // 打印 outer的函数体
   }
   outer()
-
 
   //***************************************
   // （二）arguments属性。

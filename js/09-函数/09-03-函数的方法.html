@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //
+  console.log(Object.getOwnPropertyNames(Function.prototype))
+
+  // 方法有  apply()  call()  bind()  toString()
+
+  // ***********************************************
+  // 1、 apply() 和 call()
+  // ***********************************************
+  var dog = {
+    bark: function (name, age) {
+      console.log('叫' + name + '的狗狗有' + age + '岁了')
+    },
+  }
+  var cat = {}
+  // （一） apply(obj, [param1, param2, ...])   把参数都放在数组里。（不是说参数是数组，而是说把所有参数用一个数组装起来）
+  // 显然，cat没有bark方法，用apply改变bark方法运行时的上下文
+  dog.bark.apply(cat, ['汤姆', 5])  // 叫汤姆的狗狗有5岁了
+  // （二） call(obj, parma1, param2, ...)
+  dog.bark.call(cat, '大花猫', 4)   // 叫大花猫的狗狗有4岁了
+
+  // 补充 1，如果不需要传入对象，那就写null
+  var arr = [9, 8, 54, 1, 23, 4, 5, 6]
+  //    Math.max是求最大值的，但是他的参数都是一个个放进去的，不是数组。所以这里需要把arr数组展开。apply方法刚好符合
+  //    console.log(Math.max(4,3,5));
+  // 这里不需要指定对象，null只是占坑。
+  console.log(Math.max.apply(null, arr))
+
+  // 补充 2
+  // 当给call和apply传入的第一个参数为值类型时，会将值类型转变成对应的引用类型
+  // 也就是说此时的上下文指向该引用类型。
+  function test () {
+    console.log(this)
+  }
+
+  test.apply(1)     // Number
+  test.apply('haha')   // String
+  test.apply(true)  // Boolean
+  test.apply(undefined)   // Window
+  test.apply(null)  // Window
+
+  // ***********************************************
+  // 2、 bind() 创建一个新的函数，当这个新函数被调用时其this置为提供的值。返回的是一个新函数
+  //    bind()会创建一个函数，函数体内的this对象的值会被绑定到传入bind()第一个参数的值(是第一个值参数，说明可以有多个参数)，
+  //    例如，f.bind(obj)，实际上可以理解为obj.f()，这时，f函数体内的this自然指向的是obj
+  // ***********************************************
+  // （一） bind(obj)   只传一个参数的情形
+  var name = '外边的name'
+  var obj1 = {
+    name: 'obj1的name',
+    sayName: function () {
+      console.log(this.name)
+    },
+  }
+  obj1.sayName()      // 打印  obj1的name
+  var obj2 = {
+    name: 'obj2的name',
+  }
+  var outerFunc = obj1.sayName
+  var sayName_obj2 = outerFunc.bind(obj2)
+  sayName_obj2()      // 打印  obj2的name
+  outerFunc()         // 打印  外边的name
+
+  // （二）bind(obj, num1, num2, ...) 传多个参数的情形。跟call()一样，后边的参数会传给被绑定的函数
+
+  // 运用 1 ：  偏函数
+  // bind()的另一个最简单的用法是使一个函数拥有预设的初始参数。
+  // 这些参数（如果有的话）作为bind()的第二个参数跟在this（或其他对象）后面，
+  // 之后它们会被插入到目标函数的参数列表的开始位置，传递给绑定函数的参数会跟在它们的后面。
+  function list () {
+    return Array.prototype.slice.call(arguments)
+  }
+
+  var list1 = list(1, 2, 3) // [1, 2, 3]
+  // 这里第一个参数，MDN写undefined，但是我写null也可以。
+  var leadingThirtysevenList = list.bind(undefined, 37)
+
+  var list2 = leadingThirtysevenList() // [37]
+  var list3 = leadingThirtysevenList(1, 2, 3) // [37, 1, 2, 3]
+  console.log(list2)    // [37]
+  console.log(list3)    // [37, 1, 2, 3]
+
+  // 运用 2 配合 setTimeout
+  // 在默认情况下，使用 window.setTimeout() 时，this 关键字会指向 window （或全局）对象。
+  // 当使用类的方法时，需要 this 引用类的实例，你可能需要显式地把 this 绑定到回调函数以便继续使用实例。
+  function LateBloomer () {
+    this.petalCount = Math.ceil(Math.random() * 12) + 1
+  }
+
+  // Declare bloom after a delay of 1 second
+  LateBloomer.prototype.bloom = function () {
+    window.setTimeout(this.declare.bind(this), 1000)
+  }
+  LateBloomer.prototype.declare = function () {
+    console.log('I am a beautiful flower with ' +
+      this.petalCount + ' petals!')
+  }
+  var flower = new LateBloomer()
+  flower.bloom()  // 一秒钟后, 调用'declare'方法
+
+
+</script>
+</body>
+</html>

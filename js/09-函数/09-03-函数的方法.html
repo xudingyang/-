@@ -17,7 +17,7 @@
   var dog = {
     bark: function (name, age) {
       console.log('叫' + name + '的狗狗有' + age + '岁了')
-    },
+    }
   }
   var cat = {}
   // （一） apply(obj, [param1, param2, ...])   把参数都放在数组里。（不是说参数是数组，而是说把所有参数用一个数组装起来）
@@ -57,11 +57,11 @@
     name: 'obj1的name',
     sayName: function () {
       console.log(this.name)
-    },
+    }
   }
   obj1.sayName()      // 打印  obj1的name
   var obj2 = {
-    name: 'obj2的name',
+    name: 'obj2的name'
   }
   var outerFunc = obj1.sayName
   var sayName_obj2 = outerFunc.bind(obj2)

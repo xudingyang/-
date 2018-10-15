@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<script>
+  // js中的上下文，就是执行环境的意思，也就是this
+
+  // 在上下文调用模式中，可以修改this的值，也就是可以修改函数的调用方式
+
+  // apply和call就是修改上下文的
+  // apply
+  // funcName.apply(obj,[参数列表的数组])  参数数组可要可不要
+  // call
+  // funcName.call(obj,参数1,参数2,参数3,.....)
+
+  var name = '金克斯'
+
+  function sayName (year, age) {
+    console.log(this.name + '  ' + year + '  年生' + '，  今年' + age + ' 岁')
+  }
+
+  sayName(1990, 10)  // 此时this指向window，打印  金克斯
+
+  var obj = {
+    name: '德莱文·亚索斯基'
+  }
+  // 现在，怎么通过sayName方法获得obj中的name
+  // 答：让sayName里的this指向obj即可。
+
+  sayName.apply(obj, [2003, 14])
+  sayName.call(obj, 1996, 20)
+
+  // 补充说明（一）
+  // 当给call和apply传入的第一个参数为值类型时，会将值类型转变成对应的引用类型
+  // 也就是说此时的上下文指向该引用类型。
+  function test() {
+    console.log(this);
+  }
+  test.apply(1);     // Number
+  test.apply('haha');   // String
+  test.apply(true);  // Boolean
+  test.apply(undefined);   // Window
+  test.apply(null);  // Window
+
+  // 补充说明（二）
+  // apply实现继承
+  // 一般情况下不用这种方式继承。我们用原型继承就够了
+  function Person() {
+    this.name = '张三';
+    this.age = 19;
+  }
+  // 借用Person的构造函数，即可拿到Person里的方法
+  function Student() {
+    Person.apply(this); // 这里只是借用Person的方法，this还是指向Student的。
+  }
+  var stu = new Student();
+  console.log(stu.name);  // 张三
+  console.log(stu)        // Student {name: "张三", age: 19}
+
+</script>
+<body>
+</body>
+</html>

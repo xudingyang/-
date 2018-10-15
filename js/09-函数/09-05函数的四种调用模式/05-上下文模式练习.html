@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: #fd971f;
+      border: 5px dotted red;
+      margin-top: 5px;
+    }
+
+    p {
+      width: 400px;
+      height: 40px;
+      background-color: #CCCCCC;
+      border: 5px dashed red;
+    }
+  </style>
+</head>
+<body>
+<script>
+  // 1 求一个数组中最大值
+  var arr = [9, 8, 54, 1, 23, 4, 5, 6]
+  //    Math.max是求最大值的，但是他的参数都是一个个放进去的，不是数组。apply刚好帮我们把数组展开
+  //    console.log(Math.max(4,3,5));
+  // 这里不需要指定对象，null只是占坑。
+  console.log(Math.max.apply(null, arr))
+
+  // 2 将传入的参数用 - 连接
+  function foo () {
+    // arguments 是伪数组，没有join方法。借用数组的
+    var str = Array.prototype.join.apply(arguments, ['-'])
+    console.log(str)
+  }
+  foo(1, 2, 'haha', 78, '你好')
+
+  // 3 给页面的div和p更换颜色
+  window.onload = function () {
+    var divs = document.getElementsByTagName('div')
+    var ps = document.getElementsByTagName('p')
+
+    // 传统写法：写两个for循环，要是有多个元素，那要写很多for循环
+    // 怎样减少成只写一个for循环呢？
+    // 合并数组，不就只需要写一个for循环了吗
+    /*
+     for (var i = 0; i < divs.length; i++) {
+     var obj = divs[i];
+     obj.style.backgroundColor = 'green';
+     }
+     for (var i = 0; i < ps.length; i++) {
+     var obj = ps[i];
+     obj.style.backgroundColor = 'green';
+     }
+     */
+
+    // divs ps都是伪数组，肯定不能直接调用数组的合并方法
+    var ele = []
+    // 这里开始我陷入了一个误区：我以为push只能一次加一个
+    //  结果是可以传多个参数，一次性加多个
+    ele.push.apply(ele, divs)
+    ele.push.apply(ele, ps)
+
+    // 用concat也是可以的
+    /*
+     ele = [].concat.apply(ele,divs);
+     ele = [].concat.apply(ele,ps);
+     */
+
+    for (var i = 0; i < ele.length; i++) {
+      var obj = ele[i]
+      obj.style.backgroundColor = 'yellow'
+    }
+  }
+
+</script>
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+</body>
+</html>

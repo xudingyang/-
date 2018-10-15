@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 1 工厂模式的构造函数
+  function Person (name, age) {
+    var o = {
+      name: name,
+      age: age,
+      sayHello: function () {
+        console.log('hello')
+      }
+    }
+    return o
+  }
+
+  var p = new Person('张三', 40)
+  console.log(p)
+  // 普通工厂模式创建出来的对象跟构造函数没关系,它的构造函数是Object()
+  // 调用模式是 函数模式
+
+  // 2 寄生式构造函数。代码跟上边一样的，里面的o就是寄生在Person里面的
+  function Person1 (name, age) {
+    var o = {
+      name: name,
+      age: age,
+      sayHello1: function () {
+        console.log('hello1')
+      }
+    }
+    return o
+  }
+
+  var p1 = new Person1('李四', 40)
+  console.log(p1)
+
+
+</script>
+</body>
+</html>

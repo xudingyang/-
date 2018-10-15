@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 1 函数调用模式
+  // this 指向 window
+  // 2 方法调用模式
+  // this 指向 调用者
+  // 3 构造器调用模式
+  // 指向新创建的对象
+  // 4 上下文模式（apply调用模式）
+
+  // 区别
+  // 1 形式不同
+  // 2 本质不同：函数内部的this指向不同
+
+  // 1 函数调用模式
+  function test () {
+    console.log(this)
+  }
+  test()
+
+  // 2 方法调用模式： 对象.方法名()
+  var obj = {
+    sayThis: function () {
+      console.log(this)
+    }
+  }
+  obj.sayThis()
+
+  // 3 构造器调用模式
+  function Person () {
+    this.sayThis = function () {
+      console.log(this)
+    }
+  }
+
+  var p = new Person()
+  p.sayThis()
+
+  // 4 上下文模式（apply调用模式）
+</script>
+</body>
+</html>

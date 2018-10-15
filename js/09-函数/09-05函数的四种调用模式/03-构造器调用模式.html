@@ -6,21 +6,25 @@
 </head>
 <body>
 <script>
+  // 构造器调用模式，那this当然是绑定到新创建的对象上了。不然构造器还有屁用
+
   // 1 工厂模式的构造函数
   function Person (name, age) {
+    this.name = 'Person的name'
     var o = {
       name: name,
       age: age,
-      sayHello: function () {
-        console.log('hello')
+      sayName: function () {
+        console.log(this.name)  // 这里的this肯定指向的对象 o
       }
     }
     return o
   }
-
-  var p = new Person('张三', 40)
-  console.log(p)
   // 普通工厂模式创建出来的对象跟构造函数没关系,它的构造函数是Object()
+  // 实质：这个构造函数返回的是对象 o。所以this是指向 o 的。
+  var p = new Person('张三', 40)
+  console.log(p)    // 打印 o 对象
+  p.sayName()       // 打印  张三
   // 调用模式是 函数模式
 
   // 2 寄生式构造函数。代码跟上边一样的，里面的o就是寄生在Person里面的
@@ -38,6 +42,23 @@
   var p1 = new Person1('李四', 40)
   console.log(p1)
 
+  // 3 正常构造函数
+  function Student (name, age, teacher) {
+    this.name = name
+    this.age = age
+    this.teacher = teacher
+    this.study = function () {
+      console.log(this.name + '同学正在学习')
+    }
+  }
+  Student.prototype.goHome = function () {
+    console.log(this.name + '放学回家了')
+  }
+  var xiaoming = new Student('小明', 12, '张老师')
+  console.log(typeof xiaoming)             // object
+  console.log(xiaoming.constructor.name)   // Student
+  xiaoming.study()     // 小明同学正在学习
+  xiaoming.goHome()    // 小明放学回家了
 
 </script>
 </body>

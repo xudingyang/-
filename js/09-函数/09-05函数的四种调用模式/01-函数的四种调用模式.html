@@ -19,6 +19,7 @@
   // 2 本质不同：函数内部的this指向不同
 
   // 1 函数调用模式
+  //   不管函数在对象内部，还是在函数内部，只要是函数调用模式，this都指向window
   function test () {
     console.log(this)
   }

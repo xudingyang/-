@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<script>
+
+  // func()   函数调用，前边没有东西的，就是函数调用模式。没有点，也没用new，没有apply,那肯定是函数调用模式了
+  var age = 9999
+
+  // 1 函数调用模式永远指向window
+  function test1 () {
+    var age = 30
+    var obj = {
+      age: 18,
+      sayThis: function () {
+        console.log(this.age)
+      }
+    }
+    obj.sayThis() // 18  此时this指向obj
+    var obj1 = obj.sayThis  // 把方法拿出来了
+    obj1()  // 9999   这是函数模式了，此时this指向window。这不是指向test1里面的age，看好了。
+  }
+
+  test1()
+  console.log('=====================')
+
+  // 2 同上
+  var obj = {
+    age: 10,
+    getAge: function () {
+      console.log(this.age)  // 10
+      function foo () {
+        console.log(this.age)   // 9999
+      }
+      foo()
+    }
+  }
+  obj.getAge()
+  console.log('=====================')
+
+  // arguments
+  var length = 10
+
+  function fn () {
+    console.log(this.length)
+  }
+
+  var obj = {
+    length: 5,
+    method: function (fn) {
+      fn() // 10
+      arguments[0]() // 4
+      // arguments是一个伪数组，它里面的数组下标其实是以属性形式存在的
+      // 也就是说，arguments[0]()其实是arguments.0()，也就是执行arguments里面的0这个方法
+      // 既然是arguments对象在执行0()这个方法，那么该方法里的this就指向arguments
+      // 而第0个元素又是fn，所以0()也是fn()，所以其实是 arguments.fn()
+    }
+  }
+  obj.method(fn, 23, 24, 25)
+
+
+</script>
+<body>
+</body>
+</html>

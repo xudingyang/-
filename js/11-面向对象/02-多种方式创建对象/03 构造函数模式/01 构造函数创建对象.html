@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 工厂模式的问题：
+  // 但是工厂模式创建出来的对象，都是Object的，不能判断具体的类型。没哟解决对象识别的问题
+  // 所以，用可以用构造函数模式
+
+  // 构造函数的问题：
+  // 函数是对象，所以每定义一个函数，也就实例化了一个对象。
+  // 所以，构造函数如果有方法，那么该构造函数创建的每个实例，都会包含该方法的实例。比如下边构造函数里的sayName()
+  // 比如 p1.sayName就和p2.sayName不相等。显然，创建两个相同任务的Function实例是没必要的。
+
+  // 于是，原型模式呼之欲出
+
+  /*
+  * 构造函数的执行过程：
+  * 1 使用new关键字创建对象
+  * 2 调用构造函数，把新创建出来的对象赋值给构造函数内的this
+  * 3 在构造函数内使用this，为新创建出来的对象添加成员
+  *       this的作用：
+  *           1. this只出现在函数中。
+  *           2. 谁调用函数，this就指的是谁。
+  *           3. new People();   People中的this代指被创建的对象实例。
+  * 4 默认返回新创建的这个对象。（普通函数如果不写return，会返回undefined）
+  * */
+  // new调用构造函数，会经历四个步骤
+  // 1 创建一个新对象
+  // 2 将构造函数的作用域赋值给新对象（因此this就指向了新对象）
+  // 3 执行构造函数中的代码
+  // 4 返回新对象
+
+  /*
+  * 构造函数的返回值：
+  * 1 默认返回的是新创建的对象
+  * 2 如果我们自己写return语句，而且return的是空(不是写return null，就是一个赤裸裸的return;)
+  *   或者是String，Number，Boolean，Null，Undefined 这几个基本类型，都会忽略我们写的return的值，仍然返回新创建的对象。
+  * 3 如果返回的是其它Object类型，那么就返回我们自己写的object对象。得不到新创建的对象。
+  * */
+
+  // 特别注意：
+  // 如果使用构造函数的时候，不使用new，那就和普通函数一样了。函数调用模式。
+  // 此时不会创建新对象，this指向window对象。
+
+  /*
+  * 存在的问题：
+  * 每个对象都会把构造函数的方法赋值一份，这是多余的。
+  * 所以，可以用原型解决。
+  * */
+
+  /*
+  * 构造函数和普通函数的区别
+  *  1 构造函数也属于函数。
+  *  2 构造函数是用于实例化对象的，和new关键字结合使用。
+  *  3 返回值不同。构造函数默认返回新创建的对象。普通函数写的return啥就是啥，不写就默认返回undefined。
+  *  4 this指向不同。构造函数的this指向新创建的对象。普通函数的this指向调用该函数的对象。
+  * */
+
+  function Person (name, age) {
+    this.name = name
+    this.age = age
+    this.sayName = function () {
+      console.log('My name is ' + this.name)
+    }
+  }
+  var p1 = new Person('刘能', 20)
+  var p2 = new Person('本山', 21)
+
+  console.log(p1.constructor === Person)  // true
+  console.log(p2.constructor === Person)  // true
+
+  // 对象的constructor属性最初是用来标识对象类型的。
+  // 但是，检测对象类型，还是instanceof操作符更可靠些。
+  // 因为p1是Person的实例，也是Object的实例，用constructor是检测不到Object的，用instanceof就可以了
+  // instanceof操作符，检测的是原型链
+
+  console.log(p1 instanceof Person)   // true
+  console.log(p1 instanceof Object)   // true
+  console.log(p2 instanceof Person)   // true
+  console.log(p2 instanceof Object)   // true
+
+</script>
+</body>
+</html>

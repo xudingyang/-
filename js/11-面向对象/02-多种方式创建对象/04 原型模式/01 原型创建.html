@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+  /*
+  * 1 什么是原型？
+  *   在构造函数创建出来的时候，系统会默认帮构造函数创建一个对象，就是原型对象。
+  *   原型默认的是一个空对象，也就是说要给原型对象添加东西，我们才能用原型的东西，因为不添加东西的原型就是空对象。
+  * 2 原型用来干什么？
+  *   原型中的属性和方法，可以被使用该构造函数创建出来的对象使用。
+  * 3 如何访问构造函数的原型?
+  *   原型是构造函数的东西，当然可以通过构造函数获得：
+  *       构造函数.prototype
+  *
+  * 使用原型中的东西：
+  *   当使用对象去访问属性和方法的时候，
+  *   会先在对象自己内部查找，
+  *   若没找到，就去原型中找，
+  *   若原型中也没用，那么属性就是undefined。方法就报错。
+  * */
+  var Role = function () {
+  }
+  /*姓名*/
+  Role.prototype.name = ''
+  //生命值
+  Role.prototype.HP = 100
+  //魔法值
+  Role.prototype.MP = 100
+  //技能
+  Role.prototype.technologys = ['普通攻击', '横扫千军', '地狱火', '漫天飞雪']
+  //跑起来
+  Role.prototype.run = function () {
+    alert('run')
+  }
+
+  //值类型没问题
+  var boy = new Role()
+  boy.name = '剑侠客'
+  console.log(boy.name)
+  var girl = new Role()
+  girl.name = '可爱宝贝'
+  console.log(girl.name)
+
+
+</script>

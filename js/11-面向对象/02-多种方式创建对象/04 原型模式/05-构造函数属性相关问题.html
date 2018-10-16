@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Person () {
+
+  }
+
+  console.log(Person.prototype.constructor)  // 打印 function Person() {}
+
+  Person.prototype = {} // 替换
+  console.log(Person.prototype.constructor)  // 打印 function Object() { [native code] }
+
+  // 说明 {}的构造函数是 Object()
+  // 但是Person()的构造函数肯定要是Person()才行，不然对应关系乱了
+  // 为了维护这个对应关系，应该在替换的原型对象里手动添加 constructor : Person 这个键值对
+
+  Person.prototype = {
+    constructor: Person
+  }
+  console.log(Person.prototype.constructor)  // 打印 function Person() {}
+</script>
+</body>
+</html>

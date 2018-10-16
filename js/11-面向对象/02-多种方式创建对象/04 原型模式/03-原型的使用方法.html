@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 原型的使用方法:
+    * 1 利用对象的动态特性给原型对象添加成员。添加的少，用此方法。
+    * 2 搞个对象，直接赋值给prototype。添加的多，用此方法。
+    * */
+
+    function Person(name,age,gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    /*
+    这是方式1的搞法，一个一个添加
+    Person.prototype.sayHello = function () {
+        alert('hello');
+    }
+     Person.prototype.sayHi = function () {
+        alert('hi');
+     }
+     */
+
+    // 方式2适合添加很多方法
+    Person.prototype = {
+        msg : '我很开心',
+        sayHello : function () {
+            console.log('hello');
+        },
+        sayHi : function () {
+            console.log('hi');
+        }
+    }
+    var p = new Person('Tom',20,'男');
+    p.sayHello();
+    console.log(p.msg);
+
+    Person.prototype = {
+        work : function () {
+            console.log('work');
+        }
+    }
+    var p1 = new Person();
+
+    p.sayHello();  // 这里仍然是指向旧的原型，打印'hello'
+//    p.work(); // 报错。因为旧原型中没有这个方法
+    /*
+    * 原型与对象机制：
+    * 当修改原型之后，原先创建的对象与旧原型的对应关系不会改变
+    * 原先创建的对象的__proto__也不会指向新的原型
+    * 也就是说，旧的原型对象并不会被销毁
+    *
+    * 要想改变旧的原型，就得用p.__proto__属性 来修改。但是这个属性并不是标准里面的，不建议在开发中使用，调试的时候可以用。
+    * */
+
+
+    p1.work();
+
+
+</script>
+</body>
+</html>

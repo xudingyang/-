@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+
+  /*
+   * 1 替换原型，不改变已经创建出来的对象对应的旧原型
+   * 2 对象用点语法给属性赋值的时候，若自身没有，不会去原型中寻找，只会给自身添加该属性
+   *   访问属性才会去原型中找
+   * */
+
+  // 1 替换原型，不改变已经创建出来的对象对应的旧原型
+  /*
+   * 原型与对象机制：
+   * 当修改原型之后，原先创建的对象与旧原型的对应关系不会改变
+   * 原先创建的对象的__proto__也不会指向新的原型
+   * 也就是说，旧的原型对象并不会被销毁
+   *
+   * 要想改变旧的原型，就得用p.__proto__属性 来修改。但是这个属性并不是标准里面的，不建议在开发中使用，调试的时候可以用。
+   * */
+  function Person (name, age, gender) {
+    this.name = name
+    this.age = age
+  }
+
+  Person.prototype = {
+    msg: '我很开心',
+    sayHello: function () {
+      console.log('hello')
+    }
+  }
+  var p = new Person('Tom', 20)
+  p.sayHello()
+  console.log(p.msg)
+  // 下边替换原型
+  Person.prototype = {
+    work: function () {
+      console.log('work')
+    }
+  }
+
+  var p1 = new Person()
+  p.sayHello()  // 这里仍然是指向旧的原型，打印'hello'
+  //    p.work(); // 报错。因为旧原型中没有这个方法
+  p1.work()
+
+  // 2 使用对象访问属性的时候，如果对象本身找不到，就去原型中找
+  //   但是使用点语法进行属性赋值的时候，如果对象本身没有，并不会去原型中找，而是给对象添加一个该属性
+  function Dog () {
+
+  }
+
+  Dog.prototype.name = '旺财'
+  Dog.prototype.age = 5
+  var d = new Dog()
+  console.log(d.name)   // 打印 旺财
+
+  d.name = '来福'    // 这里不会改变原型中的name，而是给d对象添加一个name属性
+  console.log(d.name)   // 打印 来福
+
+  var d1 = new Dog()
+  console.log(d1.name)   // 打印 旺财。说明原型并没有改变
+
+  // 3 原型中是引用类型。引用类型只是具有引用类型的特征，还是要满足原型的规则
+  function Man () {
+
+  }
+
+  var Car = {
+    brand: '奔驰',
+    type: 'X7'
+  }
+  Man.prototype.car = Car
+  var m = new Man()
+  console.log(m.car.brand)     // 打印 本次
+  m.car.brand = '宝马' // 这里换的是引用类型里的brand
+
+  var m1 = new Man()
+  console.log(m1.car.brand)    // 打印宝马
+
+  Man.prototype.car = {
+    brand: 'BYD'
+  }
+  console.log(m.car.brand)  // 打印 BYD 这里是改变原型的内容，并没有替换原型
+  var m2 = new Man()
+  console.log(m2.car.brand)   // 打印 BYD
+
+  Man.prototype = {
+    brand: '桑塔纳'
+  }
+  console.log(m1.brand)   // 打印 undefined
+  var m3 = new Man()
+  console.log(m3.brand)   // 打印 桑塔纳
+</script>

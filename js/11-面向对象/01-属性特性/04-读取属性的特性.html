@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 使用 ES 5 的Object.getOwnPropertyDescriptor()方法，可以取得给定属性的描述符。
+  // 接受两个参数：属性所在的对象 和 要读取其描述符的属性名称
+  // 返回值是一个对象
+  // 如果是数据属性，返回的对象的属性有 configurable enumerable writable value
+  // 如果是访问器属性，返回的对象的属性有 configurable enumerable get set
+
+  var book = {}
+  Object.defineProperties(book, {
+    _year: {
+      value: 2004,
+      writable: true
+    },
+    editon: {
+      value: 1
+    },
+    year: {
+      get: function () {
+        return this._year
+      },
+      set: function (v) {
+        if (v > 2004) {
+          this._year = v
+          this.edition += v - 2004
+        }
+      }
+    }
+  })
+
+  book._year = 2018
+  book.year = 2009
+
+  var descriptor = Object.getOwnPropertyDescriptor(book, '_year')
+  console.log(descriptor)               // {value: 2009, writable: true, enumerable: false, configurable: false}
+  console.log(descriptor.value)         // 2009
+  console.log(descriptor.configurable)  // false
+  console.log(descriptor.enumerable)    // false
+  console.log(descriptor.writable)      // true
+
+  console.log(typeof descriptor.get)    // undefined
+</script>
+</body>
+</html>

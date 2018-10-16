@@ -8,6 +8,7 @@
 <script>
 
   // typeof操作符
+  // jQuery也提供了很多工具方法来判断数据类型
 
   // typeof可能得到以下6个值 undefined  boolean  string  number  object   function
   var person = {name: '老四', age: 20}
@@ -70,6 +71,18 @@
   // 原理：Object的toString()方法返回的是  '[object ConstructorName]'
 
   //    方式三，ES5之后，有了原生的isArray()方法
+
+  // 另外：jQuery提供了一些工具方法用来判断数据类型
+  //    jQuery提供一系列工具方法，用来判断数据类型，以弥补JavaScript原生的typeof运算符的不足。
+  //     以下方法对参数进行判断，返回一个布尔值。
+
+  //    jQuery.isArray()：是否为数组。
+  //    jQuery.isEmptyObject()：是否为空对象（不含可枚举的属性）。
+  //    jQuery.isFunction()：是否为函数。
+  //    jQuery.isNumeric()：是否为数字。
+  //    jQuery.isPlainObject()：是否为使用“{}”或“new Object”生成的对象，而不是浏览器原生提供的对象。
+  //    jQuery.isWindow()：是否为window对象。
+  //    jQuery.isXMLDoc()：判断一个DOM节点是否处于XML文档之中。
 </script>
 </body>
 </html>

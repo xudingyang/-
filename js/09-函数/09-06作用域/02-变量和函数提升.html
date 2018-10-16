@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 本文件内容：
+  // 1 变量提升 函数提升
+  // 2 同名函数
+  // 3 变量和函数同名
+  // 4 函数表达式中的函数声明不会提升，但是变量会提升
+  // 5 只要满足条件，提升是一定会发生的
+
+  // js 代码的执行分为两步：
+  // 1 预解析
+  // js代码在预解析阶段，会对 var声明的变量名 和 function开头的语句块 进行提升操作
+  // 2 执行
+
+  /*
+   *  1 变量提升 函数提升
+   */
+  console.log(a) // 打印 undefined
+  var a = 10
+  // 函数提升是整个代码块的提升
+  // 变量提升只会提升声明，不会提升赋值。所以上边两句代码提升之后就成了：
+  // var a;
+  // console.log(a);
+  // a = 10;
+
+  // 另外：若不声明a也不赋值，直接打印，那么报错  a is not defined
+
+  /*
+   * 2 同名函数
+   * */
+  fun1()   // 打印    last
+  function fun1 () {
+    console.log('first')
+  }
+
+  fun1()   // 打印    last
+  function fun1 () {
+    console.log('last')
+  }
+
+  // 分析：
+  // 函数提升(预解析)之后的代码是这样的：last把first覆盖了
+  /*
+   function fun1() {
+       console.log('first');
+   }
+   function fun1() {
+       console.log('last');
+   }
+   fun1();
+   fun1();
+   */
+
+  /*
+   * 3 变量和函数同名
+   * */
+  console.log(foo)  // 打印 函数体
+  function foo () {
+  }
+
+  var foo = 2
+  console.log(foo)  // 打印 2
+  // 提升之后，是下边这样的：
+  // 如果函数和变量同名,在提升的时候，但是会忽略掉变量，只提升函数
+  /*
+   function foo() {}
+   // 这里不会再有 var foo;
+   console.log(foo);
+   var foo = 2;
+   console.log(foo);
+   */
+
+  /**
+   * 4 函数表达式
+   */
+    //myF();   // 报错 myF is not a function
+  var myF = function () {
+      console.log('haha')
+    }
+  // 提升如下：
+  /*
+   var myF;
+   myF();
+   myF = function () {
+   console.log('haha');
+   }
+   */
+
+  /**
+   * 5 提升是一定会发生的，有时候都不觉得提升，其实也提升了
+   */
+  var scope = 'global-scope'  // var声明的变量，提升
+  function func1 () { // function开头的代码块，提升
+    console.log(scope)
+    var scope = 'local-scope'   // var声明的变量，提升
+    console.log(scope)
+  }
+
+  func1()  // 分别打印 undefined  local-scope
+  // 提升之后的代码是：
+  /*
+   var scope;
+   function func1() {
+       var scope;
+       console.log(scope);
+       scope = 'local-scope';
+       console.log(scope);
+   }
+   scope = 'global-scope';
+   func1();
+   */
+
+  // 再来看一段不明显的
+  if ('a' in window) {
+    var a = 10
+  }
+  console.log(a)  // 打印 10
+  // 分析：这里要搞清楚一点，只有函数才能产生作用域，所以if语句是不会产生作用域的
+  // 所以代码提升之后是：
+  /*
+   var a;  // 这里 a 已经是window的属性了
+   if ('a' in window) {
+   a = 10;
+   }
+   console.log(a);
+   */
+
+  // 再来一个
+  var ff = 1
+
+  function func2 () {
+    if (!ff) {
+      var ff = 10
+    }
+    console.log(ff)
+  }
+
+  func2()  // 打印 10
+  // 提升之后的代码如下
+  /*
+   var ff;
+   function func2() {
+      var ff;
+      if (!ff) {
+         ff = 10;
+      }
+       console.log(ff);
+   }
+   ff = 1;
+   func2();
+   */
+
+  // 还来一个
+  function Foo () {
+    getName = function () { alert(1) }
+    return this
+  }
+
+  Foo.getName = function () { alert(2)}
+  Foo.prototype.getName = function () { alert(3)}
+  var getName = function () { alert(4)}
+
+  function getName () { alert(5)}
+
+  Foo.getName()   // 2  直接访问Foo的属性getName
+  getName() // 4  getName = function () { alert(4);}在最下边
+  Foo().getName() // 1  Foo()执行，返回this，this在这里指window，而Foo()执行后，window.getName修改了
+  getName() // 1 Foo()执行后，window.getName修改了,改成了1
+  // 构造函数没有参数的时候，可以省略括号，即 new Foo与new Foo()是一样的。
+  // 但是 new Foo.getName()的时候 先执行点运算，在执行new运算。这里是创建一个以Foo.getName为构造函数的对象
+  // 如果Foo后边加了括号，那就是先创建Foo对象再调用getName()方法了，一个括号的差别
+  new Foo.getName() // 2
+  new Foo().getName() // 3  new Foo().getName() 这里是先执行new，再执行点运算。就跟new Date().getTime();一样的
+  new new Foo().getName() // 3 同上
+
+  // 预解析 | 变量函数提升 之后的代码
+  //    function Foo() {  // 执行这一句之后，全局变量getName的值就会改变
+  //        getName = function () { alert(1); }
+  //        return this;
+  //    }
+  //    var getName;
+  //    function getName() { alert(5);}
+  //    Foo.getName = function () { alert(2);}
+  //    Foo.prototype.getName = function () { alert(3);}
+  //    getName = function () { alert(4);}
+
+</script>
+</body>
+</html>

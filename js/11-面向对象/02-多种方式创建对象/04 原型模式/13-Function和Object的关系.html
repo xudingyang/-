@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<script>
+
+  // instanceof就是判断前边对象是否在后边类（即构造函数）的原型链上
+
+  // Function的构造函数是Function
+  // 所以 Function --> Function.prototype --> Object.prototype --> null   Function在Function原型链上
+  console.log(Function instanceof Function)  // true
+
+  // Function --> Function.prototype --> Object.prototype --> null    Function在Object原型链上
+  console.log(Function instanceof Object)  // true
+
+  // Object函数的构造函数是Function
+  // Object --> Function.prototype --> Object.prototype --> null    Object在Function原型链上
+  console.log(Object instanceof Function)  // true
+
+  // Object --> Function.prototype --> Object.prototype --> null  Object肯定在Object原型链上
+  console.log(Object instanceof Object)  // true
+
+
+</script>
+<body>
+</body>
+</html>

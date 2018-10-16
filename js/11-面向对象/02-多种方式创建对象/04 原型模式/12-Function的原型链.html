@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var foo = new Function()
+  console.log(Function.prototype.__proto__)  // Object
+  console.log(Function.prototype)    //  function () { [native code] }
+
+  console.log(Function.prototype.__proto__.constructor)    //  function Object() { [native code] }
+  console.log(Function.constructor)  // function Function() { [native code] }
+  console.log(Object.constructor) // function Function() { [native code] }
+  console.log(Object.prototype.constructor) // function Object() { [native code] }
+
+  // foo的构造函数是Function
+  // 每一个（构造）函数的构造函数都是Function，所以Function、Array、Object等这些内置构造函数的构造函数都是Function
+  // Function的原型对象是一个空函数（对象）
+  // Function的原型对象的构造函数是 Object()。所有原型对象的构造函数都是Object()
+  // 每一个（构造）函数都有 prototype属性
+  // 每一个对象都有__proto__属性
+
+  console.log(Function instanceof Function)  // true
+  console.log(Function instanceof Object)  // true
+  console.log(Object instanceof Function)  // true
+  console.log(Object instanceof Object)  // true
+
+  // 总结：艹！
+</script>
+</body>
+</html>

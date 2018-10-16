@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Person () {
+
+  }
+
+  var p = new Person()
+
+  //console.log(p.haha());  // TypeError: p.haha() is not a function
+  // 寻找顺序：
+  // p --> Person.prototype --> Object.prototype --> null
+
+  // 属性搜索原则：
+  // 1 当访问一个对象的成员时，先找自身，若有，用之；
+  // 2 若没找到，则去当前对象的原型对象中查找，若有，用之；
+  // 3 若没有找到，继续找原型对象的原型对象，若有，用之；
+  // 4 若没找到，继续向上找，直到Object.prototype，若还没有,属性返回undefined，方法报错 xxx is not a function
+
+  // 复杂的原型链
+  function Animal () {
+    this.gender = 'male'
+  }
+
+  function Human () {
+    this.action = 'thinking'
+  }
+
+  Human.prototype = new Animal()
+  Human.prototype.constructor = Human
+
+  function Student () {
+    this.work = 'study'
+  }
+
+  Student.prototype = new Human()
+  Student.prototype.constructor = Student
+
+  function GoodStudent () {
+    this.name = '猪八戒'
+  }
+
+  GoodStudent.prototype = new Student()
+  GoodStudent.prototype.constructor = GoodStudent
+
+  var gs = new GoodStudent()
+  console.log(gs)
+
+</script>
+</body>
+</html>

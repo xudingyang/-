@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function PersonHaha () {
+    this.name = '张三'
+    this.age = 20
+  }
+
+  // 1 constructor
+  var p = new PersonHaha()
+  console.log(PersonHaha.prototype.constructor)
+  console.log('================')
+
+  // 2 hasOwnProperty
+  // 用来判断对象本身（不包含原型）是否拥有某个属性
+  console.log('p.hasOwnProperty(\'__proto__\') -------- ' + p.hasOwnProperty('__proto__')) // false 不会去原型中找
+  console.log('p.hasOwnProperty(\'constructor\') -------- ' + p.hasOwnProperty('constructor')) // false 不会去原型中找
+  console.log('p.hasOwnProperty(\'hehe\') -------- ' + p.hasOwnProperty('hehe')) // false
+  console.log('p.hasOwnProperty(\'name\') -------- ' + p.hasOwnProperty('name')) // true
+  console.log('================')
+
+  // 3 propertyIsEnumerable
+  // 1> 判断属性是否属于对象本身
+  // 2> 判断属性是否可以被遍历
+  // Object.defineProperties()
+  // 使用上边方法添加属性的时候，可以附加一些信息
+  // 例如该属性是否可读写、可遍历
+
+  console.log('p.propertyIsEnumerable("name")    --------    ' + p.propertyIsEnumerable('name'))
+  console.log('================')
+
+  // 4 toString 与 toLocaleString。区别主要在时间。
+  var now = new Date()
+  console.log('new Date toString ----------- ' + now.toString())
+  console.log('new Date toLocaleString ----------- ' + now.toLocaleString())
+  console.log('p toString --- ' + p.toString())  // 打印 [object Object] 跟下边一样
+  console.log('p toLocaleString --- ' + p.toLocaleString())  // 跟上边一样
+  console.log('================')
+
+  // 5 valueOf
+  // 获取当前对象的值
+  function Yaya () {
+
+  }
+
+  var ya = new Yaya()
+  console.log(ya.valueOf())  // 打印 Yaya {}          ①
+  // 默认的就是调用toString方法，再进行字符串拼接
+  console.log(1 + ya.valueOf()) // 打印  1[object Object]         ②
+
+  // 重写valueOf方法
+  function Tutu () {
+    this.valueOf = function () {
+      return 123
+    }
+  }
+
+  var tu = new Tutu()
+  console.log(tu.valueOf())  // 打印 123     ③
+  console.log(1 + tu.valueOf()) // 打印124      ④
+
+  // valueOf()总结
+  // 1 获取当前对象的值  见打印  ①
+  // 2 在对象参与运算的时候    见打印  ③④
+  // 1> 默认先调用valueOf()方法，
+  // 2> 如果valueOf获取到的值无法参与运算，就去调用对象的toString()方法
+
+  // 6 __proto__
+  // 略
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 闭包的作用：
+  // 最基本作用：可以通过闭包返回的函数或方法，来修改函数内部的数据
+  // 创建一个私有的空间，保护数据，外界想访问，必须使用我们提供的方法
+  // 减少全局变量污染
+
+  function person () {
+    var name = '刘能'
+    var age = 18
+    return {
+      getName: function () {
+        console.log(this)
+        return name
+      },
+      setName: function (nameStr) {
+        name = nameStr
+        console.log(this)
+        return name  // 这里搞个返回值，可以让外边判断是否更改成功。不写也可以
+      },
+      getAge: function () {
+        return age
+      },
+      setAge: function (ageNum) {
+        // 在函数外部想要修改数据
+        // 只能通过函数内部的方法
+        // 我们可以在这个方法里做文章，比如设置校验措施
+        // 可以保证系统的安全性和稳定性
+        if (ageNum < 0) {
+          throw '你的年龄小于0吗？'
+        } else {
+          age = ageNum
+        }
+      }
+    }
+  }
+
+  var p = person()
+//  var hh = p.setName
+//  hh()
+  console.log(p.getName())
+  console.log(p.getAge())
+
+//  p.setAge(-20)
+  p.setName('刘德华')
+  console.log(p.getName())
+  console.log(p.getAge())
+</script>
+</body>
+</html>

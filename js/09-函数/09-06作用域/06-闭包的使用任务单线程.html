@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script>
+
+    // JS是单线程的
+    // JS中有三个任务，（即：单线程要做三件任务）
+    // 1 渲染任务
+    // 2 JS代码执行任务
+    // 3 事件处理任务
+    // 事件处理代码不会立即执行，等到事件发生的时候再执行，回调函数、定时器都属于这种。脱离JS代码执行任务。
+    // 由于单线程，怎么做这些事呢？
+    // JS代码执行顺序：
+    // 1 先把主任务(代码任务)执行完毕，回调什么的先不管，也管不了
+    // 2 再去执行次要的，如定时器回调函数中的代码。
+    // setTimeout里的时间是从JS代码任务执行完毕开始算时间的，也就是说下边的for循环执行完了之后，才执行定时器
+    // 所以所有定时器都是打印的 10
+    // 也就是说，定时器的时间 = 设定的时间 + JS代码执行完毕的时间
+
+    //        alert('卡住了');
+    function foo () {
+      for (var i = 0; i < 10; i++) {
+        // 每次进来后，都创建一个新的定时器来执行任务
+        setTimeout(function () {
+          console.log(i)
+        }, 0)
+      }
+      for (var i = 0; i < 5; i++) {}
+      console.log(i) // 打印一个 5
+    }
+    foo() // 打印10个5
+
+    // 上边定时器得不到我们想要的 i
+    // 我们要怎样在for循环遍历的时候，就把当时的 i 塞给定时器？用闭包
+    for (var j = 0; j < 10; j++) {
+      function tmp (k) {
+        return function () {  // 用闭包来保存当时的 变量 j
+          console.log(k + '一般写法')
+        }
+      }
+
+      setTimeout(tmp(j), 0)
+    }
+    // 上边写法不是太好，下边的写法更常见、更紧凑：
+    for (var i1 = 0; i1 < 10; i1++) {
+      setTimeout((function (j1) {
+        return function () {
+          console.log(j1)
+        }
+      })(i1), 0)
+    }
+
+  </script>
+
+</head>
+<body>
+
+</body>
+</html>

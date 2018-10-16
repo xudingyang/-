@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 1 什么是闭包
+  //      一个封闭的、对外不公开，包裹结构，或空间
+
+  // 2 js中  闭包就是函数。函数就是封闭的对外不公开的包裹嘛
+
+  // 3 闭包的原理就是作用域搜索原则
+  //   上级作用域无法直接访问下级作用域中的变量
+
+  // 4 闭包要解决什么问题
+  // 闭包内的数据不允许外界访问
+  // 要解决的问题就是间接访问该数据
+
+  // 问题的引出
+  function ff () {
+    var num = 123
+    var person = {name: '张三'}
+    return person
+  }
+
+  var ff1 = ff()
+  var ff2 = ff()
+  console.log(ff1 == ff2) // 这里看都不用看，肯定不等
+  // 每次调用ff()，我们得到的都把里面的代码执行一遍，ff1和ff2里面的num和person都是不同
+  // 如果只调用一次ff，然后在里面动手术，那就能操作里面的变量了
+
+  // 闭包的解决方案
+  function foo () {
+    var num = 123
+    return function (a) {
+      if (a != undefined) {    // 如果传参了，那么就是给num赋值
+        num = a
+      } else {   // 如果没传参，就是获取num的值
+        return num
+      }
+    }
+  }
+
+  // 这里只调用了一次 foo()，所以后边的操作都是在操作这个foo里面的num值。
+  var func = foo()
+  // 设置值
+  func(999)
+  console.log(func())  // 打印 999
+  func(111)
+  console.log(func())  // 打印 111
+
+  // 如果多次调用foo()，那肯定是不同对象了，操作不到原先的数据
+  var func2 = foo()
+  console.log(func2())   // 打印 123
+
+  // 闭包获取、设置多个参数
+  function person () {
+    var name = '李雷雷'
+    var age = 18
+    var gender = '男'
+    return {
+      getName: function () {
+        return name
+      },
+      setName: function (nameStr) {
+        name = nameStr
+        return name  // 这里搞个返回值，可以让外边判断是否更改成功。不写也可以
+      },
+      getAge: function () {
+        return age
+      },
+      setAge: function (ageNum) {
+        age = ageNum
+      },
+      getGender: function () {
+        return gender
+      },
+      setGender: function (genderStr) {
+        gender = genderStr
+      }
+    }
+  }
+
+  var p = person()
+  console.log(p.getName())
+  console.log(p.getAge())
+  console.log(p.getGender())
+
+  p.setAge(20)
+  p.setName('刘德华')
+  p.setGender('老男人')
+  console.log(p.getName())
+  console.log(p.getAge())
+  console.log(p.getGender())
+
+</script>
+</body>
+</html>

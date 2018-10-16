@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+
+    // 此处不一定要用闭包，只是作为演示。正常情况下最好使用属性，避免闭包滥用
+
+    // 点击div，打印div的序号
+    window.onload = function () {
+
+      // 方法一：给div对象加一个index属性
+      // 能用属性，偏要用闭包，这是闭包滥用
+//            func1();
+
+      // 方法二：用闭包
+//      func2()
+
+      fun3()
+    }
+
+    // 方法一：给div对象加一个index属性
+    function func1 () {
+      var divs = document.getElementsByTagName('div')
+      for (var i = 0; i < divs.length; i++) {
+        var obj = divs[i]
+        obj.index = i
+        obj.onclick = function () {
+          console.log(this.index)
+        }
+      }
+    }
+
+    // 方法二：用闭包给每个div记住 i
+    function func2 () {
+      var divs = document.getElementsByTagName('div')
+      for (var i = 0; i < divs.length; i++) {
+        var obj = divs[i]
+        obj.onclick = (function (j) {
+          return function () {
+            console.log(j)
+          }
+        })(i)
+      }
+    }
+
+    // 方法三：用indexof
+    function fun3 () {
+      var divs = document.getElementsByTagName('div')
+      var timer = null
+      for (var i = 0, iLength = divs.length; i < iLength; i++) {
+        var obj = divs[i]
+        obj.onclick = function () {
+          // 其实有下边一句就够了。下边用定时器的写法，是为了有个延时效果，仅仅作为演示
+          // console.log(Array.prototype.indexOf.call(divs, this))
+
+          var _this = this
+          clearTimeout(timer)
+          timer = setTimeout(function () {
+            // 只需要在点击的时候，把这个被点击的传进去
+            console.log(Array.prototype.indexOf.call(divs, _this))
+          }, 1000)
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+<div>我是第1个div</div>
+<div>我是第2个div</div>
+<div>我是第3个div</div>
+<div>我是第4个div</div>
+<div>我是第5个div</div>
+<div>我是第6个div</div>
+<div>我是第7个div</div>
+<div>我是第8个div</div>
+<div>我是第9个div</div>
+<div>我是第10个div</div>
+</body>
+</html>

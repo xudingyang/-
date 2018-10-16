@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // JS中的沙箱就是一个自调用函数，与外界隔绝
+
+  // 自调用函数不会向外界暴露任何数据，外界甚至不能调用这个函数，完全隔绝
+
+  // 沙箱模式一般应用在书写第三方框架的时候
+  // 或者为第三方框架写插件
+  // 或者书写功能独立的组件
+
+  // 沙箱模式的优势：
+  // 1 沙箱使用的自调用函数，不会向外界暴露任何全局变量，避免全局污染
+  // 2 沙箱中所有数据都是和外界隔离的，保证了代码安全性
+
+  // 实现原理：
+  // 函数可以构建作用域。上级作用域不能直接访问下级作用域中的数据
+
+  // jQuery中沙箱模式
+  (function (win) {
+    var jQuery = {
+      sayHi: function () {
+
+      }
+    }
+
+    // 直接引用会破坏沙箱原则
+    // 虽然可以直接用window，但是这样不好，最好是通过参数传进来
+    win.jQuery = win.$ = jQuery
+  })(window);
+
+  // jQuery插件写法
+  (function ($) {  // 如果我这里直接用$来表示jQuery，那么外边要是释放了$，我这里就gg了
+    // 所以要通过参数传进来
+    $.haha = function () {
+
+    }
+  })(jQuery)
+
+</script>
+</body>
+</html>

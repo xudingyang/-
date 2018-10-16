@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+
+    //  delete 操作符  可以删除var开头的变量，也可以删除对象的属性
+
+    // 上一个斐波那契数列的例子，我们用的是数组作为缓存，是因为我们要计算的序号正好对应着数组下标，很方便定位需要的数据
+
+    // jQuery中，以选择器为例，选择器是没有序号对应的，所以数组不适合做缓存了
+    // 用字典做缓存。即 对象做缓存
+    // 为了避免全局污染，用闭包
+
+    // eleCache
+    // typeCache
+    // classCache
+    // eventCache
+
+    // 这个方法可以到处使用，包括用到Fibonacci的示例中
+    // 缓存应该是有个限制的，这里用index来记录缓存个数
+    function createCache () {
+      var cache = {}
+      var index = []
+      return function (key, value) {
+        // 如果传了值，说明是设置
+        if (value !== undefined) {
+          cache[key] = value
+
+          index.push(key)
+
+          // 判断缓存中数量是否超出限制
+          if (index.length >= 50) {
+            // 删除掉最早的缓存
+            // 1 找最早的缓存的key
+            var tempKey = index.shift()
+            // 2 根据key删除掉缓存对象的属性。{}的每一项（key，value）都是它的属性。
+            delete cache[tempKey]
+          }
+
+          return cache[key]
+        }
+        // 如果只传了键，那就是获取
+        else {
+          return cache[key]
+        }
+      }
+    }
+
+    var eleCache = createCache()
+    eleCache('name', 'Jack')
+    console.log(eleCache('name'))
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

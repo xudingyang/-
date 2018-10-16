@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 用普通递归计算斐波那契数列，很多计算都是多余的。比如：
+  // 计算 第5个：要依次计算 第4个 第3个 第2个 第1个
+  // 计算 第4个：要依次计算 第3个 第2个 第1个
+  // 其中第 3 2 1个都是重复计算
+
+  // 可以把计算好的放进一个缓存数组，每次计算的时候，若不是新的，就直接从数组中取
+
+  var cache = []
+
+  function fibonacci (n) {
+    // 如果 有，从cache中取
+    if (cache[n] !== undefined) {
+      return cache[n]
+    }
+    // 如果没有，就计算，然后放入cache
+    if (n <= 2) {
+      cache[n] = 1
+      return 1
+    }
+    var temp = fibonacci(n - 1) + fibonacci(n - 2)
+    cache[n] = temp
+    return temp
+  }
+
+  console.log(fibonacci(9))
+
+  // 上边代码有问题，因为有全局变量污染。用闭包解决这个问题
+  function createFibonacci () {
+    var cache = []
+    return function (n) {
+      // 如果 有，从cache中取
+      if (cache[n] !== undefined) {
+        return cache[n]
+      }
+      // 如果没有，就计算，然后放入cache
+      if (n <= 2) {
+        cache[n] = 1
+        return 1
+      }
+      var temp = fibonacci(n - 1) + fibonacci(n - 2)
+      cache[n] = temp
+      return temp
+    }
+  }
+
+  var fib = createFibonacci()
+  console.log(fib(9))
+
+</script>
+</body>
+</html>

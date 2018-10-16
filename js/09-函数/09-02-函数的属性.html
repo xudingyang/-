@@ -15,6 +15,11 @@
   // 4 length     形参个数     略
   // 5 constructor 指向构造函数  略
 
+  // Function 里面有 prototype 属性，指向Function.prototype
+  // Function.prototype 里面有 constructor 属性，指向Function
+  // 所以，以前认为只有构造函数里才有prototype，是错误的！！
+  // 所有函数里都有prototype
+
   //***************************************
   // （一）caller属性。
   //***************************************

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 只要是函数，就可以创建作用域
+    // 函数中又可以再创建函数
+    // 函数内部的作用域可以访问函数外部的作用域
+    // 如果有多个函数嵌套，就会构成一个链式访问结构，就是作用域链
+    
+    function f1() {
+        function f2() {
+            
+        }
+    }
+    var num = 456;
+    function f3() {
+        function f4() {
+            
+        }
+    }
+</script>
+</body>
+</html>

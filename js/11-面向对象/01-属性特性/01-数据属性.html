@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 数据属性是用来描述数据值的
+
+  // 数据属性包含一个数据值的位置。在这个位置可以读取和写入值。
+  // 数据属性有4个描述其行为的特性。
+  // configurable    是否可配置。三方面意思：是否可以用delete删除；能否修改属性的特性；能否把属性修改为访问器属性。
+  // enumerable      是否可枚举
+  // writable        是否可修改
+  // value           数据值。读取顺序值的时候，从这个位置读；写入的时候，把新值保存在这个位置。
+  // value 的默认值为undefined。所以，我们看到的只声明但是未赋值的变量都是undefined
+
+  // 非严格模式下
+  // writable 为 false的时候，赋值操作会被忽略
+  // configurable 为 false，delete操作，什么也不会发生
+
+  // 严格模式下
+  // writable 为 false的时候，赋值操作会报错 Cannot assign to read only property
+  // configurable 为 false，delete操作，会导致错误 Cannot delete property
+
+  var person = {}
+  Object.defineProperty(person, 'name', {
+    writable: false,
+    value: '刘能',
+    configurable: false,
+    enumerable: false
+  })
+  for (let key in person) {
+    console.log(person[key])    // 打印 空白
+  }
+  person.name = '张三'
+  console.log(person.name)      // 仍然打印  刘能
+  delete person.name
+  console.log(person.name)      // 还是能打印出来。根本就没删掉
+
+
+  // 关于configurable enumerable writable 三个特性的默认值
+  // 1 如果直接用 person.age = 12 的方式定义属性，
+  //    那么configurable enumerable writable都默认是true，value就是刚刚赋的值
+  // 2 如果调用Object.defineProperty()方法时，这三个特性默认都是false
+  //    特别要注意这里，这里与第一条是刚刚相反的
+
+  // 另外：configurable的限制
+  // 一旦把属性定义为不可配置的，就不能再把它变回可配置的了。
+  // 此时再调用Object.defineProperty()方法修改除writable之外的特性，都会导致错误。记住，是除了writable之外
+  // 也就是说，可以多次调用Object.defineProperty()方法修改同一个属性，但在把configurable设置成false后，就有限制了
+</script>
+</body>
+</html>

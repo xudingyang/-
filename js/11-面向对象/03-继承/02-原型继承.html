@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 总述：通过修改原型链结构实现的继承，就是原型继承。
+
+  // 1 给原型对象添加成员
+  // 其实这不算严格意义上的继承，因为都是一个类，没有涉及到另外的类
+  // 这里相当于是，p对象继承原型对象
+  // 实际上，js里的继承，就是对于原型来说的
+
+  function Person (name, age, gender) {
+    this.name = name
+    this.age = age
+    this.gender = gender
+    // hehe既不是实例的，也不是Person的。他就是函数表达式，只能在内部使用，不属于任何东西。
+    var hehe = function () {
+      console.log('hehe')
+    }
+  }
+  Person.prototype.sayHello = function () {
+    console.log('我听见风的声音')
+  }
+  var p = new Person('Tom', 20, 'male')
+  p.sayHello()
+  //    p.hehe();
+  //    Person.hehe();
+
+  // 2 直接替换原型对象
+  // 跟上边差不多。因为p能访问到原型中的内容，所以认为p继承了原型对象。
+  function Person1 (name, age, gender) {
+    this.name = name
+    this.age = age
+    this.gender = gender
+  }
+  var parent = {
+    sayHello: function () {
+      console.log('我听见风的声音111111')
+    },
+  }
+  Person1.prototype = parent
+  var p1 = new Person1('Tom', 20, 'male')
+  p1.sayHello()
+
+  // 3 混入方式继承原型。这样就不是替换原型，而是增强原型。
+  function Person2 (name, age, gender) {
+    this.name = name
+    this.age = age
+    this.gender = gender
+  }
+  var parent2 = {
+    sayHello: function () {
+      console.log('我听见风的声音22222')
+    },
+  }
+  for (var k in parent2) {
+    Person2.prototype[k] = parent2[k]
+  }
+  var p2 = new Person2('Tom', 20, 'male')
+  p2.sayHello()
+
+</script>
+</body>
+</html>

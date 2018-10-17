@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 《javascript语言精粹》作者提出了一个方式实现继承
+
+  // 先来看下边这种，推出我们书中的经典继承
+  function jicheng (obj) {
+    var o = {}
+    o.__proto__ = obj
+    return o
+  }
+
+  var o = jicheng({
+    name: '汤姆',
+    age: 23,
+    sayHello: function () {
+      console.log('hello')
+    }
+  })
+
+  console.log(o)
+  o.sayHello()
+
+  // 经典继承语法
+  // Object.create(obj);
+  // 返回值为一个对象，继承自参数obj
+  // 问题：
+  // create是ES5才出现的方法，有兼容问题
+  var o = {
+    name: '张三'
+  }
+  var obj = Object.create(o)
+  console.log('obj的name------' + obj.name)
+
+  // 如何处理上边的兼容问题：我自己封装个create函数不就行了。类似封装getElementsByClassName
+  function create (obj) {
+    if (Object.create) {
+      return Object.create(obj)
+    } else {
+      function F () {}
+
+      F.prototype = obj
+      return new F()
+    }
+  }
+
+  var o1 = {
+    name: '张三'
+  }
+
+  var obj1 = create(o1)
+  console.log(obj1.name)
+
+
+</script>
+</body>
+</html>

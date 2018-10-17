@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // in 关键字
+  // 1 最常用在for in循环中
+  // 2 判断属性是否存在于对象中
+  // 语法  属性名 in 对象
+  // 3 判断数组中是否存在某个键(数组的键，就是下标、索引)。不是判断值，是判断索引。
+  var obj = {
+    name: '许定阳',
+    age: 18,
+  }
+  for (var key in obj) {
+    // 这里不能用点语法，不然就成了 访问obj这个对象里的key这一个属性。而这里的key不是专指key属性，而是指代所有属性。
+    console.log(obj[key])
+  }
+
+  // 属性名为字符串类型。若不加引号，name就是一个变量。
+  // 当然，这里name不加引号也不会是undefind。因为window有个属性也是name
+  var isExist = 'name' in obj
+  console.log(isExist)
+
+  var arr = [11, 22, 33, 44, 55]
+  console.log(0 in arr)    // true
+  console.log('0' in arr)    // true。这里有一个隐式的类型转换。由于是操作索引，所以不需要加引号。
+
+</script>
+
+</body>
+</html>

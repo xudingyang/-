@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 混入式继承    或者叫做拷贝继承
+  // 就是把对象赋值一遍
+  // 利用in关键字：in关键字能访问对象的key
+  // 跟创建对象里面是一样的
+
+  var Obj1 = {
+    name: '刘能',
+    sayHello: function () {
+      console.log('我是obj1的方法。sayHello')
+    }
+  }
+
+  var Obj2 = {}
+
+  // 下边让obj2继承obj1
+  for (var k in Obj1) {
+    // 记住:这里不能用点语法
+    Obj2[k] = Obj1[k]
+  }
+  Obj2.sayHello()
+
+</script>
+</body>
+</html>

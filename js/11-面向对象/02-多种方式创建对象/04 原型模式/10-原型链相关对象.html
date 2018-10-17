@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 每个函数都有 prototype 属性。创建函数的时候，系统自动添加的
+  // 对象中没有prototype属性，只有函数中才有
+  // 函数中没有__proto__，普通原型对象中也没有__proto__，只有Object.prototype中才有__proto__
+  // 普通原型对象中，也没有__proto__。只有constructor一个自身属性。__proto__在Object.prototype中
+  // 创建出来的普通对象，没有constructor，也没有__proto__，什么也没有。但是它们又能访问到，说明在原型中
+  // 每个原型对象的原型都是Object.prototype。即 person.__proto__ 是 Object.prototype
+  // 每个函数的构造函数都是Function。Function自己的构造函数也是Function
+
+  // Object Array 这些内置对象，其实都是内置构造函数，也是函数，所以它们的构造函数都是Function
+  // 它们只是比普通函数多一点点特殊属性而已
+
+  function Person () {
+
+  }
+  var person = new Person()
+
+  // 创建出来的普通对象，没有constructor，也没有__proto__，什么也没有。但是它们又能访问到，说明在原型中
+  // 普通原型对象中，没有__proto__。只有constructor
+  // 对象中、原型对象中，都没有prototype属性。函数中才有prototype
+  console.log(person.prototype)    // undefined
+  console.log(person.constructor)  // Person
+  console.log(person.__proto__)    // Person.prototype
+  console.log(person.hasOwnProperty('__proto__'))    // false
+  console.log(person.hasOwnProperty('constructor'))  // false
+  console.log(Object.getOwnPropertyNames(person))     // 打印 []  空数组
+
+  // Person和Person.prototype
+  console.log('==========================')
+  console.log(Person.constructor)  // Function() { [native code] }
+  console.log(Person.prototype)    // Person.prototype     打印的是 {constructor: ƒ}
+  console.log(Person.__proto__)    // Function.prototype   打印的是 ƒ () { [native code] }
+  console.log(Person.hasOwnProperty('prototype'))             // true
+  console.log(Person.prototype.hasOwnProperty('__proto__'))   // false
+  console.log(Person.prototype.hasOwnProperty('constructor')) // true
+  console.log(Object.getOwnPropertyNames(Person.prototype))   // 打印 ["constructor"]
+
+  // Object
+  console.log(Object.constructor)  // Function() { [native code] }
+  console.log(Object.prototype.hasOwnProperty('__proto__'))  // true
+
+</script>
+</body>
+</html>

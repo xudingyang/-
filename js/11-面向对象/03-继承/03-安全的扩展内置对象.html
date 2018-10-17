@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 1 扩展内置对象不安全方式：直接在内置对象原型上动刀
+  //    Array.prototype = {
+  //        sayHello : function () {
+  //
+  //        }
+  //    }
+
+  // 2 先继承内置对象的原型，再在我自己的类上动刀子
+  function MyArray () {
+
+  }
+
+  // 让MyArray继承Array的原型，然后在MyArray里或者MyArray原型里加东西，不就是既没有破坏Array，也实现了扩展
+  MyArray.prototype = []
+
+  var myArr = new MyArray()
+  myArr.push(34)
+  myArr.push(35)
+  myArr.push(38)
+  console.log(myArr)
+
+</script>
+</body>
+</html>

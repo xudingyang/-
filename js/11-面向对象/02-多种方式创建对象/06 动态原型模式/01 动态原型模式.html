@@ -32,6 +32,40 @@
   var p = new Person('刘能', 23)
   p.sayName()
 
+  // 注意：
+  // 使用动态原型模式，只能在原型对象上一个一个的添加属性或方法，不能直接用对象字面量赋给原型对象。
+  // 因为 new Person()之后，是先创建对象，然后再执行函数体。
+  // 所以，在第一次调用new Person()之后，对象已经创建了，此时的对象是指向旧原型的。
+  // 一旦把对象字面量赋给原型对象，那么第一个之后的对象都会与旧原型切断联系。
+  // 第一个对象也不会与新原型产生联系，也就是说，后边给原型添加的属性，第一个对象访问不到。
+
+  // 如果非要用对象字面量，怎么办？
+  // 无非就是把第一个对象与新原型对象绑定。
+  // 绑定是无法绑定的。但是我们可以在更换原型对象之后，再创建一个对象，把这个对象作为第一个对象返回。那就行了呀
+
+  // 请看例子：
+  function Dog (name) {
+    // 属性
+    this.name = name
+    // 方法
+    if (typeof this.bark != 'function') {
+      console.log('第一次进if语句')
+      Dog.prototype = {
+        construtor: Dog,
+        age: 12,
+        bark: function () {
+          console.log(this.name + '在汪汪叫')
+        }
+      }
+      return new Dog(name)
+    }
+  }
+
+  var d1 = new Dog('旺财')
+  d1.bark()
+  var d2 = new Dog('来福')
+  d2.bark()
+
 </script>
 </body>
 </html>

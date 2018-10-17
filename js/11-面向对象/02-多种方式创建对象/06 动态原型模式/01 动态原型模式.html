@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 主要是给其他语言的开发人员看的。其他语言都是一个类创建对象，我们这里是一个"类"加一个原型，所以我们要做的是把类和原型放在一个函数里
+
+  // 把所有信息都封装在构造函数中，而通过在构造函数中初始化原型（仅在必要的情况下），又保持了同时使用构造函数和原型的优点。
+  // 换句话说，可以通过检查某个应该存在的方法是否有效，来决定是否需要初始化原型
+
+  // 下边的例子，看起来了是检测sayName方法存不存在。
+  // 其实，我们是为了检测原型有没有初始化，如果原型初始化了，那么我们的sayName方法肯定是存在的。
+  // 也就是说，如果有多个方法都在原型上，我们随便检测一个都可以。
+  // 只要方法还没有创建，那就初始化原型。
+  // if语句只在调用构造函数的时候执行一次，因为执行了之后，sayName就存在了，原型已经初始化了，就不会再进入if代码块了
+
+  function Person (name, age) {
+    // 属性
+    this.name = name
+    this.age = age
+    // 方法
+    if (typeof this.sayName != 'function') {
+      console.log('sayName方法不存在哦，把它添加到原型上吧')
+      Person.prototype.sayName = function () {
+        console.log('My name is ' + this.name)
+      }
+    }
+  }
+  var p = new Person('刘能', 23)
+  p.sayName()
+
+</script>
+</body>
+</html>

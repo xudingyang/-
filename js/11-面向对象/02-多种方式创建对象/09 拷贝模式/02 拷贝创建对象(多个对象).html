@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>title</title>
+</head>
+<body>
+<div>
+  <p>遍历A对象的每个属性，以此赋值给另一个空对象</p>
+</div>
+</body>
+</html>
+
+<script>
+
+  // 上一个例子只复制了一个对象。其实可以复制多个对象
+  // extend(target,obj1,obj2,obj3)
+
+  function extend () {
+    var key, i = 0, len = arguments.length, target = null, copy
+    if (len === 0) {
+      return
+    } else if (len === 1) {
+      target = this
+    } else {
+      i++
+      target = arguments[0]
+    }
+    // 这里要做的就是，把obj1 boj2 obj3的属性全部合并，添加到target中
+    for (; i < len; i++) {
+      // 参数是对象,这里的key是json里的key
+      for (key in arguments[i]) {
+        // 取得json的value
+        copy = arguments[i][key]
+        // 把json的值赋给相应的target键
+        target[key] = copy
+      }
+    }
+    // 返回target 这是传进来的所有对象的综合体
+    return target
+  }
+
+  // child的属性
+  var child = {
+    name: '男孩名',
+    gender: '男',
+    age: 20
+  }
+  // 人类的能力
+  var humenAbility = {
+    humenName: '人类',
+    eat: function () {
+      console.log('吃饭')
+    }
+  }
+  // 人类的的亲属关系
+  var humenRelationship = {
+    father: '爸爸',
+    monther: '妈妈'
+  }
+
+  // 一个孩子的
+  var xiaoming = extend({}, child, humenAbility, humenRelationship)
+  console.log(xiaoming) // {name: "男孩名", gender: "男", age: 20, humenName: "人类", eat: ƒ, …}
+
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>title</title>
+</head>
+<body>
+<div>
+  <p>遍历A对象的每个属性，以此赋值给另一个空对象</p>
+</div>
+</body>
+</html>
+
+<script>
+  // 所谓拷贝：
+  // 遍历A对象的每个属性，以此赋值给另一个空对象
+
+  //-------------------------拷贝创建对象核心代码--------------------------
+  function extend (target, source) {
+    // 遍历对象
+    // 这里把原型的属性也拷贝进来了。看情况取舍吧
+    for (var i in source) {
+      target[i] = source[i]
+    }
+    return target
+  }
+
+  // 下边的方式只拷贝自身的
+  function extend2 (target, source) {
+    for (var p in source) {
+      if (source.hasOwnProperty(p)) {
+        target[p] = source[p]
+      }
+    }
+    return target
+  }
+
+  // 给原型添加个可以枚举的属性
+  Object.prototype.hhh = '哈哈'
+
+  var boy = {
+    name: '男孩名',
+    gender: '男',
+    age: 20
+  }
+
+  var girl = {
+    name: '女孩名',
+    gender: '女',
+    age: 21
+  }
+
+  var hanmeimei = extend2({}, girl)
+  console.log(Object.getOwnPropertyNames(hanmeimei))
+  console.log(hanmeimei)     // {name: "女孩名", gender: "女", age: 21}
+  hanmeimei.name = '韩梅梅'
+  console.log(hanmeimei)     // {name: "韩梅梅", gender: "女", age: 21}
+  console.log(hanmeimei.age) // 21
+
+</script>

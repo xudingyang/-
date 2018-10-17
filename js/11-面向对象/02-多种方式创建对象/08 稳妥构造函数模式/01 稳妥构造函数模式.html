@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 所谓稳妥模式，就是指没有公共属性，而且其方法也不引用this。
+  // 就是安全模式嘛。实际上，单独拿出来当构造函数说没什么意思
+
+  function Person (name, age) {
+    // 创建要返回的对象
+    var obj = new Object()
+
+    // 可以在这里定义私有变量和函数
+    var address = '和平大道'
+    function sayName(){
+      console.log(name)
+    }
+    // 添加方法
+    obj.sayAddress = function () {
+      console.log(address)
+    }
+    // 返回对象
+    return obj
+  }
+  var p = new Person('刘能', 20)
+  p.sayAddress()
+
+</script>
+</body>
+</html>

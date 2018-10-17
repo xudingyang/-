@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Person (name, age) {
+    var obj = new Object()
+    obj.name = name
+    obj.age = age
+    obj.sayName = function () {
+      console.log('My name is ' + this.name)
+    }
+    return obj
+  }
+  var p = new Person('刘能', 23)
+  p.sayName()
+  console.log(p.constructor)     // Object
+
+  // 从字面上看，这种方式就是工厂模式。但是差别就在于是用new调用的
+  // 而且，因为末尾返回了新创建的obj，所以用不用new调用，效果是一样的
+  // 那么，为什么吃饱了撑着用new调用呢？目的就是为了用new这个词，就是为了用构造函数的方式
+
+  // 运用：扩展已存在的对象。就像装饰模式
+  //   比如：给内置对象Array添加一个sayName方法
+  function ArraySayName () {
+    // 创建数组对象
+    var obj = new Array()
+    // 给数组对象添加内容
+    obj.sayName = function () {
+      console.log('你见过会say name的数组吗')
+    }
+    return obj
+  }
+  var arr = new ArraySayName()
+  console.log(arr instanceof Array)          // true
+  console.log(arr instanceof ArraySayName)   // false
+  arr.sayName()    // 你见过会say name的数组吗
+
+</script>
+</body>
+</html>

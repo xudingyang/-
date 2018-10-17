@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // ******************************************
+  // 抽取成函数
+  // ******************************************
+  function inheriPrototype (subType, superType) {
+    var prototype = Object.create(superType.prototype)
+    prototype.constructor = subType
+    subType.prototype = prototype
+  }
+
+
+
+  // 组合继承最大的问题是，无论什么情况下，都会调用两次超类型的构造函数
+  // 第一次是创建子类型的原型的时候；第二次是在子类型构造函数内部
+  // 问题出现了：
+  // 这样就导致属性重复了，实例中的属性屏蔽了原型中的属性
+  //    第一次指定SubType.prototype的时候，name colors都是SubType的属性了，只是在原型中
+  //    第二次在子类型构造函数内部，SuperType.call()之后，把name colors加到了SubType身上
+
+  // 我们的目标就是，不让属性有重复的。
+
+  // 改进思路：
+  // 在子类型构造函数内部执行SuperType.call()之后，就已经把超类型构造函数的属性全部复制进子类型了。
+  // 在指定SubType.prototype = new SuperType()的时候，我们得到了SuperType的原型，也得到了SuperType的构造函数创造的属性(这就重复了)
+  // 其实，在指定SubType.prototype的时候，我们完全没必要再次得到SuperType的构造函数添加的属性
+  // 用书上的话说就是：不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已
+
+  // 怎么解决呢？
+  // SuperType的构造函数肯定是要调用的，SuperType的原型也是要得到的。
+  // 那就调用一次SuperType的构造函数，然后直接取SuperType的原型并赋值
+
+  // 这里又有一个问题？
+  // 既然调用构造函数，可以同时得到构造函数创造的属性和原型对象的属性。那么直接调用构造函数创建新对象，然后把新对象设置成原型不就行了？
+  // 我靠！！！你是忘了构造函数应该放什么，原型中应该放什么了吧？
+  //    放在构造函数中的属性，说明是不想放原型中被所有实例共享。子类型如果把父类型构造函数中的属性也放到原型中，这不合适吧！！！
+
+  // 所以，还必须得调用一次构造函数，然后取一次原型对象
+
+  function SuperType (name) {
+    this.name = name
+    this.colors = ['red', 'blue', 'green']
+  }
+  SuperType.prototype.sayName = function () {
+    console.log('My name is ' + this.name)
+  }
+
+  function SubType (name, age) {
+    // 继承属性
+    SuperType.call(this, name)
+    this.age = age
+  }
+
+  // 【start】寄生组合继承
+  var subPrototype = Object.create(SuperType.prototype)
+  subPrototype.constructor = SubType
+  SubType.prototype = subPrototype
+  // 【end】 寄生组合继承
+
+  SubType.prototype.sayAge = function () {
+    console.log(this.age + '岁')
+  }
+
+  var instance1 = new SubType('刘能', 20)
+  instance1.colors.push('黑色')
+  console.log(instance1.colors)   // ["red", "blue", "green", "黑色"]
+  instance1.sayName()             // My name is 刘能
+  instance1.sayAge()              // 20岁
+
+  var instance2 = new SubType('李富', 23)
+  console.log(instance2.colors)    // ["red", "blue", "green"]
+  instance2.sayName()              // My name is 李富
+  instance2.sayAge()               // 23岁
+
+  console.log(instance2 instanceof SubType)  // true
+
+
+
+</script>
+</body>
+</html>

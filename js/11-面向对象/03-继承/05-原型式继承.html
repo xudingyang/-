@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 《javascript语言精粹》作者提出了一个方式实现继承
+
+  // 先来看下边这种，推出我们书中的经典继承
+  function jicheng (obj) {
+    var o = {}
+    o.__proto__ = obj
+    return o
+  }
+
+  var o = jicheng({
+    name: '汤姆',
+    age: 23,
+    sayHello: function () {
+      console.log('hello')
+    }
+  })
+
+  console.log(o)
+  o.sayHello()
+
+  // 书中原型继承：
+  // 书中写的是create，因为ES5把create收编了，所以我这里写create1以示区别
+  Object.create1 = function (o) {
+    function F () {}
+    F.prototype = o
+    return new F()
+  }
+  var person = {
+    name: '张三李四',
+    hobby: ['排球','羽毛球']
+  }
+  var anotherPerson = Object.create1(person)
+  anotherPerson.name = '杨过'
+  anotherPerson.hobby.push('游泳')
+
+  var yetAnotherPerson = Object.create1(person)
+  yetAnotherPerson.name = '小龙女'
+  yetAnotherPerson.hobby.push('跳绳')
+
+  console.log(person.hobby)           // ["排球", "羽毛球", "游泳", "跳绳"]
+  console.log(anotherPerson.hobby)    // ["排球", "羽毛球", "游泳", "跳绳"]
+  console.log(yetAnotherPerson.hobby) // ["排球", "羽毛球", "游泳", "跳绳"]
+  console.log(anotherPerson.name)     // 杨过
+  console.log(anotherPerson.constructor) // Object() { [native code] }
+  // 可以看到，引用类型出问题了。
+
+  // ES 5 的原生语法
+  // Object.create(obj, [{name: {value: 'Rose'}}]);
+  // 第二个参数跟Object.defineProperties第二个参数一样
+  // 返回值为一个对象，继承自参数obj
+  // 问题：
+  // create是ES5才出现的方法，有兼容问题
+  // 跟上边额create1一样，对参数里的对象都是浅复制，引用类型会有问题
+
+  var o1 = {
+    name: '张三',
+    hobby: ['排球','羽毛球']
+  }
+  var obj1 = Object.create(o1)
+  obj1.hobby.push('跑步')
+  console.log(obj1.hobby)         // ["排球", "羽毛球", "跑步"]
+  var obj2 = Object.create(o1)
+  console.log(obj2.hobby)         // ["排球", "羽毛球", "跑步"]
+  // 一样的，引用类型还是出问题，都是浅复制。
+
+
+  // 如何处理上边的兼容问题：
+  // 我自己封装个create函数不就行了。类似封装getElementsByClassName
+  function create (obj) {
+    if (Object.create) {
+      return Object.create(obj)
+    } else {
+      function F () {}
+      F.prototype = obj
+      return new F()
+    }
+  }
+
+  // 有这么多问题，为什么还用它？
+  // 当只需要简单继承一个对象的时候，用这方法就行了，方便、简单、高效
+
+
+</script>
+</body>
+</html>

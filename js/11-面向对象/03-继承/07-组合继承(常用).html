@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 组合继承，指的是将原型链和借用构造函数 组合到一起
+
+  // 组合继承最大的问题是，无论什么情况下，都会调用两次超类型的构造函数
+  // 第一次是创建子类型的原型的时候。
+  // 第二次是在子类型构造函数内部
+  // 还有，属性也有多余重复了。
+  //    第一次指定SubType.prototype的时候，name colors都是SubType的属性了，只是在原型中
+  //    第二次在子类型构造函数内部，SuperType.call()之后，把name colors加到了SubType身上，这样就多此一举了
+
+  // 所以后边把  原型链、借用构造函数、寄生  结合起来，叫做 寄生组合式继承
+
+  function SuperType (name) {
+    this.name = name
+    this.colors = ['red', 'blue', 'green']
+  }
+  SuperType.prototype.sayName = function () {
+    console.log('My name is ' + this.name)
+  }
+
+  function SubType (name, age) {
+    // 继承属性
+    SuperType.call(this, name)                // 第二次调用超类型的构造函数
+    this.age = age
+  }
+  // 继承Super的原型对象
+  SubType.prototype = new SuperType()         // 第一次调用超类型的构造函数
+  // 不要忘记给constructor重新赋值
+  SubType.prototype.constructor = SubType
+  // 继承了Super的原型对象，也可以给自己的原型添加方法嘛
+  SubType.prototype.sayAge = function () {
+    console.log(this.age + '岁')
+  }
+
+  var instance1 = new SubType('刘能', 20)
+  instance1.colors.push('黑色')
+  console.log(instance1.colors)   // ["red", "blue", "green", "黑色"]
+  instance1.sayName()             // My name is 刘能
+  instance1.sayAge()              // 20岁
+
+  var instance2 = new SubType('李富', 23)
+  console.log(instance2.colors)    // ["red", "blue", "green"]
+  instance2.sayName()              // My name is 李富
+  instance2.sayAge()               // 23岁
+
+  console.log(instance2 instanceof SubType)  // true
+
+</script>
+</body>
+</html>

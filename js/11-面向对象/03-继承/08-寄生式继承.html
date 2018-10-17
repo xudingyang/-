@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 思路与寄生构造函数和工厂模式类似
+  // 即：创建一个仅用于封装继承过程的函数，该函数在内部增强对象，最后再返回对象
+
+  // 问题：
+  // 还是重复代码过多，不能复用函数。
+  // 很显然，用组合模式
+
+  // 在下边例子中，
+  // 先用参数对象创建一个新对象
+  // 然后把新对象进行增强
+  // 然后返回增强了的新对象
+  function createAnother (original) {
+    var clone = Object(original)  // 这一句不是必须的，只要能达到同样的效果就行
+    clone.sayHi = function () {
+      console.log('hi')
+    }
+    return clone
+  }
+
+</script>
+</body>
+</html>

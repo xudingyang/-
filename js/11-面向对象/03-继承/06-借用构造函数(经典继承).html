@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 在子类型构造函数的内部调用超类型的构造函数。
+
+  // 问题：
+  // 方法都在构造函数中定义，因此函数复用无从谈起。
+  // 而且，超类原型中定义的方法，对子类型而言也是不可见的。也就是说，不能用到超类的原型。
+  // 连超类的原型都用不了，那还继承什么？
+  // 所以，一般很少单独用借用构造函数。
+  // 跟创建对象一样，还是要组合模式的。
+
+  function SuperType () {
+    this.colors = ['red', 'blue', 'green']
+  }
+  function SubType () {
+    // 继承了SuperType
+    SuperType.call(this)
+  }
+
+  var instance1 = new SubType()
+  instance1.colors.push('black')
+  console.log(instance1.colors)    // ["red", "blue", "green", "black"]
+
+  var instance2 = new SubType()
+  console.log(instance2.colors)     // ["red", "blue", "green"]
+  console.log(instance2.hasOwnProperty('colors'))  // true
+  console.log(instance2.constructor) // SubType()
+
+
+</script>
+</body>
+</html>

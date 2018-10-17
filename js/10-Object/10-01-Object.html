@@ -20,7 +20,7 @@
   // 其中，constructor指向Object()，里面还有好多属性，但是我们无法通过for in读取，说明Object()里的属性是不可枚举的
   // （一）constructor  指向构造函数
   // （二）hasOwnProperty()  这个只能读取到自己的属性，不能读取到继承自原型对象中的，所以要避开原型对象属性的时候，不要用for in，要用这个
-  // （三）isPrototypeOf() 用于测试一个对象是否存在于另一个对象的原型链上。
+  // （三）isPrototypeOf() obj是否是参数对象的原型对象。用于测试一个对象是否存在于另一个对象的原型链上。
   // （四）propertyIsEnumerable()  该属性是不是可枚举的。只会查找自身的，不会找到原型。如果找原型的，那就返回false。也可以借此判断属性是不是自己的
   var obj1 = {
     name: '老张'

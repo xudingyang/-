@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 构造函数模式的问题：
+  // 如果把方法也放到构造函数里，那么每个对象中都有相同任务的函数对象
+
+  // 原型模式的问题：
+  // 1 应该属于对象的属性，不该保存在原型中
+  // 2 原型中如果放引用类型，那么一个对象修改了，其他对象的该属性也会跟着被改
+
+  // 混合模式是用的最多的。好用好理解
+  // 混合模式就是 构造函数模式 和 原型模式 混合着用
+
+  function Person (name, age) {
+    this.name = name
+    this.age = age
+    this.hobby = ['羽毛球', '排球']
+  }
+  Person.prototype = {
+    constructor: Person,
+    sayName: function () {
+      console.log('My name is ' + this.name)
+    }
+  }
+
+  var p1 = new Person('小明', 14)
+  var p2 = new Person('花花', 15)
+  console.log(p1.constructor)     // Person
+  p1.sayName()   // My name is 小明
+  p2.sayName()   // My name is 花花
+  p1.hobby.push('刚篮球')
+  console.log(p1.hobby)   // ["羽毛球", "排球", "刚篮球"]
+  console.log(p2.hobby)   // ["羽毛球", "排球"]
+</script>
+</body>
+</html>

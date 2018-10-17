@@ -11,32 +11,26 @@
 <script>
 
 
-  //原型方式主张将一切都放在原型中
-  //  存在的缺点：name是每个实例不一样的
-  //  所以，应该把单独放在构造函数中，把公共的放到原型中。
-  //见下一种方式：混合方式
-  var Role = function () {}
-  /*姓名*/
-  Role.prototype.name = {nickName: '剑侠客', accountName: '876791562@qq.com'}
-  //生命值
-  Role.prototype.HP = 100
-  //魔法值
-  Role.prototype.MP = 100
-  //技能
-  Role.prototype.technologys = ['普通攻击', '横扫千军', '地狱火', '漫天飞雪']
-  //跑起来
-  Role.prototype.run = function () {
-    alert('run')
+  // 原型方式主张将一切都放在原型中
+  //  存在的缺点：
+  //  1 name是每个实例不一样的，所以，应该把单独放在构造函数中，把公共的放到原型中。
+  //  2 如果原型里有引用类型，如果一个对象修改了该引用类型，所有的对象都会跟着改
+
+  function Person () {}
+  Person.prototype = {
+    constructor: Person,
+    name: '老张',
+    age: 12,
+    hobby: ['排球','羽毛球'],
+    sayName: function () {
+      console.log('My name is ' + this.name)
+    }
   }
 
-  /*引用类型有问题*/
-  var boy = new Role()
-  boy.name.nickName = '剑侠客'
-  console.log(boy.name.nickName)
-  var girl = new Role()
-  girl.name.nickName = '可爱宝贝'
-  console.log(boy.name.nickName)
-  console.log(girl.name.nickName)
-
+  var p1 = new Person()
+  var p2 = new Person()
+  p1.hobby.push('橄榄球','游泳')
+  console.log(p1.hobby)   // ["排球", "羽毛球", "橄榄球", "游泳"]
+  console.log(p2.hobby)   // ["排球", "羽毛球", "橄榄球", "游泳"]
 
 </script>

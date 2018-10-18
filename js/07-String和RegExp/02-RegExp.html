@@ -26,6 +26,19 @@
   //     lastIndex: 整数，表示开始搜索下一个匹配项的字符位置，从0算起
   //     source: 正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回。
 
+  // 用一用正则
+  ;(function () {
+    var str = 'KangKang good good 66 1234 boy'   // 长度为30
+    console.log(str.match(/good/g))   //  ["good", "good"]
+    console.log(str.match(/[^god6kK\s]/g))  // ["a", "n", "a", "n", "1", "2", "3", "b", "y"]
+    console.log(str.match(/g\w+d/g))  // ["good", "good"]
+    console.log(str.match(/\d{2}/g))  // ["66", "12", "34"]
+    console.log(str.match(/\d{3,}/g)) // ["1234"]
+    console.log(str.match(/\d{1,3}/g)) // ["66", "123", "4"]
+    console.log(/[\d|\w]+@[\d|\w]{2,}\.\w{2,}/g.test('1234ddf@qq.com'))  // true
+  })()
+
+
   // *****************************************************
   // RegExp实例方法
   // *****************************************************

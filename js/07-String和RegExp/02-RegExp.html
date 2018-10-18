@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 格式一：var patt = new RegExp(patternStr, modifiersString); 注意，参数都是字符串，不能直接传正则表达式
+  // 格式二：var patt = /pattern/modifiers;
+  // ES 5 之后，这两种方式都一样的了。
+
+  // pattern 中文叫 模式，可以是任何正则表达式
+  // modifiers 是修饰符。看清楚，这是复数形式，也就是说可以带多个模式。
+  // 模式有下边三种
+  // g 表示全局模式
+  // i 表示不区分大小写
+  // m 表示多行，即在到达一行末尾时，还会继续查找下一行中是否存在与模式匹配的项
+
+  // 1 所有元字符必须转义。元字符有    ( [ { \ ^ $ | ) ? * + . ] }
+  // 2 new RegExp(patternStr, modifiersString)的参数都是字符串，不能传正则表达式字面量
+  // 3 RegExp实例属性
+  //     global: 布尔值，表示是否设置了g标志
+  //     ignoreCase: 布尔值，表示是否设置了i标志
+  //     multiline: 布尔值，表示是否设置了m标志
+  //     lastIndex: 整数，表示开始搜索下一个匹配项的字符位置，从0算起
+  //     source: 正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回。
+
+  // *****************************************************
+  // RegExp实例方法
+  // *****************************************************
+
+  // 1 exec() 该方法专门为捕获组而设计的。接受一个字符串参数
+  //    返回值是一个数组。
+  //      第 1 个元素是与 RegExpObject 的第 1 个子表达式相匹配的文本
+  //      第 2 个元素是与 RegExpObject 的第 2 个子表达式相匹配的文本
+  //      ...以此类推
+  //    返回数组中还有index input两个属性：
+  //      index 属性声明的是匹配文本的第一个字符的位置。
+  //      input 属性则存放的是被检索的字符串 string。
+
+  var str = 'Hello world!'
+  //查找"Hello"
+  var patt = /Hello/g
+  var result = patt.exec(str)
+  console.log(result)               // ["Hello", index: 0, input: "Hello world!", groups: undefined]
+  console.log('返回值: ' + result)   // 返回值: Hello
+  //查找 "RUNOOB"
+  patt = /RUNOOB/g
+  result = patt.exec(str)
+  console.log('返回值: ' + result)    // 返回值: null
+
+  var text = 'mom and dad and baby'
+  var pattern = /and/gi
+  var matches = pattern.exec(text)
+  var matches1 = pattern.exec(text)
+
+  console.log(matches)  // ["and", index: 4, input: "mom and dad and baby", groups: undefined]
+  console.log(matches1) // ["and", index: 12, input: "mom and dad and baby", groups: undefined]
+
+  var pattern1 = /(mom)/gi
+  console.log(pattern1.exec(text)) // ["mom", "mom", index: 0, input: "mom and dad and baby", groups: undefined]
+
+  // 2 test()
+  //  test就很简单了，只判断整个字符串是否有符合模式的子串，如果有，返回true；如果没有，返回false
+  var testPattern = /abc/g
+  console.log(testPattern.test('abcdfgg'))   // true
+  console.log(testPattern.test('adbcdfgg')) // false
+
+  // 3 toString()
+  var toStringPattern = /^abc$/g
+  console.log(toStringPattern.toString())   // /^abc$/g   原封不动的打印
+</script>
+</body>
+</html>

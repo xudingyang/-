@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 查询对象是否存在
+  // 原理：访问不存在的未声明的变量会抛出错误。但是可以查询宿主上是否存在该属性
+  function test1 () {
+    // var value = anotherValue    // 报错  anotherValue is not defined
+    var value1 = window.anotherValue
+    console.log(value1)            // 打印  undefined
+  }
+
+</script>
+</body>
+</html>

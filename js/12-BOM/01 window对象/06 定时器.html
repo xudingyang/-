@@ -6,7 +6,71 @@
 </head>
 <body>
 <script>
-  // js是单线程的，因此一定时间内只能执行一段代码。为了控制
+  // js是单线程的，因此一定时间内只能执行一段代码。
+  // 为了控制要执行的代码，就有一个JavaScript任务队列。这些任务会按照将它们(指任务自己)添加到队列的顺序执行
+  // setTimeout()的第二个参数告诉js再过多长时间把当前任务添加到队列中。
+  // 如果队列是空的，那么添加的代码会立即执行；如果队列不是空的，那就排队吧。
+
+  // 在调用 setTimeout() setInterval()之后，会返回一个数值ID，这个ID是定时器的唯一标识符，可以通过ID来取消定时器
+  function test1 () {
+    var timer = setTimeout(function () {
+      console.log(123)
+    }, 1000)
+    console.log(timer)     // 打印  1
+    var timer1 = setTimeout(function () {
+      console.log(123)
+    }, 1000)
+    console.log(timer1)    // 打印 2
+
+    var timer3 = setInterval(function () {
+      console.log('====')
+    }, 1000)
+    console.log(timer3)    // 打印 3
+
+    var timer4 = setTimeout(function () {
+      console.log(123)
+    }, 1000)
+    console.log(timer4)    // 打印 4
+
+    var timer5 = setInterval(function () {
+      console.log('*******')
+    }, 1000)
+    console.log(timer5)    // 打印 5
+  }
+
+  // 开发中很少用setInterval，不是因为容易忘记clearInterval，这都忘记，不傻逼吗
+  //    原因是：后一个间歇调用可能会在前一个间歇调用结束之前启动。
+  // 对这里的理解：setInterval是每隔多长时间执行代码，不管上一个周期的代码有没有执行完，到了指定时间后，下一个周期就要启动。
+  // 问题：setTimeout就没有这个问题吗？setTimeout也会代码执行时间大于间隔时间啊！
+  // 答：setTimeout是隔多久后，把任务加入到队列，至于是否执行，它不管。
+
+  // 尽量用setTimeout替代setInterval
+  function test2 () {
+    var num = 0
+    var max = 10
+    // var intervalId = setInterval(function () {
+    //   num++
+    //   if (num >= max) {
+    //     clearInterval(intervalId)
+    //     console.log('interval结束啦')
+    //   }
+    // }, 500)
+    function incrementNumber () {
+      num++
+      console.log(num)
+      if (num < max) {
+        setTimeout(incrementNumber, 500)
+      } else {
+        console.log('timout结束啦')
+      }
+    }
+
+    setTimeout(incrementNumber, 500)
+
+  }
+
+  test2()
+
 </script>
 </body>
 </html>

@@ -6,6 +6,11 @@
 </head>
 <body>
 <script>
+  // Window 对象表示浏览器中打开的窗口。浏览器的一个tab栏就是一个window.
+  // 浏览器上边的地址栏、书签，不属于window对象。这些是浏览器自己的。
+  // 地址是属于window的，但地址栏是浏览器的，地址栏只是把window对象的地址展示了出来。
+  // 如果文档包含框架（<frame> 或 <iframe> 标签），浏览器会为 HTML 文档创建一个 window 对象，并为每个框架创建一个额外的 window 对象。
+  // 注意： 没有应用于 window 对象的公开标准，不过所有浏览器都支持该对象。
   console.log(window)
   // window对象里的东西就太多了，凡是属于全局对象的,比如内置对象Array Number等、parseInt()函数，都是window的
 

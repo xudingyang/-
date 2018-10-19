@@ -7,12 +7,17 @@
 <body>
 <script>
 
+  test1()
   // 查询对象是否存在
   // 原理：访问不存在的未声明的变量会抛出错误。但是可以查询宿主上是否存在该属性
+  //   typeof操作符可以，直接用点语法去取也可以。
+  //   判断兼容性的时候很有用
   function test1 () {
     // var value = anotherValue    // 报错  anotherValue is not defined
     var value1 = window.anotherValue
     console.log(value1)            // 打印  undefined
+
+    console.log(typeof value1)     // undefined
   }
 
 </script>

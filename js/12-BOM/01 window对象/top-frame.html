@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  window.onload = function () {
+    console.log(window.frames[0])
+    this.topArr = [1,2,3]
+    console.log(topArr instanceof Array)  // true
+    console.log(window.parent.name)   // 最大的窗口
+    console.log(window.top.name)  // 最大的窗口
+
+  }
+</script>

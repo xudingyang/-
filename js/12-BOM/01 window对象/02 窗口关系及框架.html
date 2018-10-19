@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div style="height: 160px">
+  <iframe src="top-frame.html" width="100%" height="160" name="topFrame"></iframe>
+</div>
+<div style="height: 400px;display: flex;">
+  <iframe src="left-frame.html" width="30%" height="100%" name="leftFrame"></iframe>
+  <iframe src="right-frame.html" width="70%" height="100%" name="rightFrame"></iframe>
+</div>
+</body>
+<script>
+  window.onload = function () {
+    this.name = '最大的窗口'
+
+    console.log(window.frames.length)  // 3
+    console.log(window.frames[0].name)  // topFrame
+
+    // 判断数组。这时候就出问题了
+    console.log(window.frames[0].topArr instanceof Array)  // false
+
+    console.log(Object.prototype.toString.call(window.frames[0].topArr))  // [object Array]
+
+    console.log(window.top.name)  // 最大的窗口
+  }
+
+  // 以后都用div + iframe 取代 frameset。
+  // 父框架访问子框架，window.frames[0]
+  // 子框架访问父框架，window.parent
+
+  // window.top 始终指向最外层框架
+</script>
+</html>

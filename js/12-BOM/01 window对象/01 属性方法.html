@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  console.log(window)
+  // window对象里的东西就太多了，凡是属于全局对象的,比如内置对象Array Number等、parseInt()函数，都是window的
+
+  // 定义全局变量与直接在window上定义的属性，有一点差别：
+  // 全局变量不能通过delete操作符删除，因为[[Configurable]]为false
+  // 直接在window对象上定义的，可以用delete操作符删除
+
+
+  // 常用对象
+  document
+  history
+  navigator
+  location
+  screen
+  frames       // 所有框架
+  top          // 指向最外层框架
+  parent       // 父框架
+
+  // 常用方法
+  alert()
+  blur()
+  focus()
+  confirm()
+  parseInt('12')
+
+
+</script>
+</body>
+</html>

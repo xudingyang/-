@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="box1">dsfsdfdsfd</div>
+<script type="text/javascript">
+  // navigator 记载浏览器的信息，一般用来识别浏览器
+  console.log(window.navigator.userAgent)
+  console.log(navigator.appName)
+  console.log(navigator.platform)
+  console.log(navigator.appVersion)
+  console.log(navigator.appCodeName)
+  console.log(navigator.cookieEnabled)
+
+  var box1 = document.getElementById('box1')
+  box1.innerHTML = navigator.userAgent
+  // 下边打印的是Chrome 70的结果
+  // Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36
+  // Netscape
+  // MacIntel
+  // 5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36
+  // Mozilla
+  // true
+
+  // 下边是 Firefox的
+  // Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:55.0) Gecko/20100101 Firefox/55.0
+  // Netscape
+  // MacIntel
+  // 5.0 (Macintosh)
+  // Mozilla
+  // true
+
+  // 下边是Safari的，只有 userAgent不同，其他都一样
+  // Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.1 Safari/605.1.15
+
+
+</script>
+</body>
+</html>

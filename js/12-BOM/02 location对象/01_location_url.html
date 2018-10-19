@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>location解剖url</title>
+</head>
+<body>
+<script>
+  // 本文件知识点
+  // （一）剖析location
+  // （二）查询字符串参数
+  // （三）位置操作（跳转）
+
+  // 1 剖析location
+  // url   http://localhost:63342/HTML/frontend-knowledge/js/12-BOM/02%20location%E5%AF%B9%E8%B1%A1/01_location_url.html
+  console.log('href========')
+  console.log(location.href)       // 完整的 url
+  console.log(location.toString()) // 完整的 url
+  console.log('protocol====')
+  console.log(location.protocol)   // http:
+  console.log('host========')
+  console.log(location.host)       // localhost:63342
+  console.log('hostname====')
+  console.log(location.hostname)   // localhost
+  console.log('pathname====')
+  console.log(location.pathname)   // /HTML/frontend-knowledge/js/12-BOM/02%20location%E5%AF%B9%E8%B1%A1/01_location_url.html
+  console.log('port========')
+  console.log(location.port)       // 63342
+  console.log('search======')
+  console.log(decodeURIComponent(location.search))   // ?aldtype=16047&query=介绍
+  console.log('hash========')
+  console.log(decodeURIComponent(location.hash))   // #zh/en/哈哈
+
+  // 2 查询字符串参数(把参数一一分割出来)
+  function getQueryStringArgs () {
+    // 取得参数，并去掉开头的问号
+    var qs = location.search.length > 0 ? location.search.slice(1) : ''
+    // 用于存放参数的字典
+    var args = {}
+    // 把参数切割成数组元素
+    var items = qs.length ? qs.split('&') : []
+    var i = 0, len = items.length, item = null, name = null, value = null
+    // 遍历
+    for (; i < len; i++) {
+      item = items[i].split('=')
+      name = decodeURIComponent(item[0])
+      value = decodeURIComponent(item[1])
+      if (name.length) {
+        args[name] = value
+      }
+    }
+    return args
+  }
+  var paramArgs = getQueryStringArgs()
+  console.log(paramArgs)  // {aldtype: "16047", query: "介绍"}
+
+  // 3 位置操作
+  // 3.1 修改location的方式，
+  //    本页面会产生历史记录
+  // assign(url)方法,跳转到url，并且在历史记录中生成一条记录
+  // 下边两条语句，背后也会调用assign()方法
+  // window.location = url
+  // location.href = url    最常用。我也习惯用这种
+
+  // 当然，修改loction的其他属性(除了hash)，也可以改变当前加载的页面。记得，除了hash，但是修改hash也会产生历史记录
+
+  // 3.2 位置操作 用replace()，
+  //   本页面不会产生历史记录
+
+  // location.replace('https://www.baidu.com')
+
+  // 3.3 位置操作  reload([boolean])
+  //    如果不传参数，如果不传参数，那就会以最有效的方式重新加载。即：如果自从上次请求以后，页面没有改变过，就从缓存中重新加载
+  //    如果传参数为true，则强制从服务器重新加载。
+</script>
+</body>
+</html>

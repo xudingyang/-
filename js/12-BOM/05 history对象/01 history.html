@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // history是window的属性。所以，每个浏览器窗口、标签、框架，都有自己的history对象与特定的window关联
+  // 处于安全考虑，开发人员无法得知用户浏览过的URL。
+  // 不过，借由用户访问过的页面列表，同样可以在不知道实际URL的情况下实现后退、前进。当然了，你能跳到别的页面，不能自己跳回来
+
+  // 1 go(integer)
+  // 可以在用户在历史记录中任意跳转
+  history.go(-1)   // 后退一页
+  history.go(1)   // 前进一页
+  history.back()  // 后退以页面
+  history.forward()  // 前进一页
+
+  console.log(history.length)  // 历史记录的数量
+</script>
+</body>
+</html>

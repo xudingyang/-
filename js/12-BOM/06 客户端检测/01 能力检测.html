@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 能力检测，是指检测浏览器具不具备某个方法、属性
+
+  // 能力检测不是浏览器检测。除非是检测一些浏览器自己的特有属性
+
+  function getElement (id) {
+    // 把最常用的属性放前边，避免过多无谓的检测
+    if (document.getElementById) {
+      return document.getElementById(id)
+    }  else if (document.all) {
+      return document.all[id]
+    } else {
+      throw new Error('搞不好，没有这个属性啊')
+    }
+  }
+
+  // 当然，这样判断不一定可靠。比如，上边检测的是getElementById方法，如果还有一个getElementById属性。那就判断不出来了。
+  // 更稳妥判断是用 typeof
+  console.log(typeof document.getElementById == 'function')
+
+</script>
+</body>
+</html>

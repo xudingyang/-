@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 确定窗口大小，会遇到各种奇葩
+  // IE 9 以后，浏览器都有innerHeight innerWidth outerWidth outerHeight 四个属性
+  // IE 9+ Safari Firefox中outerWidth outerHeight返回浏览器窗口尺寸;innerHeight innerWidth表示视图区的大小
+  // Chrome中，innerHeight innerWidth outerWidth outerHeight的返回值相同，都是视口(viewport)的大小
+
+  // 当然，我们用到的一般是视口的大小。谁他妈用浏览器大小啊。所以下边的兼容性代码是针对 innerWidth的，不考虑outerWidth
+  // IE8及以下，没有BOM元素可以访问窗口尺寸，可以通过DOM访问。这种情况下，又分IE6 7 8，IE6又要为标准模式和混杂模式(也叫怪异模式)
+  //    IE7、IE8及其他厂商浏览器，用的是document.documentElement.clientWidth，document.documentElement.clientHeight
+  //       IE 6标准模式，同IE7  IE8
+  //       IE 6混杂模式,用的是document.body.clientWidth，document.body.clientHeight
+  //    混杂模式下的Chrome，document.documentElement.clientWidth与document.body.clientWidth都可以。
+  // 只需要关注IE6 7 8的兼容就行了，Chrome的兼容问题一般没问题了。
+
+  // 封装可视区域大小
+  function client () {
+    if (window.innerWidth != undefined) {  // ie9 +  最新浏览器
+      return {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }
+    }
+    else if (document.compatMode === 'CSS1Compat') {  // 标准浏览器
+      return {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      }
+    }
+    return {   // 怪异浏览器
+      width: document.body.clientWidth,
+      height: document.body.clientHeight
+    }
+  }
+
+  // 获取窗口位置的时候，有设置窗口位置的方法，虽然往往被浏览器禁用
+  // 获取窗口大小的时候，也有设置窗口大小的方法，同样也可能被浏览器禁用了
+
+  // resizeTo(新宽度,新高度)
+  // resizeBy(宽度差，高度差)  宽度差、高度差，正数则增大，负数则减小
+
+</script>
+</body>
+</html>

@@ -6,8 +6,8 @@
 </head>
 <body>
 <script>
-  // Window 对象表示浏览器中打开的窗口。浏览器的一个tab栏就是一个window.
-  // 浏览器上边的地址栏、书签，不属于window对象。这些是浏览器自己的。
+  // Window 对象表示浏览器中打开的窗口。你当前能在浏览器上看到的东西都是window，包括上边的书签、地址栏，虽然用js访问不到书签
+  // 请看图解   https://github.com/xudingyang/frontend/blob/master/images/window/window_size.png
   // 地址是属于window的，但地址栏是浏览器的，地址栏只是把window对象的地址展示了出来。
   // 如果文档包含框架（<frame> 或 <iframe> 标签），浏览器会为 HTML 文档创建一个 window 对象，并为每个框架创建一个额外的 window 对象。
   // 注意： 没有应用于 window 对象的公开标准，不过所有浏览器都支持该对象。
@@ -28,6 +28,9 @@
   frames       // 所有框架
   top          // 指向最外层框架
   parent       // 父框架
+  screenLeft   // 返回窗口相对于屏幕的X坐标.  Firefox不支持，其他都支持。 Firefox支持的是 screenX
+  innerWidth;innerHeight;  // 窗口的文档显示区的宽度|高度，也就是不包含工具条与滚动条。兼容性请看"04 窗口大小"。
+  outerWidth;outerHeight;  // 窗口的外部宽度|高度，包含工具条与滚动条。
 
 
   // 常用方法
@@ -36,6 +39,12 @@
   focus()
   confirm()
   parseInt('12')
+  open()
+  clone()
+  moveTo()
+  resizeTo()
+  setTimeout()
+  setInterval()
 
 
 </script>

@@ -15,13 +15,31 @@
 <body>
 <div id="box1"></div>
 <script>
-  window.onload = function () {
-    var box1 = document.getElementById('box1')
-    console.log(window.screenLeft)
-    console.log(window.screenTop)
-    console.log(box1.screenLeft)
-  }
+  //*************************************************
+  // 1 相对于屏幕的距离
+  //*************************************************
+  // screenLeft    火狐不支持，其他支持
+  // screenX       IE不支持，其他支持
+  // 兼容写法
+  var leftPos = (typeof window.screenLeft == 'number') ? window.screenLeft : window.screenX
+  var topPos = (typeof window.screenTop == 'number') ? window.screenTop : window.screenY
+  console.log(leftPos)
+  console.log(topPos)
+  // 仍然存在的问题：
+  //   1 各个浏览器的计算 screenTop的方式是不用
+  //      IE Opera中，screenTop是指可视区域(即网页内容)到屏幕顶部的距离。
+  //      其他浏览器中，是指浏览器到屏幕顶部的距离。（这也是字面理解的意思）
+  //   2 在有框架的情况下，表现不同
+  //      Chrome Firefox  Safari 返回的始终是top.screenX和top.screenY
+  //      IE Opera 则会给出相应框架的坐标值。当然，这些都是老版本的Opera了，新版本的Opera几乎跟Chrome一样了
 
+  //*************************************************
+  // 2 moveTo(x,y) moveBy(deltaX,deltaY)   移动（最外层）窗口
+  //   moveTo直接移动到指定坐标。mobeBy移动的是距离
+  //   都是移动最外层框架，内层似乎也移不动
+  //   这俩方法可能被浏览器禁用。谁他妈用代码移动浏览器啊！
+  //*************************************************
+  window.moveTo(100,100)
 </script>
 </body>
 </html>

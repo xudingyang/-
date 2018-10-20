@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box1,#box2,#box3 {
+      min-height:20px;border: 2px solid red;margin-bottom: 10px;
+    }
+    p {
+      height: 50px;
+      width: 200px;
+      background: green;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+<div id="outer_box">
+  <div id="box1">盒子1</div>
+  <div id="box2">盒子2</div>
+  <div id="box3">盒子3</div>
+</div>
+<div id="outer_box2">
+  <div><div><p>我是outer_box2最里面的p标签</p></div></div>
+</div>
+
+<script>
+  var box1 = document.getElementById('box1')
+  var box2 = document.getElementById('box2')
+  var box3 = document.getElementById('box3')
+  var outer_box = document.getElementById('outer_box')
+  var outer_box2 = document.getElementById('outer_box2')
+
+  // 1 box1.appendChild(addNode)
+  //   返回值：被添加的节点对象
+  //   向childNodes列表末尾添加一个节点
+  //   如果要添加的节点已经在DOM结构中，那就不是新创建节点，而是移动这个节点的位置
+  // 2 insertBefore(要插入的节点, 参照节点)
+  //   返回值：插入的节点对象
+  //   如果不传参照节点，那就跟appendChild的操作一样
+  //   注意：没有insertAfter方法。
+  // 3 replaceChild(要插入的节点，要被替换的节点)
+  //   返回值：被替换的节点对象
+  // 4 removeChild(被移除的节点)
+  //    返回值：被移除的节点对象
+  // 5 cloneNode([boolean])
+  //    复制节点。传true表示深复制，节点本身及子节点一并复制了。传false表示浅复制，只复制节点本身，不复制子节点
+  //    复制后返回的节点为文档所有，但它没有父节点。孤儿节点。可以添加到任何节点下
+  // 6 normalize() 合并相邻的文本节点并删除空的文本节点
+
+  // 无论是replaceChild()还是removeChild()，节点只是在当前文档中没有了位置，但还是为文档所有，不是销毁了
+
+  var node1 = document.createElement('p')
+  node1.innerHTML = '我是p1标签'
+
+  var node2 = document.createElement('p')
+  node2.innerHTML = '我是p2标签'
+
+  outer_box.appendChild(node1)
+  outer_box.insertBefore(node2, box1)
+
+  var node3 = document.createElement('p')
+  node3.innerHTML = '我是替换box2的p3标签'
+
+  outer_box.replaceChild(node3, box2)
+  outer_box.removeChild(box3)
+
+  outer_box.appendChild(box3)
+
+  // 浅复制
+  var node4 = outer_box2.cloneNode()
+  box3.appendChild(node4)
+  // 深复制
+  var node5 = outer_box2.cloneNode(true)
+  box1.appendChild(node5)
+</script>
+</body>
+</html>

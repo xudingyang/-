@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="box1">
+  <p id="p1">段落1</p><!-- 注释的文字-->是大幅度发
+</div>
+<script>
+  // 需要注意的是：p标签里的文字，不属于文本节点
+  // nodeType 的值是 3
+  // nodeName 的值是 #text
+  var box1 = document.getElementById('box1')
+  var p1 = document.getElementById('p1')
+  console.log(box1.childNodes)
+</script>
+</body>
+</html>

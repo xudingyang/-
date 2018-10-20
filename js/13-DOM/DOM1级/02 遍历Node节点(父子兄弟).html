@@ -5,10 +5,13 @@
   <title>Title</title>
 </head>
 <body>
-<div id="box1"></div>
+<div id="box1"><p>我是p标签</p></div>
 <script>
 
   var box1 = document.getElementById('box1')
+
+  // 性能忠告
+  // 因为childNodes是动态查询的。所以，要尽量减少访问childNodes的次数。
 
   // 1 父节点
   // parentNode
@@ -39,6 +42,13 @@
   // 4 判断是否有子节点
   //   方式一  if (box.childNodes.length > 0)  这比方式二多访问一次length属性，没下边的好
   //   方式二  box1.hasChildNodes()
+
+  // 5 遍历节点
+  //   每个节点都有一个childNodes属性，其中保存着NodeList对象，基于DOM结构动态查询的结果，伪数组
+  console.log(box1.childNodes)
+  // 下边两种方式都可以访问保存在NodeList中的节点
+  console.log(box1.childNodes[0])
+  console.log(box1.childNodes.item(0))
 
 
 </script>

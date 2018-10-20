@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input id="box1" class="box1" data-haha="自定义特性" placeholder="占位文字" style="background:#0f0;font-size:14px;" onclick="alert(123)"></input>
+<script>
+  var box1 = document.getElementById('box1')
+
+  // 元素类型用于表现XML或HTML元素。nodeType值为 1; nodeValue值为 null
+  // 要访问元素的标签名，可以用nodeName，也可以用tagName
+
+  // 1 HTML元素
+  //   所有HTML元素都是右 HTMLElement 类型或其子类型表示。
+  //   在标准Element基础上，HTMLElement添加了如下 id  title  lang   dir  className 等特性
+  //   这些公认特性都以属性的形式添加到了DOM对象中，可以用点语法访问。当然，也可以用getAttribute访问。
+  //   两类特殊的特性：
+  //     style，通过属性的形式用点语法访问，得到的是一个对象；通过getAttribute访问，得到css字符串
+  //     onclick，通过属性的形式用点语法访问，得到JavaScript函数；通过getAttribute访问，得到相应的代码的字符串
+
+  // 2 取得特性
+  // 2.1 getAttribute(attributeName)
+  // 注意：特性的名称是不区分大小写的，即 id 与 ID 是一样的
+  // 自定义特性是随意写的。但是HTML5规范，自定义特性应该加上 data- 前缀以便验证。
+  console.log(box1.getAttribute('class'))  // 注意，这里是写class，不是写className了
+  console.log(box1.getAttribute('data-haha'))
+  console.log(box1.getAttribute('placeholder'))
+  console.log(box1.getAttribute('style'))  // background:#0f0;font-size:14px;
+  console.log(box1.style)  // 返回的是一个对象
+  console.log(box1.getAttribute('onclick'))   // 打印代码的字符串  alert(123)
+  console.log(box1.onclick)     // 得到一个函数，函数体是我们在html里写的代码的字符串
+  // 2.2 setAttribute(attributeName, newAttributeValue)
+  // 这个方法设置的特性名，会被统一转成小写形式
+  box1.setAttribute('class', 'box-class')
+  box1.setAttribute('hello', '自定义')  // 通过这种方式添加的自定义特性，除了IE，其他浏览器不会当成元素的特性，用getAttribute取不到
+  box1.getAttribute('hello')  // 取不到这个值
+  // 2.3 removeAttribute(attributeName)
+  box1.removeAttribute('class')
+
+  // 3 attributes 属性
+  // 顾名思义，就是把元素的特性封装成了一个对象。也一样的可以增删查改
+
+  // 4 创建元素。这是创建元素节点。创建别的节点，有相应的方法。比如 createTextNode()创建文本节点
+  document.createElement('div')
+
+</script>
+</body>
+</html>

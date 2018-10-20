@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #outer_box {
+    padding: 20px;
+    border: 2px solid #888;
+    font-size: 10px;
+  }
+  .box1 {
+    width: 300px;
+    background: #0f0;
+  }
+</style>
+<body>
+<div id="outer_box">
+  <div id="box1" class="box1" style="height: 30px;"></div>
+</div>
+<script>
+  var box1 = document.getElementById('box1')
+
+  // 1 style对象    只能访问到style特性里的样式
+  // html元素都有一个style属性。这个style对象是CSSStyleDeclaration的实例
+  // style对象中只有通过style特性指定的css
+  // 在标准模式下，所有度量值都必须指定一个度量单位
+  // 当然了，iE8是不支持的。IE8用的是styleSheet属性
+  console.log(box1.style.height)      // 打印 30px
+  console.log(box1.style.background)  // 打印为空   style对象中只有style特性里的内容。
+  // style.cssText 可以得到style特性里完整css代码的字符串
+  console.log(box1.style.cssText)     // height: 30px;
+
+  // 2 document.defaultView.getComputedStyle(element, 伪元素字符串)
+  //   伪元素字符串，比如 ":after" ，如果不需要伪元素，那就传null
+  // 当然了，IE中肯定不支持的。IE中，具有style属性的元素有个currentStyle属性，也可以达到同样的效果
+  var computeStyle = document.defaultView.getComputedStyle(box1, null)
+  console.log(computeStyle.fontSize)  // 12px
+</script>
+</body>
+</html>

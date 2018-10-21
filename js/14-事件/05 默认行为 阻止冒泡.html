@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 1 阻止默认行为
+  // 划分出一个个不同的事件，就是因为每种事件都要做不同的处理。
+  // 有些事件是明显可以知道要怎么处理的，比如点击超链接的点击事件，默认行为肯定是跳转到该链接。这就是默认行为
+  // 只有cancelable属性设置为true的事件，才可以使用preventDefault()来取消其默认行为。
+  // DOM方式   e.preventDefault()
+  // IE方式    e.returnValue = false
+  var link = document.getElementById('myLink')
+  link.onclick = function (e) {
+    e.preventDefault()
+
+    // 下边是IE的方式
+    // IE的这些属性是可读写的。
+    e.returnValue = false
+  }
+
+  // 2 阻止冒泡
+  //   立即停止事件在DOM层次中的传播，即取消进一步的事件捕获或冒泡
+  //   DOM方式  e.stopPropagation()
+  //   IE方式   e.cancelBubble = true
+  link.onclick = function (e) {
+    e.stopPropagation()
+
+    // 下边是IE的方式
+    e.cancelBubble = true
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div style="height: 50px;width: 50px;background:gray;margin-top: 20px" onclick="console.log(this)"></div>
+<div style="height: 50px;width: 50px;background:blue;margin-top: 20px" onclick="clickBox()"></div>
+<div id="box1" style="height: 50px;width: 50px;background:red;margin-top: 20px">box1</div>
+<div id="box2" style="height: 50px;width: 50px;background:green;margin-top: 20px">box2</div>
+<div id="box3" style="height: 50px;width: 50px;background:yellow;margin-top: 20px">box3</div>
+<div id="box4" style="height: 50px;width: 50px;background:pink;margin-top: 20px">box4</div>
+<script>
+  // 方式一：HTML事件处理程序
+  // 就是在html中直接添加
+  // 在onclick属性里写的js代码，this指向该html元素
+  // 把函数抽取出来的方式，那就是函数调用模式了,this指向window。
+  // event是函数内部的局部变量，表示该事件对象
+  function clickBox () {
+    // event是函数内部的局部变量，表示该事件对象
+    console.log(event)
+    console.log('直接在html中添加事件处理函数')
+  }
+
+  var box1 = document.getElementById('box1')
+  var box2 = document.getElementById('box2')
+  var box3 = document.getElementById('box3')
+  var box4 = document.getElementById('box4')
+
+  // 方式二：DOM0级事件处理程序
+  //       这实际上是给box1的onclick属性赋值。所以是方法调用模式
+  //       所以，this指向当前元素
+  //       参数是时间对象 event
+  // 优点：简单明了
+  // 局限：既然onclick是一个属性，那么多次给onlick赋值，也只能给onclick添加一个事件处理函数。
+  // 删除事件的方式：
+  // box1.onclick = null 即可
+  box1.onclick = function (ev) {
+    console.log(this)
+    console.log(ev)
+  }
+
+  // 方式三：DOM2级事件处理程序
+  //     addEventListener('click', function(){}, [boolean])
+  //     传true，表示捕获阶段调用事件处理程序；false表示冒泡，默认为false
+  //     this也是指向html元素自身
+  // 当box2接收到click事件的时候，会从上到下依次调用下边两个处理程序
+  box2.addEventListener('click', function (evt) {
+    console.log('第一个click事件处理程序')
+  })
+  box2.addEventListener('click', function (evt) {
+    console.log('第二个click事件处理程序')
+  })
+  // removeEventListener('click',function(){},[boolean])
+  // 这里的function，一定要就是addEventListener()里面的那个function，即指向同一个地址
+  // 可能原因是：因为可以给一个事件添加多个处理函数，所以函数如果不相同，那会删错。
+  // 要达到这效果，只能是用函数指针了
+  var handler = function () {
+    console.log(this)
+  }
+  box3.addEventListener('click',handler)
+  box3.removeEventListener('click',handler)
+
+  // IE8及更早的IE事件处理程序
+  // 因为IE8及以前，只有冒泡，所以有些特殊
+  // attachEvent()
+  //    里面的this指向window
+  //    删除事件，也是需要传入同一个函数
+  // 如果添加多个事件处理程序，执行方向跟addEventListener相反，是从下往上的
+  var handler1 = function(){
+    alert('attachEvent')
+  }
+  box4.attachEvent('onclick',handler1)
+  box4.detachEvent('onclick',handler1)
+</script>
+</body>
+</html>

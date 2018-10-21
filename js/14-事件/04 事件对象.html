@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="outer" style="width: 600px;height: 600px;background:blue;">
+  <div id="box"
+       style="height: 200px;width: 200px;background:red;margin-top: 20px;margin-left: 30px;display: flex;align-items: center;justify-content: center;">
+    <p id="p1" style="height: 100px;width: 100px;background:green;">box里的p标签</p>
+  </div>
+</div>
+<script>
+
+  var outer = document.getElementById('outer')
+  var box = document.getElementById('box')
+  var p1 = document.getElementById('p1')
+
+  // event是函数的的内部属性，不通过外界创造，也不会被外界消灭，在事件处理函数作用域中自动出现
+
+  // 普通浏览器支持 event
+  // ie 678 支持 window.event
+  //  兼容写法如下：
+  //    var event = event || window.event
+
+  // envet对象中常用属性
+  // 函数中传不传这个参数都可以，习惯是传参数
+  // 实践：要传参数。在attachEvent中，必须传参数。所以为了兼容，还是要传参数
+  outer.addEventListener('click', function (event) {
+    var event = event || window.event
+    // console.log(event === e)  // true
+
+    // 在标准浏览器里，这些属性都是只读的。IE中returnValue cancelBubble 却都是可读写的。
+    console.log(event.target)          // 当前被点击的最小的盒子。一般来讲，你既然点击最小的盒子，那肯定是要找这个盒子了，不然你为什么非要点最小的？那这就是目标了
+    console.log(event.currentTarget)   // 与当前事件处理程序绑定的盒子，即事件正在发生的盒子。这里是 outer
+    console.log(event.type)            // 事件名     这里是  click
+    console.log(event.cancelable)      // 事件是否冒泡   这里是  true
+    console.log(event.screenX)      // 光标相对于该屏幕的水平位置  event.screenY 同理
+    console.log(event.pageX)        // 光标相对于该网页的水平位置（ie无）   event.pageY 同理
+    console.log(event.clientX)      // 光标相对于该网页的水平位置 （当前可见区域）  clientY 同理
+    console.log(event.eventPhase)   // 确定事件当前正位于事件流的哪个阶段。捕获 1；目标 2；冒泡 3。尽管"处于目标"发生在冒泡阶段，但eventPhase还是等于2
+    console.log(event.returnValue)  // IE才有，可读写。默认为true，设置为false就可以取消事件的默认行为
+    console.log(event.cancelBubble) // IE才有，可读写。默认为false，设置为true就可以取消冒泡
+    console.log(event.srcElement)   // IE才有，只读。与上边介绍的target属性相同.IE事件里不要用this，最好是使用srcElement
+  })
+
+  // data	返回拖拽对象的URL字符串（dragDrop）
+  // pageX	光标相对于该网页的水平位置（ie无）
+  // pageY	光标相对于该网页的垂直位置（ie无）
+  // screenX	光标相对于该屏幕的水平位置
+  // screenY	光标相对于该屏幕的垂直位置
+  // target	该事件被传送到的对象
+  // type	事件的类型
+  // clientX	光标相对于该网页的水平位置 （当前可见区域）
+  // clientY	光标相对于该网页的水平位置
+  // returnValue  IE才有，可读写。默认为true，设置为false就可以取消事件的默认行为
+  // cancelBubble  IE才有，可读写。默认为false，设置为true就可以取消冒泡
+  // srcElement  IE才有，只读。与上边介绍的target属性相同
+
+</script>
+</body>
+</html>

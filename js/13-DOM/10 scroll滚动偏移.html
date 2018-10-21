@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      height: 300px;
+      border: 1px solid #666;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <p>我是p标签</p>
+  <p>我是p标签</p>
+  <p>我是p标签</p>
+  <p>我是p标签</p>
+</div>
+<script>
+  // scrollTop    被卷去的头部 滑动滚轮浏览网页的时候,网页隐藏在屏幕上方的距离
+  // scrollLeft   被卷去的左边
+
+  // 注意与下边两个属性区分
+  // scrollWidth  scrollHeight  元素内容的实际宽度|高度，比如带有滚动条的盒子的宽度。
+  // 当然，不带滚动条的时候也可以用这俩属性，但最好别用于不带滚动条的盒子，因为这时候各浏览器表现不一致
+
+  // 获取scrollTop
+  window.onscroll = function (ev) {
+    // console.log(document.body.scrollTop)
+
+    // 混杂模式(怪异模式)   document.body.scrollTop
+    // 火狐谷歌等其他浏览器  document.documentElement.scrollTop
+    // IE9+以后的现代浏览器用这俩最新的属性  window.pageXOffset    window.pageYOffset
+
+    console.log(window.pageYOffset)
+
+    // 兼容写法
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+  }
+</script>
+</body>
+</html>

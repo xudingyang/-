@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // readystatechange事件，提供与文档或元素的加载状态相关的信息，但这个事件的行为有时候也很难预料
+  // 支持readystatechange事件的每个对象都有一个readyState属性，取值有如下5个：
+  // uninitialized（未初始化）   对象存在但尚未初始化
+  // loading（正在加载）         对象正在加载数据
+  // loaded（加载完毕）          对象加载数据完成，此时只是数据搞到手了，但还不能交互
+  // interactive（交互）     可以操作对象了，但还没有完全加载
+  // complete（完成）        对象已经加载完毕
+
+  // 并非所有对象都会经历这几个阶段
+  // 对于document而言，值为interactive的readyState会在DOMContentLoaded大致相同的时刻触发readystatechange事件
+  // 在与load事件一起使用时，如果包含较多或较大外部资源，则会在load之前进入交互阶段；如果外部资源较少较小，则很难保证在load之前
+  // 更蛋疼的是，交互阶段可能早于也可能晚于完成阶段。外部资源多，交互更可能早于完成；外部资源少，完成更可能早于交互。
+  // 更多内容，去看看《js高程（第3版）》
+
+  document.addEventListener('readystatechange',function (e) {
+    var e = e || window.event
+    console.log(document.readyState)
+  })
+</script>
+</body>
+</html>

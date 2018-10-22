@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      margin: 30px;
+      width: 200px;
+      height: 200px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+<div id="box1" class="box">box1</div>
+<div class="box">box1</div>
+<div class="box">box1</div>
+<div class="box">box1</div>
+<div class="box">box1</div>
+<script>
+  // click事件属于鼠标事件，因为最常用，所以拿出来说
+  // 一次click事件，实际顺序发生了3个事件：mousedown mouseup click
+  var box1 = document.getElementById('box1')
+  box1.onclick = function (e) {
+    var e = e || window.event
+    // 1 客户区坐标位置(相对视口而言，原点在视口左上角)
+    console.log(e.clientX)
+    console.log(e.clientY)
+    // 2 页面坐标位置（相对页面而言，原点在页面左上角）
+    console.log('下边是页面位置===========')
+    console.log(e.pageX)  // IE8及以前，不支持
+    console.log(e.pageY)  // IE8及以前，不支持
+    // 在没有滚动的情况下，clientX和pageX是相等的
+    // 兼容写法
+    var pageX = e.pageX
+    var pageY = e.pageY
+    if (pageX === undefined) {
+      pageX = e.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft)
+      pageY = e.clientY + (document.body.scrollTop || document.documentElement.scrollTop)
+    }
+    // 3 屏幕坐标位置
+    console.log('下边是屏幕坐标位置========')
+    console.log(e.screenX)
+    console.log(e.screenY)
+    // 4 修改键
+    //   按下鼠标时，键盘上的某些键的状态也可以影响到所要采取的操作。这些键就是Shift Ctrl Alt Meta(Windows/Command)
+    //   DOM给这4个键规定了4个属性：shiftKey ctrlKey altKey metaKey
+    //   这些属性都是布尔值。按下为true，否则为false
+    //   IE8及之前，不支持metaKey
+    if (e.shiftKey) {
+      console.log('你点击鼠标的时候按下shift键啦')
+    }
+  }
+
+  
+</script>
+</body>
+</html>

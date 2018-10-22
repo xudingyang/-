@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div {
+      height: 100px;
+      width: 200px;
+      background: green;
+      margin: 30px;
+    }
+    #my_menu {
+      position: absolute;
+    }
+    li {
+      width: 80px;
+      height: 40px;
+      line-height: 40px;
+      background: #aaa;
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+<div id="box1">
+
+</div>
+<ul id="my_menu">
+  <li><a href="http://www.baidu.com">百度1</a></li>
+  <li><a href="http://www.baidu.com">百度2</a></li>
+  <li><a href="http://www.baidu.com">百度3</a></li>
+  <li><a href="http://www.baidu.com">百度4</a></li>
+  <li><a href="http://www.baidu.com">百度5</a></li>
+</ul>
+<script>
+  // 通过右键调出上下文菜单
+  // 是冒泡的。因此可以为document指定一个事件处理程序，用以处理页面中发生的此类事件。
+  // 取消默认行为，可以不显示浏览器默认的上下文菜单
+  // 属于鼠标事件，所以该事件对象中包含光标位置有关的所有属性
+  // 通常用来显示自定义的上下文菜单，而使用onclick来隐藏该菜单
+
+  var box1 = document.getElementById('box1')
+  var myMenu = document.getElementById('my_menu')
+  box1.oncontextmenu = function (e) {
+    var e = e || window.event
+    e.preventDefault()
+    myMenu.style.left = e.clientX + 'px'
+    myMenu.style.top = e.clientY + 'px'
+    myMenu.style.visibility = 'visible'
+  }
+  document.onclick = function (e) {
+    myMenu.style.visibility = 'hidden'
+  }
+
+</script>
+</body>
+</html>

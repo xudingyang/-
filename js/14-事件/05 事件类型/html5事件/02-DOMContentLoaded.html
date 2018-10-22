@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    window.onload = function (ev) {
+      console.log(22)
+    }
+    // DOMContentLoaded事件始终会在load事件之前调用
+    document.addEventListener('DOMContentLoaded', function (e) {
+      console.log(11)
+    })
+    // DOMContentLoaded事件   在load事件之前调用
+    // DOMContentLoaded事件在形成完整的DOM树之后就会触发，不理会图像、js文件、css文件或其他资源是否已经下载完毕。
+    // 支持在页面下载的早期添加事件处理程序，这也就意味着用户能够尽早地与页面进行交互
+    // 该事件既可以添加事件处理程序，也可以执行其他DOM操作
+    // IE9+ 之后都支持
+
+    // 对于不支持DOMContentLoaded的浏览器，可以用setTimeout(fn, 0)替代，一定是页面中第一个超时调用。
+    // 但是不能百分百替代。DOMContentLoaded是一定在load之前调用，但是setTimeout(fn, 0)不一定在load之前
+  </script>
+</head>
+<body>
+<div><p><i>水电费水电费谁的</i></p></div>
+<div><p><i>水电费水电费谁的</i></p></div>
+<div><p><i>水电费水电费谁的</i></p></div>
+<div><p><i>水电费水电费谁的</i></p></div>
+</body>
+</html>

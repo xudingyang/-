@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 有3个键盘事件
+  // keydown  按下 任意键。如果按住不放，会重复触发此事件
+  // keypress 按下 字符键。如果按住不放，会重复触发此事件。按住ESC键也会触发
+  // keyup  松开按键
+  // 虽然所有元素都支持者3个事件，但一般用于输入文本框，别的元素也用不着这个事件啊。
+  // 键盘事件与鼠标事件一样，支持相同的修改键。IE8及之前，不支持metaKey
+
+  // 有1个文本事件
+  // textInput
+  // 这个事件是对keypress的补充。用意是在将文本显示给用户之前更容易拦截文本。在文本插入文本框之前会触发textInput事件
+  // 在打字的时候，首先会触发keydown，紧接着是keypress，最后是keyup。
+  // 其中,keydown keypress都是在文本框发生变化之前被触发的；而keyup则是在文本框发生变化之后被触发的
+  // 如果用户按住一个字符键不放，会重复触发keydown keypress，直到松开该键为止。
+  // 实际例子：一直按住一个字符键，文本框里会重复填入该字符。
+
+  // 1 键码
+  // 在发生keydown和keyup事件时，event对象的keyCode属性中会包含一个代码，与键盘上一个特定的键对应
+</script>
+</body>
+</html>

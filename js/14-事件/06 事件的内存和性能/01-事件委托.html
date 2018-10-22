@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #outer_box {
+      padding: 30px;
+      width: 200px;
+      border: 1px solid #666;
+    }
+
+    #outer_box > div {
+      height: 100px;
+      width: 100px;
+      background: green;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div id="outer_box">
+  <div id="box1">1</div>
+  <div id="box2">2</div>
+  <div id="box3">3</div>
+  <div id="box4">4</div>
+</div>
+<script>
+  // 添加到页面中的事件处理程序过多，会影响页面的整体运行性能
+
+  // 性能问题怎么来？
+  // 1 函数都是对象，都会占用内存；内存中对象越多，性能就越差
+  // 2 必须事先指定所有事件处理程序而导致的DOM访问次数，会延迟整个页面的交互就绪时间
+
+  // 事件委托
+  // 事件委托利用了事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。
+  // 例如，click事件会一直冒泡到document层次，那么我们可以在document添加一个click事件，而不必给每个可单击的元素分别添加事件处理程序
+  // 这是，就体现出target与currentTarget的区别了
+  // target是被真正点击的元素；currentTarget是当前冒泡链上绑定事件处理程序的元素。
+
+  var outer_box = document.getElementById('outer_box')
+  outer_box.onclick = function (ev) {
+    var e = ev || window.event
+    var target = e.target
+    switch (target.id) {
+      case 'box1':
+        console.log('你点的是box1')
+        break
+      case 'box2':
+        console.log('你点的是box2')
+        break
+      case 'box3':
+        console.log('点的是box3')
+        break
+      case 'box4':
+        console.log('点的box4')
+        break
+    }
+  }
+</script>
+</body>
+</html>

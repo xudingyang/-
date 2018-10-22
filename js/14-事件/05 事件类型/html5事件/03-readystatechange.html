@@ -20,6 +20,8 @@
   // 更蛋疼的是，交互阶段可能早于也可能晚于完成阶段。外部资源多，交互更可能早于完成；外部资源少，完成更可能早于交互。
   // 更多内容，去看看《js高程（第3版）》
 
+  // <script>标签下载完成后会触发readystatechange事件，ajax里面用的就是这个
+
   document.addEventListener('readystatechange',function (e) {
     var e = e || window.event
     console.log(document.readyState)

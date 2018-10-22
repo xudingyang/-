@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div {
+      height: 270px;
+      width: 200px;
+      background: green;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<script>
+  // 主要介绍下边4个事件
+  // 1 load
+  // 2 unload
+  // 3 resize
+  // 4 scroll
+
+  // 1 load
+  //   window  框架集  img  IE9+的<script> 都会发生load事件
+  window.onload
+
+  // 2 unload
+  //   文档在完全卸载后触发，主要做一些清理工作，避免内存泄漏。在这个事件里不能访问DOM了
+
+  // 3 resize
+  //   当浏览器被调整到一个新的高度或宽度时，触发resize事件
+  //   用js的的方式，就是window.resize
+  //   用html属性的方式，就是在<body>元素上添加onresize属性
+  //   浏览器差别：
+  //      Firfox只会在用户停止调整窗口大小时才会触发resize事件
+  //      其他浏览器，窗口变化1像素，就会触发resize事件。所以要注意性能问题
+  window.onresize = function (ev) {}
+
+  // 4 scroll
+  //   scroll事件是在window对象上发生的。
+  //   在标准模式下，Safari基于<body>跟踪滚动位置;其他浏览器基于<html>跟踪
+  //   在混杂模式下，通过<body>的scrollLeft和scrollTop来监控这一变化
+  window.onscroll = function (ev) {
+    // 混杂模式(怪异模式)   document.body.scrollTop
+    // 火狐谷歌等其他浏览器  document.documentElement.scrollTop
+    // IE9+以后的现代浏览器用这俩最新的属性  window.pageXOffset    window.pageYOffset
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    console.log(scrollTop)
+  }
+</script>
+</body>
+</html>

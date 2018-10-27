@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 具名函数    匿名函数
+  // 以前写自调用函数的时候，都是匿名的，其实具名函数也是可以的。
+  // 立即执行函数表达式术语叫 IIFE (Immediately Invoked Function Expression)
+  // 函数用括号括起来，就是一个表达式。所以(function(){})会被当成函数表达式，(function(){})()那就是执行函数了。
+  // 其实，任何东西用括号括起来，都是一个表达式了。用eval()接收json字符串的时候，不也是用括号包起来的吗，防止json产生代码块。
+  // eval('(' + jsonStr + ')')
+
+  // 在不加分号的写法下，千万记得给立即执行函数前加分号
+
+  var a = 2
+  ;(function foo() {
+    var a = 3
+    console.log(a)
+  })()
+
+  // 传递参数
+  ;(function (global) {
+    // 这样会把全局的window屏蔽，再也访问不到了
+    var window = 12
+    console.log(window)
+    // 可以通过参数传递进来
+    console.log(global)
+  })(window)
+
+  // 作为参数传递。暂时还不知道这样做的作用
+  ;(function (def) {
+    def(window)
+  })(function def(global) {
+    var a = 99
+    console.log(a)          // 这里打印局部变量的a
+    console.log(global.a)   // 这里打印window的a
+  })
+
+</script>
+</body>
+</html>

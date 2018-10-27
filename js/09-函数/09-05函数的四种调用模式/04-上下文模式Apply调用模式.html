@@ -15,6 +15,9 @@
   // call
   // funcName.call(obj,参数1,参数2,参数3,.....)
 
+  // bind
+  // 本来一直用apply来实现硬绑定，ES5之后，用原生bind()来实现硬绑定
+
   var name = '金克斯'
 
   function sayName (year, age) {
@@ -31,6 +34,27 @@
 
   sayName.apply(obj, [2003, 14])
   sayName.call(obj, 1996, 20)
+
+  // 硬绑定
+  function foo () {
+    console.log(this.a)
+  }
+  var obj1 = {a:2}
+  var bar = function () {
+    // 这里直接写死了，不管怎么玩bar()这个函数，bar执行的时候，都与对象obj1绑定死了。
+    foo.call(obj1)
+  }
+  bar()  // 打印 2
+  setTimeout(bar, 1000)   // 也打印2
+  // ES5原生支持硬绑定，用bind()
+  function foo2 (something) {
+    console.log(this.a, something)
+    return this.a + something
+  }
+  var obj2 = {a:2222}
+  var bar = foo2.bind(obj2)
+  var b = bar(3)
+  console.log('b等于=====' + b)    // b等于=====2225
 
   // 补充说明（一）
   // 当给call和apply传入的第一个参数为值类型时，会将值类型转变成对应的引用类型

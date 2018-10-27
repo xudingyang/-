@@ -8,6 +8,8 @@
 <script>
   // 1 函数调用模式
   // this 指向 window
+  //  补充①：非严格模式下，才指向window。严格模式下，无法绑定到window，那就是undefined了。
+  //  补充②：不是看调用位置是否在严格模式下，而是看函数体代码的书写位置是否在严格模式下。
   // 2 方法调用模式
   // this 指向 调用者
   // 3 构造器调用模式
@@ -20,6 +22,7 @@
 
   // 1 函数调用模式
   //   不管函数在对象内部，还是在函数内部，只要是函数调用模式，this都指向window
+  //   setTimeour(fn,deltaTime)里，是函数调用模式。相当于是fn在指定时间之后的默认调用
   function test () {
     console.log(this)
   }
@@ -44,6 +47,8 @@
   p.sayThis()
 
   // 4 上下文模式（apply调用模式）
+  // 还可以叫显式绑定
+  // 有call()   apply()    bind()
 </script>
 </body>
 </html>

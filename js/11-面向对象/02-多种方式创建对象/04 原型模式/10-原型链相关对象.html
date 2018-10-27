@@ -17,6 +17,11 @@
   // Object Array 这些内置对象，其实都是内置构造函数，也是函数，所以它们的构造函数都是Function
   // 它们只是比普通函数多一点点特殊属性而已
 
+  // 再次强调：
+  // 创建的对象中没有__proto__，__proto__在Object.prototype中
+  // 也没有constructor，constructor在该对象的原型对象中。
+  //    其实，在更改一个对象的原型对象后，必须指定它的contructor属性，原因就是该对象中并没有constructor
+
   function Person () {
 
   }

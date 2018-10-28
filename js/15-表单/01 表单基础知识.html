@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form id="login_form">
+
+</form>
+<script>
+  // 1 取得表单
+  //   方式一：跟取元素一样
+  var form1 = document.getElementById('login_form')
+  console.log(form1)
+  //   方式二：古老的document.forms，得到所有的form数组。不推荐使用了。
+  var form2 = document.forms[0]
+  console.log(form1 === form2)  // true
+
+  // 2 提交表单
+  //   方式一：通用提交按钮    <input type="submit" value="提交">
+  //   方式二：自定义提交按钮  <button type="submit">提交</button>
+  //   方式三：图像按钮       <input type="image" src="#">
+
+  // 点击按钮，可以直接提交。
+  // 或者，只要表单中存在上边三种任一种按钮，那么在相应表单控件拥有焦点的情况下，按回车键就可以提交该表单。(textares按回车是换行)
+  // 如果表单里没有提交按钮，按回车不会提交表单。
+  // 这三种方式提交的表单，会触发submit事件，在该事件里验证表单数据。
+  // 阻止该事件的默认行为，就可以取消提交表单。如果验证不通过，取消默认行为即可阻止提交表单。
+
+  // 方式四：用代码提交，如下所示
+  //    form1.submit()
+  //    这种方式不会触发submit事件。因此在调用此方法之前，就要验证表单数据。
+
+  // 问题：
+  //  提交表单最容易出现的问题是重复提交表单。
+  // 解决方法：
+  //  在第一次提交表单后就禁用提交按钮，或者利用onsubmit事件处理程序取消后续的表单提交操作
+</script>
+</body>
+</html>

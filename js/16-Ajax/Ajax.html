@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 1 创建对象
+  // 2 绑定事件
+  // 3 open(type, url, true)方法，启动请求，以备发送
+  //   true 表示异步请求；false 表示同步请求
+  // 4 send(null | params)方法，发送请求
+  //   get方式，传null；post方式，传参数
+
+  // 1 创建对象
+  var xhr = null
+  if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest()
+  } else {
+    xhr = new ActiveXObject('Microsoft.XMLHTTP')
+  }
+
+  // 2 绑定事件
+  // readyState状态：0 未初始化  1 正在加载  2 加载完毕 3 正在交互 4 完成
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      var data = xhr.responseText
+      console.log(data)
+    }
+  }
+
+  // 3 open(type, url, boolean)
+  // 3.1 get方式
+  var url_get = './tologin.php?name=' + encodeURIComponent('喜羊羊') + '&age=20'
+  xhr.open('get', url_get, true)
+
+  // 3.2 post方式
+  var url_post = './tologin.php'
+  xhr.open('post', url_post, true)
+  // 这里必须设置header，不然服务器不知道怎么解析传过来的参数。这里的设置可以把参数当表单字段处理
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+  var param = "name=喜羊羊&age=20"
+
+  // 4 send(params || null) // 如果是get，这里就是null
+  // 4.1 get方式
+  xhr.send(null)
+  // 4.2 post方式
+  xhr.send(param)
+
+
+</script>
+</body>
+</html>

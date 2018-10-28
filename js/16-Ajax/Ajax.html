@@ -38,8 +38,10 @@
   // 3.2 post方式
   var url_post = './tologin.php'
   xhr.open('post', url_post, true)
+  // 一定要在open方法之后、send方法之前设置header
   // 这里必须设置header，不然服务器不知道怎么解析传过来的参数。这里的设置可以把参数当表单字段处理
   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+  // post的请求体也没啥牛鼻的，依然是跟get方式一样拼接参数
   var param = "name=喜羊羊&age=20"
 
   // 4 send(params || null) // 如果是get，这里就是null

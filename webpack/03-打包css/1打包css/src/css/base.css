@@ -1,0 +1,9 @@
+body {
+  background: green;
+}
+div {
+  font-size: 20px;
+  height: 300px;
+  width: 100px;
+  border: 1px solid #ddd;
+}

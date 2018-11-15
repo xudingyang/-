@@ -66,10 +66,25 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
+              name: '[name]_[hash:8].[ext]',
               // 小于这个值的图片，用base64打包。 这里的单位是B
               // 如果图片大于这个值，那么还是按照file-loader的方式打包。这也是需要配置publicPath与useRelativePath的原因
               limit: 1024 * 90,
               publicPath: '../dist/assets/imgs',
+              useRelativePath: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(eot|otf|svg|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name]_[hash:8].[ext]',
+              limit: 1024 * 5,
+              publicPath: '../dist/assets/fonts',
               useRelativePath: true
             }
           }

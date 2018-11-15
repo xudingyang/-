@@ -1,0 +1,35 @@
+@bgColor: #f7f7f7;
+
+body {
+  background: @bgColor;
+}
+#app {
+  font-size: 20px;
+}
+.big-box {
+  width: 600px;
+  height: 600px;
+  border: 5px solid #ddd;
+  box-shadow: 1px 1px #eee;
+  color: #0A74DA;
+  > div {
+    width: 260px;
+    height: 260px;
+    float: left;
+  }
+  .an1 {
+    background: url("../assets/imgs/1.jpg") no-repeat;
+  }
+  .an2 {
+    background: url("../assets/imgs/2.jpg") no-repeat;
+  }
+  .an3 {
+    background: url("../assets/imgs/3.jpg") no-repeat;
+  }
+  .an4 {
+    background: url("../assets/imgs/4.jpg") no-repeat;
+  }
+}
+.tt {
+  transform: scale(1.4,1.2);
+}

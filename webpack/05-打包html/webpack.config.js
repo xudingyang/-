@@ -2,6 +2,7 @@ var webpack = require('webpack')
 var path = require('path')
 // webpack4要按照最新版的。 npm install --save-dev extract-text-webpack-plugin@next
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -9,9 +10,9 @@ module.exports = {
     app: './src/app.js'
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: './dist/',
-    filename: 'js/[name].bundle.js',
+    path: path.resolve(__dirname, './dist'),   // dist前加不加点是一样的
+    publicPath: '../../dist/',                 // 相对html所在路径
+    filename: 'js/[name].bundle.[hash:5].js',
     chunkFilename: '[name].chunk.js'
   },
   module: {
@@ -50,6 +51,20 @@ module.exports = {
         })
       },
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              // attrs: ['img:src']    这是默认情况，如果只需要处理图片，则可以不配置attrs。
+              attrs: ['img:src', 'img:data-src'],
+              // publicPath: '../dist/assets/imgs',
+              // useRelativePath: true
+            }
+          }
+        ]
+      },
+      {
         test: /\.(png|jpg|jpeg|gif)$/,
         use: [
 
@@ -63,15 +78,17 @@ module.exports = {
           // }
 
           // 下边演示url-loader.
+          // 必须把html和css放在同一深度的路径下。因为url-loader的publicPath只能设置一个，
+          // 如果html和css的路径深度不同，那么html和css中运用同一个publicPath会出错
           {
             loader: 'url-loader',
             options: {
-              name: '[name]_[hash:8].[ext]',
+              name: 'assets/imgs/[name]_[hash:8].[ext]',
               // 小于这个值的图片，用base64打包。 这里的单位是B
               // 如果图片大于这个值，那么还是按照file-loader的方式打包。这也是需要配置publicPath与useRelativePath的原因
               limit: 1024 * 90,
-              publicPath: '../../dist/assets/imgs',
-              useRelativePath: true
+              // publicPath: '../../dist/assets/imgs',
+              // useRelativePath: true
             }
           }
         ]
@@ -91,7 +108,7 @@ module.exports = {
             }
           }
         ]
-      }
+      },
     ]
   },
   optimization: {
@@ -133,7 +150,7 @@ module.exports = {
   plugins: [
     // 把css提取到单独的文件。这时候就不会自动添加到文档中的style了
     new ExtractTextPlugin({
-      filename: 'css/[name].min.css'     // 提取出来的css叫什么名字
+      filename: 'css/[name].min.[hash:5].css'     // 提取出来的css叫什么名字
     }),
 
     // 引入第三方js库之  方法二
@@ -144,7 +161,16 @@ module.exports = {
     // 引入第三方库之  方法三
     new webpack.ProvidePlugin({
       $: 'jquery'  // 这里跟方法二的区别是，这里回去找别名。注意，与别名名称一致
-    })
+    }),
 
+    new HtmlWebpackPlugin({
+      filename: 'view/index.html',
+      template: './index.html',
+      hash: true,
+      inject: true,
+      minify: {
+        // collapseWhitespace: true
+      }
+    })
   ]
 }

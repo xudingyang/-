@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="jquery-1.11.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // 属性选择器
+
+      // 给 a 标签的href属性设置为 红色
+      $('a[href]').css('color', 'red')
+
+      // [attr=value]  选择attr属性中,值为value的,那一个
+      $('a[href=\'http://web.itcast.cn\']').css('font-size', '40px')
+
+      // [attr!=value]   选择attr属性中,值不等于value的,那一个。包括没有attr属性的。
+      $('a[href!=\'http://www.baidu.com\']').css('font-size', '40px')
+
+      // [attr^=value]   选择attr属性中,以http开头的
+      $('a[href^=\'http\']').css('font-size', '40px')
+
+      // [attr$=value]   选择所有以value结尾的那个
+      $('a[href$=\'cn\']').css('font-size', '40px')
+
+      // [attr*=value]  选择所有包含value这个字符(串)的东东
+      $('a[href*=\'it\']').css('font-size', '40px')
+
+      // [attr][attr] 都满足 交集   选中有href属性,且title属性中含有"的"的东东
+      $('a[href][title*=\'的\']').css('font-size', '40px')
+    })
+  </script>
+</head>
+<body>
+<div class="divItem">
+  <a href="http://www.baidu.com" title="谁啊？">百度</a>
+  <a href="http://web.itcast.cn" title="我是title的内容">前端移动</a>
+  <a href="http://sina.com.cn">新浪</a>
+  <a>我没有href</a>
+  <a href="qq.com.cn" title="腾讯的">企鹅腾讯</a>
+</div>
+</body>
+</html>

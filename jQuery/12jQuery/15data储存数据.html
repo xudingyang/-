@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQueryData 方法</title>
+    <style>
+        .demo {
+            height: 400px;
+            width: 400px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script src="jquery-1.11.3.js"></script>
+    <script>
+        $(function () {   // 注意:这里是很多个数据,data保存的是很多数据。如果是一个json,意思是data保存的就是一个json数据。
+            $(".demo").data("name",123)
+                    .data("2",123555)
+                    .data("key", {
+                        "userId": 1900,
+                        "userName": "itcast"
+                    });
+
+            $("#J_btn").on("click", function(){
+                // $(".demo").text($(".demo").data("2"));
+                $(".demo").text($(".demo").data("key").userId);
+
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="button" value="获取data" id="J_btn">
+
+<div  class="demo">
+
+</div>
+</body>
+</html>

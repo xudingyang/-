@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="jquery-1.11.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // documen 是不被引号包裹的
+      $('li').css('font-size', '30px')
+
+      // 后代选择器
+      $('.wrap li').css('background', 'red')
+
+      // 子代选择器
+      $('.wrap > ul > li').css('font-size', '30px')
+
+      // 紧邻选择器
+      $('.wrap + div').css('font-size', '30px')
+
+      // 兄弟选择器
+      $('.liItem ~ li').css('font-size', '40px')
+    })
+
+    // jQuery的第二种入口函数
+    /*$(function () {});*/
+  </script>
+</head>
+<body>
+
+<div class="wrap">
+  <ul>
+    <li>姐妹很多01
+      <p>
+      <ul>
+        <li>孩子很多</li>
+        <li>孩子很多</li>
+        <li>孩子很多</li>
+      </ul>
+      </p>
+    </li>
+    <li>姐妹很多02</li>
+    <li>姐妹很多03</li>
+    <li class="liItem">姐妹很多04</li>
+    <li>姐妹很多05</li>
+    <li>姐妹很多06</li>
+    <li>姐妹很多07</li>
+    <li>姐妹很多08</li>
+    <li>姐妹很多09</li>
+    <li>姐妹很多10</li>
+  </ul>
+</div>
+<p>我是p元素</p>
+<div>
+  我是第一个div后面的兄弟div
+</div>
+<div>
+  我是第er个div后面的兄弟div
+</div>
+
+</body>
+</html>

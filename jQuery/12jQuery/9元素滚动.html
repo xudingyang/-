@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02元素滚动</title>
+    <style>
+        .wrap {
+            overflow: scroll; /*超出部分以滚动形式展现*/
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+        p {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btnSetScroll").on("click", function(event){
+                //获取元素的 滚动的位置。被卷去的高度与宽度。
+                var left = $(".wrap").scrollLeft(),
+                        top = $(".wrap").scrollTop();
+
+                //设置元素的滚动的位置
+                $(".wrap").scrollLeft(left + 10)
+                        .scrollTop(top + 10 );
+            });
+            $(".wrap").scroll(function () {
+                var left = $(".wrap").scrollLeft(),
+                        top = $(".wrap").scrollTop();
+                $("#hehe").html("scrollLeft() = " + left + "</br>" + "scrollTop() = " + top)
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="button" value="滚动+10" id="btnSetScroll">
+
+<div class="wrap">
+    <p>我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内
+        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+    </p>
+</div>
+<div id="hehe"></div>
+</body>
+</html>

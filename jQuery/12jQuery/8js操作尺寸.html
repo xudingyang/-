@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01元素宽高</title>
+    <style>
+        * {padding: 0;margin: 0;}
+        .box {
+            height: 100px;
+            width: 200px;
+            border: 1px solid #000;
+            background-color: teal;
+            padding: 20px;
+            position: relative;
+
+        }
+        .child {
+            height: 50px;
+            width: 50px;
+            background-color: #ccc;
+        }
+    </style>
+
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function() {
+            $("#J_btn_GetHeight").click(function () {
+                //用css的方式获取高度,得到的值带px
+                console.log("css('height')" + $(".box").css("height"));
+                //获取元素    内容高度
+                console.log("height()" + $(".box").height());
+
+                //获取   内边距 + 内容的 高度
+                console.log("innerHeight()" + $(".box").innerHeight());
+
+                //获取   内容 + 内边距 + 边框 高度
+                console.log("innerHeight()" + $(".box").outerHeight());
+            });
+
+            $("#J_btn_SetHeight").click(function () {
+                $(".box").height(205);	//设置高度
+            });
+
+
+            //获取相对于document的位置
+            $("#J_btn_GetOffset").click(function () {
+                var offset = $(".child").offset();
+                console.log("offset.left = " + offset.left + "\n"
+                        + "offset.top = " + offset.top +"\n "
+                        + "offset = " +offset);
+            });
+
+            //设置元素相对于document的位置
+            $("#J_btn_SetOffset").click(function () {
+                $(".child").offset({ left: 150, top: 150});
+            });
+
+            $("#J_btn_getPosition").click(function () {
+                //获取相对于其定位的父容器的位置
+                var pos = $(".child").position();
+                console.log("left = " + pos.left + "\n"+ "top = " + pos.top);
+            });
+
+        });
+    </script>
+</head>
+<body>
+<input id="J_btn_GetHeight" type="button" value="获取元素高度">
+<input id="J_btn_SetHeight" type="button" value="设置元素高度">
+
+<input id="J_btn_GetOffset" type="button" value="获取元素相对于文档位置">
+<input id="J_btn_SetOffset" type="button" value="设置元素相对于文档位置">
+
+<input id="J_btn_getPosition" type="button" value="获取元素相对于父容器位置">
+
+<div class="box">
+    <div class="child">
+
+    </div>
+</div>
+</body>
+</html>

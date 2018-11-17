@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="show">显示</button>
+<button id="hide">隐藏</button>
+<div></div>
+</body>
+</html>
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("div").css({
+            "width" : "100px",
+            "height" : "100px",
+            "background" : "pink"
+        });
+        // 显示隐藏 1
+        /*$("#show").click(function () {
+            $("div").show();
+        });
+        $("#hide").click(function () {
+            $("div").hide();
+        });*/
+
+        // 显示隐藏 2
+        $("button").eq(0).click(function () {
+            $("div").show(1000);  // 时间 1000毫秒
+        });
+        $("button:last").click(function () {
+//            $("div").hide(3000);
+//            $("div").hide("slow");
+//            $("div").hide("fast");
+            // 回调函数
+            $("div").hide(3000,function () {
+                alert("隐藏啦");
+            });
+        });
+    })
+</script>

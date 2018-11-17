@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .top {
+        width: 100px;
+        height: 100px;
+    }
+    </style>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    		// 给div自定义事件，并自主触发。第一个参数event不能省略
+        $('.top').on('bianse', function(event, arg1, arg2) {
+        	$('.top').css({
+        		'background-color': arg1,
+        		'width': arg2
+        	})
+        });
+        $('.top').trigger('bianse', ['blue', '300px'])
+
+
+        // a 标签不能直接triiger，得加到子元素上才行
+        $('a span').trigger('click')
+        $('#btn').click(function() {
+            $('a span').triggerHandler('click')
+            alert('取消你的默认行为，你再跳啊')
+        })
+    })
+    </script>
+</head>
+
+<body>
+    <div class="top"></div>
+    <a id="tg" href="http://www.baidu.com" target="_blank"><span>点我跳转到百度</span></a>
+    <a id="tgh" href="http://www.baidu.com">点我跳转到百度</a>
+    <button id="btn">点我</button>
+</body>
+
+</html>

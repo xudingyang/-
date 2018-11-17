@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    li {
+      background-color: #cccccc;
+      font-size: 15px;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+<ul>
+  <li class="liItem aa" id="demo">兄弟很多1</li>
+  <li>兄弟很多2</li>
+  <li id="b03">兄弟很多3</li>
+  <li>兄弟很多4</li>
+  <li class="liItem">兄弟很多5</li>
+  <li id="demo1">兄弟很多6</li>
+  <li>兄弟很多7</li>
+  <li class="liItem">兄弟很多8</li>
+</ul>
+<div class="aa">
+  我是div的内容
+</div>
+
+
+</body>
+</html>
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    /*
+//        id选择器。
+//        设置一个样式
+    $("#b03").css("background","red");
+
+//        获取一个样式
+    var bg = $("#b03").css("background-color");
+    console.log(bg);
+//        字体
+    var ziti = $("#b03").css("font-size");
+    console.log(ziti);
+    */
+
+    // 类选择器
+    $('.liItem').css('background', 'red')
+
+    // 标签选择器
+    $('li').css('background', 'red')
+
+    // * 通配符选择器
+    $('*').css('font-size', '20px')
+
+    // , 并集选择器
+    $('.liItem,div').css('background', 'blue')
+
+    // 交集选择器
+    $('li#b03').css('font-size', '20px')
+
+//        设置多个样式,快捷写法。传递一个json进去
+    $('#demo').css({
+      'color': 'red',
+      'font-size': '20px',
+      'color': 'purple'
+    })
+
+    // 这个方法是API,记住就是了
+    // 设置样式，可以根据我们自己的意愿来设置。若不给参数v(在样式style中中明确给的也会放到这里来),则是浏览器默认数值
+    $('li').css('font-size', function (i, v) {
+      // index: 指定当前元素的索引号
+      // value: 表示当前元素要设置的样式，此处指：background-color
+      /*console.log(index);
+       console.log(value);*/
+      //return (i + 1) * parseInt(v) + "px";
+      console.log(v)
+      // 只设置第三个¡
+      if (i === 2) {
+        return (i + 1) * parseInt(v) + 'px'
+      }
+    })
+  })
+</script>

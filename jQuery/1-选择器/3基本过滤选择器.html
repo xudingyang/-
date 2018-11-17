@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="jquery-1.11.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // :odd      奇数
+      $('li:odd').css('background', 'red')
+
+      // :even     偶数
+      $('li:even').css('background', 'green')
+
+      // :eq(index)      序号等号index
+      $('ul li:eq(4)').css('font-size', '30px')
+
+      // :lt(index)       序号小于index
+      $('li:lt(6)').css('font-size', '30px')
+
+      // :gt(index)       序号大于index
+      $('.ulList1 li:gt(7)').css('font-size', '40px')
+
+      // :first      第一个
+      $('.ulList li:first').css('font-size', '40px')
+
+      // :last        最后一个
+      $('li:last').css('font-size', '40px')
+    })
+  </script>
+</head>
+<body>
+<ul class="ulList">
+  <li>01男嘉宾</li>
+  <li>02男嘉宾</li>
+  <li>03男嘉宾</li>
+  <li>04男嘉宾</li>
+  <li>05男嘉宾</li>
+  <li>06男嘉宾</li>
+  <li>07男嘉宾</li>
+  <li>08男嘉宾</li>
+  <li>09男嘉宾</li>
+  <li>10男嘉宾</li>
+</ul>
+<ul class="ulList">
+  <li>01男嘉宾</li>
+  <li>02男嘉宾</li>
+  <li>03男嘉宾</li>
+  <li>04男嘉宾</li>
+  <li>05男嘉宾</li>
+  <li>06男嘉宾</li>
+  <li>07男嘉宾</li>
+  <li>08男嘉宾</li>
+  <li>09男嘉宾</li>
+  <li>10男嘉宾</li>
+</ul>
+</body>
+</html>

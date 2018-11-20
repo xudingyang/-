@@ -41,7 +41,7 @@
   <p>你好<span>呵呵</span></p>
   <label>输入账号<input type="text" value="xxxx@qq.com" placeholder="输入账号"></label>
 </div>
-<div id="box4" name="box-4">
+<div id="box4" name="box-4" help="移除这个属性吧">
 
 </div>
 <script src="../jquery-1.11.1.min.js"></script>
@@ -77,6 +77,7 @@
     // 6 获取、设置属性
     console.log($('#box4').attr('name'))
     $('#box4').attr('age', 20)
+    $('#box4').removeAttr('help')
   })
 </script>
 </body>

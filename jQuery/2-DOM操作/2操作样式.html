@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .blue {
+      background-color: blue;
+    }
+
+    .haha {
+      font-size: 20px;
+    }
+
+    div {
+      margin-top: 10px;
+      height: 50px;
+      width: 100px;
+      background-color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+<button id="btn">切换</button>
+<button id="btn1">判断有样式</button>
+
+<div id="box1">张三1</div>
+<div id="box2">李四2</div>
+<div id="box3">哈哈3</div>
+<div id="box4">哈哈4</div>
+<div id="box5" class="blue haha">哈哈5</div>
+<div id="box6" class="blue haha">哈哈6</div>
+<div id="box7" class="blue haha">哈哈7</div>
+<div id="box8">哈哈8</div>
+<div id="box9">哈哈9</div>
+<div id="box10">哈哈10</div>
+<div id="box11">哈哈11</div>
+</body>
+</html>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#box1').css('color', '#ffffff')
+    $('#box2').css({
+      'width': '200px',
+      'color': 'pink',
+      // 驼峰写法 横线写法  都可以
+      'font-size': '20px',
+      'fontWeight': 700
+    })
+    $('#box3').addClass('blue')  // 注意这里的blue前边,没有点了
+    $('#box4').addClass('blue haha') // 添加多个class
+
+    $('#box5').removeClass('blue')  // 清除一个class
+    $('#box6').removeClass('blue haha')  // 清除多个class
+    $('#box7').removeClass()   // 不加参数,就是全部清除
+
+    // 切换"删除""添加"class
+    $('#btn').click(function () {
+      $('#box8').toggleClass('blue haha')
+    })
+    // 判断是否有样式
+    $('#btn1').click(function () {
+      var hasClassBlue = $('#box1').hasClass('blue')
+      if (hasClassBlue) {
+        $('#box1').text('有blue') // 这里是jq的对象,不是dom的对象,不能用innerHTML、innerText等dom的东西
+      } else {
+        $('#box1').text('没有blue')
+      }
+    })
+    /*
+     text() - 设置或返回所选元素的文本内容
+     html() - 设置或返回所选元素的内容（包括 HTML 标记）
+     val() - 设置或返回表单字段的值
+     */
+  })
+
+</script>

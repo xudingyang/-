@@ -29,7 +29,7 @@
 
 </body>
 </html>
-<script src="jquery-1.11.1.min.js"></script>
+<script src="../jquery-1.11.1.min.js"></script>
 <script>
   $(document).ready(function () {
     /*
@@ -60,10 +60,12 @@
     // 交集选择器
     $('li#b03').css('font-size', '20px')
 
-//        设置多个样式,快捷写法。传递一个json进去
+    // 设置多个样式,快捷写法。传递一个json进去
     $('#demo').css({
       'color': 'red',
+      // 驼峰写法 横线写法  都可以
       'font-size': '20px',
+      'fontWeight': 700,
       'color': 'purple'
     })
 

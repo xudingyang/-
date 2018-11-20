@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../jquery-1.11.1.js"></script>
+</head>
+<body>
+<form action="#" id="form">
+<ul>
+  <li><label id="account">账号<input type="text" name="account" placeholder="账号"></label></li>
+  <li><label id="email">账号<input type="text" name="email" placeholder="邮箱"></label></li>
+  <li><label id="passwd">密码<input type="password" name="passwd" placeholder="密码"></label></li>
+  <li><label>性别</label><label><input type="radio" name="sex" value="male">男</label><label><input type="radio" name="sex" value="female">女</label></li>
+  <li><label>爱好</label><label><input type="checkbox" name="hobby" value="yumaoqiu">羽毛球</label><label><input type="checkbox" name="hobby" value="youyong">游泳</label><label><input type="checkbox" name="hobby" value="pingpangqiu">乒乓球</label></li>
+  <li><label for="region">地区</label><select id="region">
+    <option value="human">湖南</option>
+    <option value="hubei">湖北</option>
+  </select></li>
+</ul>
+  <button type="submit">注册</button>
+  <button type="reset">重置</button>
+</form>
+<script>
+  $(function () {
+    var form = document.getElementById('#form')
+    var $form = $('#form')
+
+    $(':submit').click(function (e) {
+      var text = $(':text')      // 所有text文本框
+      var passwd = $(':password').val()
+      var email = $('input[name="email"]').val()
+      console.log(email)
+      // console.log(text)
+      // console.log(passwd)
+      e.preventDefault()
+    })
+  })
+</script>
+</body>
+</html>

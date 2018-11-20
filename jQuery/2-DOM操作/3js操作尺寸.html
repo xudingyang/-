@@ -51,6 +51,7 @@
     })
 
     //获取相对于document的位置
+    //注意，jQuery的offset是相对于文档的偏移量。js原生的offsetLeft offsetTop是相对于有定位的父元素。所以,jQuery的offset一般没屁用
     $('#J_btn_GetOffset').click(function () {
       var offset = $('.child').offset()
       console.log('offset.left = ' + offset.left + '\n'

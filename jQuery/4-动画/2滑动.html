@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div.box {
+      width: 100px;
+      height: 400px;
+      background-color: #ff0000;
+      float: left;
+      margin-right: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <button>下拉</button>
+  <button>切换</button>
+  <button>上拉</button>
+</div>
+<div class="box"></div>
+<div class="box"></div>
+</body>
+</html>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  /*
+   jQuery 拥有以下滑动方法：
+   slideDown()
+   slideUp()
+   slideToggle()
+  */
+  $(document).ready(function () {
+    $('button:eq(0)').click(function () {
+      $('.box:first').slideDown(2000, 'swing', function () {
+        console.log('淡入,加速')
+      })
+      $('.box:last').slideDown(2000, function () {  // 默认是 swing
+        console.log('淡入,加速')
+      })
+    })
+    $('button:last').click(function () {
+      $('.box:first').slideUp(2000, 'linear', function () {
+        console.log('淡出,匀速')
+      })
+      $('.box:last').slideUp(2000, 'swing', function () {
+        console.log('淡出,加速')
+      })
+    })
+    $('button:eq(1)').click(function () {
+//            $(".box").toggle();  // 立即切换
+      $('.box').slideToggle(3000)   // 动画切换
+    })
+  })
+</script>

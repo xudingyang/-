@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .start {
+      width: 100px;
+      height: 100px;
+      background-color: #ff0000;
+      position: absolute;
+      top: 50px;
+    }
+  </style>
+</head>
+<body>
+<button>变形</button>
+<button>停止</button>
+<div class="start"></div>
+</body>
+</html>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('button').click(function () {
+      $('div').animate({left: '400px'}, 2000)
+      $('div').animate({width: '200px'}, 2000)
+      $('div').animate({height: '400px'}, 1000)
+      $('div').animate({opacity: '0.5'}, 1000)
+    })
+    $('button:last').click(function () {
+      // stop([clearQueue],[gotoEnd])   [是否清空队列],[是否把当前正在执行的,立即执行完]
+      // $("div").stop();  // 默认情况下,立即终止当前动画,执行后续动画,最后继续执行被终止的动画。相当于插队。
+      // $("div").stop(true,true); // 立即完成当前动画,清空队列,不执行后续动画
+      // $("div").stop(false,true);   // 立即完成当前动画,不清空队列,然后继续执行后续动画
+      // $("div").stop(true,false);  // 立即停止当前动画,清空队列,后续动画不执行
+      $('div').stop(false, false)   // 跟默认情况一样
+
+      /*
+      * 总结:
+      * clearQueue 为true,清空队列,不执行后续动画。为false,不清空队列,执行后续动画。默认为false
+      * gotoEnd  为true,立即执行完当前动画,再执行后续动画。为false,立即停止当前动画。默认为false
+      * */
+
+    })
+  })
+</script>

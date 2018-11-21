@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .start {
+      width: 100px;
+      height: 100px;
+      background-color: #ff0000;
+      position: absolute;
+      top: 50px;
+    }
+  </style>
+</head>
+<body>
+<button>变大</button>
+<div class="start"></div>
+</body>
+</html>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  // $(selector).animate({params},speed,callback);
+
+  $(document).ready(function () {
+    $('button').click(function () {
+      $('div').animate({
+        left: '400px',     // 左边的属性加不加引号都可以,为了省事,鬼才加引号
+        opacity: '0.5',
+        height: '400px',
+        width: '+=200px'   // 也可以定义相对值（该值相对于元素的当前值）
+      }, 3000, function () {
+        alert('动画结束。。。。。。')
+      })
+    })
+  })
+</script>

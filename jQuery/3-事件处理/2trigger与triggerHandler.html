@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    .box1,.box2,.box3 {
+      width: 200px;
+      height: 100px;
+      background: #f00;
+    }
+    .split-line {
+      margin: 20px 0;
+      width: 200px;
+      height: 40px;
+      border: 2px solid #666;
+    }
+  </style>
+</head>
+
+<body>
+<div class="box1">1号box1</div>
+<p class="split-line">分割线</p>
+<div class="box1">2号box1</div>
+<p class="split-line">分割线</p>
+<div class="box2">1号box2</div>
+<p class="split-line">分割线</p>
+<div class="box2">2号box2</div>
+
+<p class="split-line">分割线</p>
+<div class="box3">我是box3</div>
+
+<a href="http://www.baidu.com" target="_blank"><span></span></a>
+<button id="btn">跳到www.baidu.com</button>
+
+<script src="../jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+  // trigger() 方法触发被选元素上指定的事件以及事件的默认行为（比如表单提交）。
+  // 该方法与 triggerHandler() 方法类似，不同的是 triggerHandler() 不触发事件的默认行为。
+
+  // 与 triggerHandler() 方法相比的不同之处:
+  // 它不会引起事件（比如表单提交）的默认行为
+  // .trigger() 会操作匹配的所有元素，而 .triggerHandler() 只影响第一个匹配元素。
+  // 由 .triggerHandler() 创建的事件不会在 DOM 树中冒泡；如果目标元素不直接处理它们，则不会发生任何事情。
+
+  // trigger() triggerHandler()是用来触发事件的，不仅可以触发自定义事件，dom原生事件也可以触发
+
+  $(document).ready(function () {
+
+    // 给.box1自定义事件，并自主触发。第一个参数event不能省略
+    $('.box1').on('bianse', function (event, arg1, arg2) {
+      $(this).css({
+        'background-color': arg1,
+        'width': arg2
+      })
+    })
+    // 5秒后自动触发该事件
+    setTimeout(function () {
+      $('.box1').trigger('bianse', ['blue', '300px'])
+    },2000)
+
+
+    // 给.box1自定义事件，并自主触发。第一个参数event不能省略
+    $('.box2').on('bianse', function (event, arg1, arg2) {
+      $(this).css({
+        'background-color': arg1,
+        'width': arg2
+      })
+    })
+    // 5秒后自动触发该事件
+    setTimeout(function () {
+      $('.box2').triggerHandler('bianse', ['green', '300px'])
+    },4000)
+
+
+    $('.box3').click(function () {
+      setTimeout(function () {
+        alert('我是trigger触发的click事件')
+      },6000)
+    }).trigger('click')
+
+    // a 标签不能直接triiger，得加到子元素上才行
+    $('a span').trigger('click')
+    $('#btn').click(function () {
+      $('a span').triggerHandler('click')
+      alert('triggerHandler不会触发默认行为，你再跳啊')
+    })
+
+  })
+</script>
+</body>
+
+</html>

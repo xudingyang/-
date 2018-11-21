@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  $(function () {
+    // 1 $(selector).load(URL,data,callback)    不是全局方法
+    // 如果提供的数据（即参数data）是对象，则使用 POST 方法；否则使用 GET 方法。
+
+    // 2 $.get(URL,callback)    是全局方法
+    $("button").click(function(){
+      $.get("/try/ajax/demo_test.php",function(data,status){
+        alert("数据: " + data + "\n状态: " + status);
+      });
+    });
+
+    // 3 $.post(URL,data,callback)     是全局方法
+    //    data 参数规定连同请求发送的数据。
+    $('button').click(function () {
+      $.post('/try/ajax/demo_test_post.php', {
+          name: '菜鸟教程',
+          url: 'http://www.runoob.com'
+        },
+        function (data, status) {
+          alert('数据: \n' + data + '\n状态: ' + status)
+        })
+    })
+  })
+</script>
+</body>
+</html>

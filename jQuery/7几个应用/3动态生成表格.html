@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    table {
+      width: 600px;
+      margin: 50px auto;
+      border: 1px solid #cccccc;
+
+      /*这两个属性常常一起配合使用。一般写了border-collapse就不必写border-spacing了,但是为了兼容性,写两个是最好的*/
+      border-spacing: 0; /*边框间距:格子间距离消除*/
+      border-collapse: collapse; /*边框折叠:格子间的线变单线条。*/
+    }
+
+    thead {
+      background-color: #45df78;
+      font: 600 20px/30px "微软雅黑";
+    }
+
+    th {
+      border: 1px solid #cccccc;
+    }
+
+    tbody td {
+      font: 400 16px/24px "宋体";
+      border: 1px solid #cccccc;
+      height: 30px;
+    }
+
+    #j_tbdata {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<table>
+  <!--表头-->
+  <thead>
+  <tr>    <!-- 表格的一行 -->
+    <th>标题</th>   <!-- 表头的一格 -->
+    <th>地址</th>
+    <th>说明</th>
+  </tr>
+  </thead>
+  <!--表体-->
+  <tbody>
+  <tr>
+    <td>张三的家</td>
+    <td>武汉市中山大道</td>
+    <td>在武汉市在武汉市在武汉市在武汉市在武汉市在武汉市</td>
+  </tr>
+  <tr>
+    <td>李四的家</td>
+    <td>武汉市和平大道</td>
+    <td>在武汉市在武汉市在武汉市在武汉市在武汉市在武汉市</td>
+  </tr>
+  <tr>
+    <td rowspan="3">王大锤家</td>
+    <td>深圳站南广1</td>
+    <td>在武汉市在武汉市在武汉市在武汉市在武汉市在武汉市</td>
+  </tr>
+  <tr>
+    <td>深圳站南🐟2</td>
+    <td>在武汉市在武汉市在武汉市在武汉市在武汉市在武汉市</td>
+  </tr>
+  <tr>
+    <td>深圳站南广3</td>
+    <td>在武汉市在武汉市在武汉市在武汉市在武汉市在武汉市</td>
+  </tr>
+  </tbody>
+</table>
+
+<br/>
+<table>
+  <thead>
+  <tr>
+    <th>姓名</th>
+    <th>成绩</th>
+    <th>排名</th>
+  </tr>
+  </thead>
+  <tbody id="J_TbData">
+  </tbody>
+</table>
+</body>
+</html>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  var data = [{
+    name: '胡珺',
+    score: 99,
+    type: '我感觉好虚,要跪啊'
+  }, {
+    name: '谭瑶',
+    score: 99,
+    type: '我感觉好虚,要跪啊'
+  }, {
+    name: '丁🐟',
+    score: 99,
+    type: '我感觉好虚,要跪啊'
+  }]
+  $('#j_tbdata').empty() // 清空所有子节点。在实时更新之后,这句就有用了。
+  //    $("#j_tbdata").remove();  // 连人带己,全部干掉
+  $(document).ready(function () {
+    for (var i = 0; i < data.length; i++) {
+      // 创建一个<tr>标签,并包装成jq对象
+      var $trTemp = $('<tr></tr>')   // </tr>写不写无所谓,写了最好
+      //往行里面追加 td单元格。append是dom操作,不是插入网页代码,而是增加节点。即把下边三个td节点加载tr节点后边。
+      $trTemp.append('<td>' + data[i].name + '</td>')
+      $trTemp.append('<td>' + data[i].score + '</td>')
+      $trTemp.append('<td>' + data[i].type + '</td>')
+      // $("#J_TbData").append($trTemp);
+      $trTemp.appendTo('#J_TbData')
+    }
+  })
+</script>

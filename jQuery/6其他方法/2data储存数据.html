@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQueryData 方法</title>
+  <style>
+    .demo {
+      height: 400px;
+      width: 400px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="获取data" id="J_btn">
+
+<div class="demo" data-hh="hh">
+
+</div>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+
+  // jQuery的data()方法，比html5的data-xx属性要强大。
+  // 不同点：
+  // html5的data-xx只能设置一个字符串；jq的data()是以key-value形式设置值，可以设置字符串，也可以是json对象
+  // html5的data-xx会出现在文档中;jq的data()不会出现在文档中。
+  // jq的data()也能获取到html5的data-xx中的内容
+
+  // jq的attr()也是设置自定义属性的(js原生的setAttribute也是)，该属性会出现在文档中，但是这种方式携带的信息较少。
+  // jq的data()方法带的信息多一些。
+  // html5的data-xx实际上是规范自定义属性。
+
+  // $(selector).removeData(name)    移除通过data()方法添加的属性
+
+  $(function () {   // 注意:这里是很多个数据,data保存的是很多数据。如果是一个json,意思是data保存的就是一个json数据。
+    $('.demo').data('name', 123).data('2', 123555).data('key', {
+      'userId': 1900,
+      'userName': '刘能'
+    }).attr('haha','哈哈')
+
+    $('#J_btn').on('click', function () {
+      // $(".demo").text($(".demo").data("2"));
+      $('.demo').text($('.demo').data('key').userId)
+      console.log($('.demo').data())
+    })
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+  $(function () {
+
+    // 1 祖先
+    // 1.1 parent()         返回被选元素的直接父元素
+    $("span").parent();
+    // 1.2 parents()        返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (<html>)
+    $("span").parents();      // span的所有父元素
+    $("span").parents("ul");  // span的所有父元素中的ul元素
+    // 1.3 parentsUntil()   返回介于两个给定元素之间的所有祖先元素
+    $("span").parentsUntil("div");  // 介于span和div之间的父元素。span在里层，div在外层
+
+
+    // 2 后代
+    // 2.1 children()       所有直接子元素。
+    $("div").children();
+    $("div").children("p.text");    // 所有孩子中，类名为text的p元素
+    // 2.2 find()           选元素的所有后代元素，一路向下直到最后一个后代。
+    $("div").find("span");   // 在后代中找span
+    $("div").find("*");      // 所有后代元素
+
+
+    // 3 同胞
+    // 3.1 siblings()       所有同胞元素
+    $("h2").siblings();
+    $("h2").siblings("p");
+    // 3.2 next()           下一个同胞元素
+    $("h2").next();
+    // 3.3 nextAll()        后边所有的同胞元素
+    $("h2").nextAll();
+    // 3.4 nextUntil()      介于两个给定参数之间的所有跟随的同胞元素
+    $("h2").nextUntil("h6");   // h2 之后 h6 之前
+    // 3.5 prev()            前一个元素
+    // 3.6 prevAll()         前边的所有元素
+    // 3.7 prevUntil()       介于两者之间的同胞元素
+
+    // 4 过滤
+    // 4.1 first()   返回被选元素的首个元素
+    $("div p").first();
+    // 4.2 last()    返回被选元素的最后一个元素
+    $("div p").last();
+    // 4.3 eq()      返回被选元素中带有指定索引号的元素
+    $("p").eq(1);
+    // 4.4 filter()  该方法允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。
+    $("p").filter(".url");    // 返回带有类名 "url" 的所有 <p> 元素
+    // 4.5 not()   返回不匹配标准的所有元素。not() 方法与 filter() 相反。
+    $("p").not(".url");       // 返回不带有类名 "url" 的所有 <p> 元素
+
+
+  })
+</script>
+</body>
+</html>

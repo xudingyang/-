@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .wrap {
+      width: 330px;
+      height: 30px;
+      margin: 100px auto 0;
+      background-image: url(imgs/bg.jpg);
+      padding-left: 10px;
+    }
+
+    .wrap li {
+      float: left;
+      width: 100px;
+      height: 30px;
+      margin-right: 10px;
+      position: relative;
+    }
+
+    .wrap a {
+      color: black;
+      text-decoration: none;
+      display: block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      background-image: url(imgs/libg.jpg);
+    }
+
+    .wrap li ul {
+      position: absolute;
+      display: none;
+    }
+  </style>
+  <script src="../../jquery-1.11.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // jq的动画是放在队里中顺序执行,如果连续在导航条上滑动,那么会连续执行动画,直到动画完了为止。
+      // 所以要适时地清空队列
+      $('.wrap li').mouseenter(function () {
+//                $(this).children("ul").slideDown();
+
+        // stop([clearQueue],[gotoEnd])
+        // clearQueue:如果设置成true，则清空队列。立即结束动画。默认是false
+        // gotoEnd:让当前正在执行的动画立即完成，并且重设show和hide的原始样式，调用回调函数等。默认是false。
+        // gotoEnd若为true,表示 立即执行当前的动画,然后再执行后续动画。
+        $(this).children('ul').stop(false, true).slideDown()
+      })
+      $('.wrap li').mouseleave(function () {
+        $(this).children('ul').stop(false, true).slideUp()
+      })
+    })
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <ul>
+    <li>
+      <a href="#">一级菜单1</a>
+      <ul>
+        <li><a href="#">二级菜单1</a></li>
+        <li><a href="#">二级菜单2</a></li>
+        <li><a href="#">二级菜单3</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">一级菜单1</a>
+      <ul>
+        <li><a href="#">二级菜单1</a></li>
+        <li><a href="#">二级菜单2</a></li>
+        <li><a href="#">二级菜单3</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">一级菜单1</a>
+      <ul>
+        <li><a href="#">二级菜单1</a></li>
+        <li><a href="#">二级菜单2</a></li>
+        <li><a href="#">二级菜单3</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>冲突的案例</title>
+  <script>
+    $ = {
+      show: function (argument) {
+        console.log('my $')
+      }
+    }
+  </script>
+  <script src="../jquery-1.11.1.min.js"></script>
+  <script>
+    var myJQuery = $.noConflict()  // 这行代码之后,jq就释放了$符号。用myJQuery来代替原先的$,或者直接用jQuery
+    jQuery(document).ready(function () {
+      jQuery('div').css('color', 'red')
+      // $("div").css("color","red"); //$就不能用了
+    })
+
+    $.show('sdf')
+
+  </script>
+</head>
+<body>
+<div>
+  sfadfsdf
+</div>
+</body>
+</html>

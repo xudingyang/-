@@ -25,6 +25,7 @@
   function songsManager () {
     this.songs = null // 刚出厂的时候，啥也没有
   }
+
   songsManager.prototype = {
 
     // 初始化歌单
@@ -53,22 +54,22 @@
     // 改
     updateSong: function (song) {
       this.checkSong(song.songName).singer = song.singer
-    },
+    }
   }
 
   var songs1 = [
     {
       songName: '《天路》',
-      singer: '韩红',
+      singer: '韩红'
     },
     {
       songName: '《丑八怪》',
-      singer: '薛之谦',
+      singer: '薛之谦'
     },
     {
       songName: '《情书》',
-      singer: '梁静茹',
-    },
+      singer: '梁静茹'
+    }
   ]
   var manager1 = new songsManager()
   manager1.init(songs1)
@@ -78,8 +79,8 @@
   var songs2 = [
     {
       songName: '《天路》',
-      singer: '韩红',
-    },
+      singer: '韩红'
+    }
   ]
   var manager2 = new songsManager()
   manager2.init(songs2)

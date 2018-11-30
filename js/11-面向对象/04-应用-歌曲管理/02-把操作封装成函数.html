@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 <script>
-    var songs = [
-        {
-            songName : '《天路》',
-            singer : '韩红'
-        },
-        {
-            songName : '《丑八怪》',
-            singer : '薛之谦'
-        },
-        {
-            songName : '《情书》',
-            singer : '梁静茹'
-        }
-    ];
+  var songs = [
+    {
+      songName: '《天路》',
+      singer: '韩红'
+    },
+    {
+      songName: '《丑八怪》',
+      singer: '薛之谦'
+    },
+    {
+      songName: '《情书》',
+      singer: '梁静茹'
+    }
+  ]
 
-    // 封装成函数，产生了大量全部变量。
+  // 封装成函数，产生了大量全部变量。
 
-    // 查
-    function checkSong(songName) {
-        for (var i = 0; i <songs.length; i++) {
-            if (songs[i].songName == songName) {
-                return songs[i];
-            }
-        }
-        return null;
+  // 查
+  function checkSong (songName) {
+    for (var i = 0; i < songs.length; i++) {
+      if (songs[i].songName == songName) {
+        return songs[i]
+      }
     }
-    // 增
-    function addSong(song) {
-        songs.push(song);
-    }
-    // 删
-    function removeSong(songName) {
-        var song = checkSong(songName);
-        var index = songs.indexOf(song);
-        songs.splice(index,1);
-    }
-    // 改
-    function updateSong(song) {
-        checkSong(song.songName).singer = song.singer;
-    }
+    return null
+  }
 
-//    console.log(checkSong('《天路》'))
-//    addSong({songName:'《let it go》',singer:'someone'})
-//    removeSong('《情书》')
-    updateSong({songName:'《情书》',singer:'老梁'})
-    console.log(songs);
+  // 增
+  function addSong (song) {
+    songs.push(song)
+  }
+
+  // 删
+  function removeSong (songName) {
+    var song = checkSong(songName)
+    var index = songs.indexOf(song)
+    songs.splice(index, 1)
+  }
+
+  // 改
+  function updateSong (song) {
+    checkSong(song.songName).singer = song.singer
+  }
+
+  //    console.log(checkSong('《天路》'))
+  //    addSong({songName:'《let it go》',singer:'someone'})
+  //    removeSong('《情书》')
+  updateSong({songName: '《情书》', singer: '老梁'})
+  console.log(songs)
 </script>
 </body>
 </html>

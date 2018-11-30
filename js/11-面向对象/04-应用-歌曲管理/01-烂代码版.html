@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var songs = [
+        {
+            songName : '《天路》',
+            singer : '韩红'
+        },
+        {
+            songName : '《丑八怪》',
+            singer : '薛之谦'
+        },
+        {
+            songName : '《情书》',
+            singer : '梁静茹'
+        }
+    ];
+
+    // 增
+//    songs.push({
+//        songName : '《爱你一万年》',
+//        singer : '刘德华'
+//    });
+//    console.log(songs); // 打印的如果是引用类型，并不是打印当时的情况，而是改变之后的情况
+
+    // 删
+//    for (var i = 0; i < songs.length; i++) {
+//        if (songs[i].songName == '《情书》') {
+//            songs.splice(i,1);
+//        }
+//    }
+//    console.log(songs);
+
+    // 查
+//    for (var i = 0; i < songs.length; i++) {
+//        if (songs[i].songName == '《丑八怪》') {
+//            console.log(songs[i]);
+//        }
+//    }
+
+    // 改
+    for (var i = 0; i < songs.length; i++) {
+        if (songs[i].songName == '《丑八怪》') {
+            songs[i].singer = '段子手薛之谦';
+        }
+    }
+    console.log(songs)
+</script>
+</body>
+</html>

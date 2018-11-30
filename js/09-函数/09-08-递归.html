@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script>
+    window.onload = function () {
+//            fibonacciTest();
+      addBorder()
+    }
+
+    // 递归遍历斐波那契数列
+    function fibonacciTest () {
+      // 1 自己调用自己
+      // 2 要有结束条件
+
+      // 使用递归的方法：
+      // 化归思想：将一个问题由难化易，由繁化简，由复杂化简单的过程称为化归，它是转化和归结的简称。
+
+      // 1 1 2 3 5 8 13 21 34
+      function fibonacci (n) {
+        if (n <= 2) {
+          return 1
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2)
+      }
+
+      var str = ''
+      for (var i = 1; i < 10; i++) {
+        str += fibonacci(i) + '  '
+      }
+      alert('斐波那契数列： ' + str)
+      //    console.log(str);
+    }
+
+    // 递归遍历后代元素:给页面每个元素添加一个边框
+    // DOM里只有找子代的api，没有直接找后代的api，所以要递归寻找字节点
+
+    function addBorder () {
+
+      function getallChildNodes (node) {
+        var allChildNode = [];
+        (function getChildNode (node1) {
+          // childNodes包含所有节点，包括元素、文本、换行
+          var nodeList = node1.childNodes
+          // 这里for循环的停止条件充当了递归结束的条件。因为没有子元素的话，都不会进入for循环
+          for (var i = 0; i < nodeList.length; i++) {
+            var childNode = nodeList[i]
+            // 我们只需要元素节点
+            if (childNode.nodeType == 1) {
+//                         函数应该是单一职责，本函数是得到childNode，所以不应该在这里设置样式
+//                         childNode.style.border = '1px solid red'
+
+              allChildNode.push(childNode)
+              getChildNode(childNode)
+            }
+          }
+        })(node)
+        return allChildNode
+      }
+
+      function setBorder (node) {
+        var allChildNodes = getallChildNodes(node)
+//                console.log(allChildNodes);
+        for (var i = 0; i < allChildNodes.length; i++) {
+          var child = allChildNodes[i]
+          child.style.border = '1px solid blue'
+        }
+      }
+
+      setBorder(document.body)
+    }
+  </script>
+
+</head>
+<body>
+<!--div{第$个div}*10>p{第$个p}*5>span{第$个span}*3-->
+<div>第1个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第2个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第3个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第4个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第5个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第6个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第7个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第8个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第9个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+<div>第10个div
+  <p>第1个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第2个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第3个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第4个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+  <p>第5个p<span>第1个span</span><span>第2个span</span><span>第3个span</span></p>
+</div>
+
+<p>我是第1个p元素</p>
+<p>我是第2个p元素</p>
+<p>我是第3个p元素</p>
+<p>我是第4个p元素</p>
+<p>我是第5个p元素</p>
+<p>我是第6个p元素</p>
+<p>我是第7个p元素</p>
+<p>我是第8个p元素</p>
+<p>我是第9个p元素</p>
+<p>我是第10个p元素</p>
+</body>
+</html>

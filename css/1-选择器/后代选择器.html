@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>后代选择器</title>
+
+	<style type="text/css">
+		/*u作用的是  div1中的所有后代中的p标签*/
+		.div1 p{
+			color: red;
+		}
+		/*div2里面的li2里的p标签*/
+		.div2 .li2 p{
+			color: green;
+		}
+		#div3 .li3 p{
+			color: yellow;
+		}
+	</style>
+
+
+</head>
+<body>
+	<div class="div1">
+		<p>段落</p>
+		<p>段落</p>
+		<p>段落</p>
+		<p>段落</p>
+		<ul>
+			<li>
+				<ul>
+					<li><p>内部段落</p></li>
+					<li><p>内部段落</p></li>
+					<li><p>内部段落</p></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<div class="div2">
+		<p>段落</p>
+		<p>段落</p>
+		<p>段落</p>
+		<p>段落</p>
+		<ul>
+			<li>
+				<ul>
+					<li class="li2"><p>内部段落</p></li>
+					<li class="li2"><p>内部段落</p></li>
+					<li class="li2"><p>内部段落</p></li>
+				</ul>
+			</li>
+		</ul>	
+	</div>
+
+	<div id="div3">
+		<p>段落</p>
+		<p>段落</p>
+		<p>段落</p>
+		<p>段落</p>
+		<ul>
+			<li>
+				<ul>
+					<li class="li3"><p>内部段落</p></li>
+					<li class="li3"><p>内部段落</p></li>
+					<li class="li3"><p>内部段落</p></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>

@@ -1,172 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>CSS3伸缩布局</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: '微软雅黑';
-            background-color: #F7F7F7;
-        }
+  <meta charset="UTF-8">
+  <title>CSS3伸缩布局</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: '微软雅黑';
+      background-color: #F7F7F7;
+    }
 
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-        .wrapper {
-            width: 1024px;
-            margin: 0 auto;
-        }
+    .wrapper {
+      width: 1024px;
+      margin: 0 auto;
+    }
 
-        .wrapper > section {
-            min-height: 300px;
-            margin-bottom: 30px;
-            box-shadow: 1px 1px 4px #DDD;
-            background-color: #FFF;
-        }
+    .wrapper > section {
+      min-height: 300px;
+      margin-bottom: 30px;
+      box-shadow: 1px 1px 4px #DDD;
+      background-color: #FFF;
+    }
 
-        .wrapper > header {
-            text-align: center;
-            line-height: 1;
-            padding: 20px;
-            margin-bottom: 10px;
-            font-size: 30px;
-        }
+    .wrapper > header {
+      text-align: center;
+      line-height: 1;
+      padding: 20px;
+      margin-bottom: 10px;
+      font-size: 30px;
+    }
 
-        .wrapper section > header {
-            line-height: 1;
-            padding: 10px;
-            font-size: 22px;
-            color: #333;
-            background-color: #EEE;
-        }
+    .wrapper section > header {
+      line-height: 1;
+      padding: 10px;
+      font-size: 22px;
+      color: #333;
+      background-color: #EEE;
+    }
 
-        .wrapper .wrap-box {
-            padding: 20px;
-        }
+    .wrapper .wrap-box {
+      padding: 20px;
+    }
 
-        .wrapper .brief {
-            min-height: auto;
-        }
+    .wrapper .brief {
+      min-height: auto;
+    }
 
-        .wrapper .flex-img {
-            width: 100%;
-        }
+    .wrapper .flex-img {
+      width: 100%;
+    }
 
-        /*全局设置*/
-        section ul {
-            display: flex;
-            min-height: 600px;
-        }
+    /*全局设置*/
+    section ul {
+      display: flex;
+      min-height: 600px;
+    }
 
-        section li {
-            width: 200px;
-            height: 200px;
-            text-align: center;
-            line-height: 200px;
-            margin: 10px;
-            background-color: pink;
-        }
+    section li {
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      margin: 10px;
+      background-color: pink;
+    }
 
-        .flex-start ul {
-            /*在纵轴的顶部对齐*/
-            align-items: flex-start;
-        }
+    .flex-start ul {
+      /*在纵轴的顶部对齐*/
+      align-items: flex-start;
+    }
 
-        .flex-end ul {
-            /*在纵轴的底部对齐*/
-            align-items: flex-end;
-        }
+    .flex-end ul {
+      /*在纵轴的底部对齐*/
+      align-items: flex-end;
+    }
 
-        .center ul {
-            /*在纵轴方向上居中对齐*/
-            align-items: center;
-        }
+    .center ul {
+      /*在纵轴方向上居中对齐*/
+      align-items: center;
+    }
 
-        .baseline ul {
-            /*基线对齐*/
-            align-items: baseline;
-        }
+    .baseline ul {
+      /*基线对齐*/
+      align-items: baseline;
+    }
 
-        .baseline ul li:last-child {
-            line-height: 100px;
-        }
+    .baseline ul li:last-child {
+      line-height: 100px;
+    }
 
-        .stretch ul {
-            /*伸缩对齐。在不给高度的时候有效,直接撑满高度*/
-            align-items: stretch;
-        }
+    .stretch ul {
+      /*伸缩对齐。在不给高度的时候有效,直接撑满高度*/
+      align-items: stretch;
+    }
 
-        .stretch li {
-            height: auto;
-        }
-    </style>
+    .stretch li {
+      height: auto;
+    }
+  </style>
 </head>
 <body>
 <div class="wrapper">
-    <header>CSS3-伸缩布局详解</header>
-    <!-- 简介 -->
-    <section class="brief">
-        <header>align-items</header>
-        <div class="wrap-box">
-            <p>调整侧轴方向对齐方式，包括flex-start、flex-end、center、baseline、stretch</p>
-        </div>
-    </section>
-    <!-- 分隔线 -->
-    <section class="flex-start">
-        <header>flex-start</header>
-        <div class="wrap-box">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    </section>
-    <section class="flex-end">
-        <header>flex-end</header>
-        <div class="wrap-box">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    </section>
-    <section class="center">
-        <header>center</header>
-        <div class="wrap-box">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    </section>
-    <section class="baseline">
-        <header>baseline</header>
-        <div class="wrap-box">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    </section>
-    <section class="stretch">
-        <header>stretch</header>
-        <div class="wrap-box">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    </section>
+  <header>CSS3-伸缩布局详解</header>
+  <!-- 简介 -->
+  <section class="brief">
+    <header>align-items</header>
+    <div class="wrap-box">
+      <p>调整侧轴方向对齐方式，包括flex-start、flex-end、center、baseline、stretch</p>
+      <p>基线对齐是指文字</p>
+    </div>
+  </section>
+  <!-- 分隔线 -->
+  <section class="flex-start">
+    <header>flex-start</header>
+    <div class="wrap-box">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </section>
+  <section class="flex-end">
+    <header>flex-end</header>
+    <div class="wrap-box">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </section>
+  <section class="center">
+    <header>center</header>
+    <div class="wrap-box">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </section>
+  <section class="baseline">
+    <header>baseline</header>
+    <div class="wrap-box">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </section>
+  <section class="stretch">
+    <header>stretch</header>
+    <div class="wrap-box">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </section>
 </div>
 </body>
 </html>

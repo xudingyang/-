@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	/*块级元素转行内元素*/
+		div{
+			display: inline;
+			background-color: green;
+			/*这时候设置宽高就没用了*/
+			width: 500px;
+			height: 200px;
+		}
+		h1{
+			background-color: yellow;
+			display: inline;
+		}
+	/*行内元素变块级元素*/
+		span{
+			display: block;
+			background-color: pink;
+			/*这时候可以设置宽高了*/
+			width: 600px;
+		}
+	</style>
+</head>
+<body>
+	<div>我是一个div</div>
+	<div>我是一个div</div>
+
+	<h1>我</h1>
+	<h1>爱</h1>
+	<h1>你</h1>
+
+	<span>哈哈</span>
+	<span>哈哈</span>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      padding: 50px;
+      margin: 100px auto;
+      background-color: yellow;
+
+      /*以边框为长宽边界。即长宽为 边框+padding的和*/
+      /*box-sizing: border-box;*/
+
+      /*这里的宽度指内容的宽度。默认就是内容的宽高*/
+      box-sizing: content-box;
+
+      border: 10px dashed red;
+      /*类似 IE低版本 怪异模式*/
+    }
+
+    p {
+      /*这里是content的宽高*/
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <p>
+    你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解
+    你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解
+    你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解
+    你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解你好啊按揭付款就是否离开据了解
+  </p>
+</div>
+</body>
+</html>

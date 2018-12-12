@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 400px;
+      padding: 50px;
+      margin: 40px auto;
+      border: 15px dashed red;
+      background-color: yellow;
+
+      /*background-clip: content-box;*/
+      background-image: url("images/bg.jpg");
+      background-repeat: no-repeat;
+
+
+      /*背景填满。宽100% 高100%。也可以是100% auto。这里的宽高是border之内的宽高,不是由background-clip制定的宽高*/
+      /*background-size: 100% 100%;*/
+
+      /*当两个都为100%的时候,这张图撑死也会铺满背景。若一个为100% 一个为auto,则100%撑满,另外一个先是100%,然后平铺*/
+      /*background-size: 100% auto;*/
+
+      /*cover:保持图像的纵横比,并将图像缩放成将完全覆盖背景定位区域的最小大小。即:按照背景大边的比例缩放,覆盖到整个背景,至于放不下整个图,那就切掉多余的部分*/
+      /*background-size: cover;*/
+
+      /*按照背景的小边缩放,至于填不满背景的部分,那就空着吧*/
+      background-size: contain;
+
+      /* background-size 与 background-clip无关 */
+      /* 因为background-size控制的是整个背景区域.background-clip控制背景显示区域 */
+
+      /*background-size 与 background-origin 保持一致*/
+    }
+  </style>
+</head>
+<body>
+<div>非官方的进口国和奋达科技搞活动客户给客户均可惹我;看过来看的房价高了科技部水电费威风威风飞洒地方过付或或或或或或或或或或或或或或或或或呵呵呵呵</div>
+</body>
+</html>

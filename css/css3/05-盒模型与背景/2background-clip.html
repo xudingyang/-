@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      padding: 50px;
+      margin: 100px auto;
+      border: 15px dashed red;
+      background-color: yellow;
+
+      /*
+         并不会改变背景区域大小.背景仍然是从border开始算的.
+         clip控制的是背景显示区域.切掉的部分不会显示背景.
+         能切出图片一部分,就说明背景区域并没有变小,只是被切掉了一部分显示区域
+         在background-clip之外的背景,会被切掉.背景包含背景图,所以,也可以切掉背景图
+      */
+
+      /*以padding为背景边界*/
+      /*background-clip: padding-box;*/
+
+      /*默认背景填充区域:以边框为界*/
+      /*background-clip: border-box;*/
+
+      /*以内容为背景。内容为border-padding区域*/
+      background-clip: content-box;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+</body>
+</html>

@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>CSS3过渡</title>
-    <style>
-        body {
-            background-color: #F2F2F2;
-        }
+  <meta charset="UTF-8">
+  <title>CSS3过渡</title>
+  <style>
+    body {
+      background-color: #F2F2F2;
+    }
 
-        .zoom {
-            width: 300px;
-            height: 300px;
-            border: 1px solid #CCC;
-            margin: 100px auto;
-            background-image: url(./images/bg.jpg);
-            background-position: center;
-            background-size: 100% auto;
-            position: relative;
-            transition: all 1.5s;
-        }
+    .zoom {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #CCC;
+      margin: 100px auto;
+      background-image: url(./images/bg.jpg);
+      background-position: center;
+      background-size: 100% auto;
+      position: relative;
+      transition: all 1.5s;
+    }
 
-        .zoom:hover {
-            /*把背景区域调大,那么原来的盒子就"看起来"小了*/
-            background-size: 120% auto;
-        }
-    </style>
+    .zoom:hover {
+      /*把背景区域调大,那么原来的盒子就"看起来"小了*/
+      background-size: 120% auto;
+    }
+  </style>
 </head>
 <body>
 <div class="zoom"></div>

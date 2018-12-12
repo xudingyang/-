@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>选择器 - 伪类</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: '微软雅黑';
+      background-color: #F7F7F7;
+    }
+
+    .wrapper {
+      width: 1024px;
+      margin: 0 auto;
+    }
+
+    .wrapper > section {
+      min-height: 300px;
+      margin-bottom: 30px;
+      box-shadow: 1px 1px 4px #DDD;
+      background-color: #FFF;
+    }
+
+    .wrapper > header {
+      text-align: center;
+      line-height: 1;
+      padding: 20px;
+      margin-bottom: 10px;
+      font-size: 30px;
+    }
+
+    .wrapper section > header {
+      line-height: 1;
+      padding: 10px;
+      font-size: 22px;
+      color: #333;
+      background-color: #EEE;
+    }
+
+    .wrapper .wrap-box {
+      padding: 20px;
+    }
+
+    /*section父亲的所有section元素的,第四个section元素*/
+    /*section:nth-of-type(4) {
+        color: red;
+    }*/
+    /*p:only-child 父元素的唯一子元素的每个 p 元素。父元素只能有一个该子元素,该子元素中有多少个元素没关系*/
+    /*section:nth-of-type(4) span:only-child{
+        color: red;
+    }*/
+    /*section:nth-of-type(4) li:nth-of-type(2) span:only-of-type {
+        color: red;
+    }*/
+    /*括号里写0,没反应。写n,是所有的。2n,是偶数。2n-1,2n-3,2n+1,...,是奇数。3n,4n,分别是模3,模4*/
+    /*section:nth-of-type(5) li:nth-of-type(2n){
+        color: red;
+    }*/
+    /*与nth-of-type一样,只是方向是从后到前的数*/
+    /*section:nth-of-type(6) li:nth-last-child(2) {
+        color: red;
+    }*/
+    /*同上*/
+    /*section:nth-of-type(6) li:nth-last-of-type(2) {
+        color: red;
+    }*/
+    /*只对没有内容的元素起作用*/
+    section:nth-last-of-type(3) p:empty {
+      width: 100px;
+      height: 50px;
+      background: #ff0000;
+    }
+
+    /*修饰跳过去之后的锚点。点击哪个,就修饰哪个,释放此时没有被点击的锚点。比如,本来点击demo1,demo1变色;再点击demo2,demo2变色,demo1恢复*/
+    section:target {
+      color: yellow;
+    }
+
+    section:last-child p:after {
+      content: "我是after加进来的";
+      color: darkgoldenrod;
+    }
+
+    section:last-child p:before {
+      content: "我是before加进来";
+      color: #5CADFF;
+    }
+
+    /*总结:
+    数字
+    first last
+    target
+    empty
+    before after
+    注意区分伪类与伪元素,伪元素是四个点,伪类是两个点。
+    css2里面,before after是伪类,也就是一个冒号。但是css3里面把它划归到了伪元素,所以浏览器里的before after前边是两个冒号。只是代码里做了兼容。
+    */
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header>CSS3-伪类选择器</header>
+  <section id="demo1">
+    <header>简介</header>
+    <div class="wrap-box">
+      我是简介
+    </div>
+  </section>
+  <section id="demo2">
+    <header>E:first-child</header>
+    <div class="wrap-box">
+      我是first-child
+    </div>
+  </section>
+  <section id="demo3">
+    <header>E:last-child</header>
+    <div class="wrap-box">
+      我是last-child
+    </div>
+  </section>
+  <section>
+    <header>E:only-child</header>
+    <div class="wrap-box">
+      <ul>
+        <li>
+          <span>我是span</span>
+          <span>我是第2个span</span>
+        </li>
+        <li>
+          <span>我是span</span>
+          <p>我是p</p>
+          <!--<span>有了我,那哥们也不变色了</span>-->
+        </li>
+        <li>
+          <p>
+            <span>我是li里的p里的span</span>
+            <!--<span>有了我,用only-child上边就不会变色</span>-->
+          <div>我可以存在</div>
+          </p>
+        </li>
+        <li>hehe</li>
+      </ul>
+    </div>
+  </section>
+  <section>
+    <header>E:nth-child(n)</header>
+    <div class="wrap-box">
+      <p>n的取值为大于等于1，当N作为系数时N的取值可以为0 比如2n+1</p>
+
+      <ul>
+        <li>
+          <span>我是span</span>
+        </li>
+        <li>
+          <span>我是span</span>
+        </li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </section>
+  <section>
+    <header>E:nth-last-child(n)</header>
+    <div class="wrap-box">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </div>
+  </section>
+  <section>
+    <header>E:first-of-type</header>
+    <div class="wrap-box"></div>
+  </section>
+  <section>
+    <header>E:last-of-type</header>
+    <div class="wrap-box"></div>
+  </section>
+  <section>
+    <header>E:only-of-type</header>
+    <div class="wrap-box"></div>
+  </section>
+  <section>
+    <header>E:nth-of-type(n)</header>
+    <div class="wrap-box"></div>
+  </section>
+  <section>
+    <header>E:nth-last-of-type(n)</header>
+    <div class="wrap-box"></div>
+  </section>
+  <section>
+    <header>E:empty</header>
+    <div class="wrap-box">
+      <span>E:empty 表示元素没有任何内容才被选中</span>
+      <p>111</p>
+      <p></p>
+    </div>
+  </section>
+  <section>
+    <header>E:target</header>
+    <div class="wrap-box">
+      <a href="#demo1">demo1</a>  <!-- 页内锚点 -->
+      <a href="#demo2">demo2</a>
+      <a href="#demo3">demo3</a>
+    </div>
+  </section>
+  <section>
+    <header>E:after</header>
+    <div class="wrap-box">
+      <p>p</p>
+      <span>span</span>
+      <p>p</p>
+      <span>span</span>
+      <p>p</p>
+      <span>span</span>
+    </div>
+  </section>
+</div>
+</body>
+</html>

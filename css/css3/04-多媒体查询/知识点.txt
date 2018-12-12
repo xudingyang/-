@@ -1,0 +1,20 @@
+
+CSS3 多媒体类型
+
+    all	用于所有多媒体类型设备
+    print	用于打印机
+    screen	用于电脑屏幕，平板，智能手机等。
+    speech	用于屏幕阅读器
+
+
+多媒体查询语法
+多媒体查询由多种媒体组成，可以包含一个或多个表达式，表达式根据条件是否成立返回 true 或 false。
+@media not|only mediatype and (expressions) {
+    CSS-Code;
+}
+如果指定的多媒体类型匹配设备类型则查询结果返回 true，文档会在匹配的设备上显示指定样式效果。
+除非你使用了 not 或 only 操作符，否则所有的样式会适应在所有设备上显示效果。
+not: not是用来排除掉某些特定的设备的，比如 @media not print（非打印设备）。
+only: 用来定某种特别的媒体类型。对于支持Media Queries的移动设备来说，如果存在only关键字，移动设备的Web浏览器会忽略only关键字并直接根据后面的表达式应用样式文件。对于不支持Media Queries的设备但能够读取Media Type类型的Web浏览器，遇到only关键字时会忽略这个样式文件。
+all: 所有设备，这个应该经常看到。
+你也可以在不同的媒体上使用不同的样式文件：

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body, ul, li, dl, dt, dd, h1, h2, h3, h4, h5 {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #F7F7F7;
+    }
+
+    .wrapper {
+      width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .wrapper > header {
+      font-family: "宋体";
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .wrapper .main > section {
+      min-height: 300px;
+      margin-bottom: 30px;
+      background-color: #fff;
+      box-shadow: 1px 1px 5px #ddd;
+      position: relative;
+    }
+
+    .wrapper section > header {
+      text-align: left;
+      line-height: 1;
+      font-size: 20px;
+      padding: 10px;
+      background-color: #EEEEEE;
+    }
+
+    .wrapper .main .brief {
+      min-height: auto;
+    }
+
+    section:nth-of-type(1) div {
+      padding: 5px;
+      font-size: 20px;
+      background-color: #EEEEEE;
+      margin: 10px;
+    }
+
+    section:nth-of-type(n) .translate-2D:after {
+      content: attr(data-brief);
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      position: absolute;
+      top: 60px;
+      left: 30px;
+      color: #FFF;
+      font-family: '微软雅黑';
+      font-size: 18px;
+      background-color: red;
+      transition: all 2s;
+    }
+
+    /*translateX*/
+    section:nth-of-type(2):hover .translate-2D:after {
+      transform: translateX(400px);
+    }
+
+    /*translate*/
+    section:nth-of-type(3):hover .translate-2D:after {
+      transform: translate(200px, 50px);
+    }
+
+    /*scaleX scaleY*/
+    section:nth-of-type(4):hover .translate-2D:after {
+      /*宽度缩小至原先的0.5*/
+      /*transform: scaleX(0.5);  */
+      /*高度增加至原先的2倍*/
+      transform: scaleY(2);
+    }
+
+    /*scale*/
+    section:nth-of-type(5):hover .translate-2D:after {
+      transform: scale(2, 3);
+    }
+
+    /*rotate*/
+    section:nth-of-type(6):hover .translate-2D:after {
+      /*transform: rotate(90deg);*/
+      transform: rotate(-90deg);
+    }
+
+    /*skewX 沿着x轴倾斜*/
+    section:nth-of-type(7):hover .translate-2D:after {
+      transform: skewX(30deg);
+      /*transform: skewY(45deg);*/
+    }
+
+    /*skew*/
+    section:nth-of-type(8):hover .translate-2D:after {
+      transform: skew(45deg, 30deg);
+    }
+
+    /*matrix(n,n,n,n,n,n)*/
+    section:nth-of-type(9):hover .translate-2D:after {
+      transform: matrix(0.866, 0.5, -0.5, 0.866, 0, 0);
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header><h1>2D转换-移动</h1></header>
+  <div class="main">
+    <section class="brief">
+      <header>translate()方法</header>
+      <div>
+        <p>translateX()方法,沿着 X 轴移动元素。</p>
+        <p>translate()方法，根据左(X轴)和顶部(Y轴)位置给定的参数，从当前元素位置移动。</p>
+      </div>
+      <div>
+        <p>scaleX(),定义 2D 缩放转换，改变元素的宽度。</p>
+        <p>scale()方法，该元素增加或减少的大小，取决于宽度（X轴）和高度（Y轴）的参数</p>
+      </div>
+      <div>
+        <p>rotate(angle)方法，在一个给定度数顺时针旋转的元素。负值是允许的，这样是元素逆时针旋转。</p>
+      </div>
+      <div>
+        <p>skewX(angle),定义 2D 倾斜转换，沿着 X 轴。</p>
+        <p>skew()方法，该元素会根据横向（X轴）和垂直（Y轴）线参数给定角度：</p>
+      </div>
+      <div>
+        matrix()方法和2D变换方法合并成一个。matrix 方法有六个参数，包含旋转，缩放，移动（平移）和倾斜功能。
+      </div>
+    </section>
+    <section>
+      <header>translateX()方法</header>
+      <div class="translate-2D" data-brief="translateX"></div>
+    </section>
+    <section>
+      <header>translate()方法</header>
+      <div class="translate-2D" data-brief="translate"></div>
+    </section>
+    <section>
+      <header>scaleX()方法</header>
+      <div class="translate-2D" data-brief="scaleX"></div>
+    </section>
+    <section>
+      <header>scale()方法</header>
+      <div class="translate-2D" data-brief="scale"></div>
+    </section>
+    <section>
+      <header>rotate()方法</header>
+      <div class="translate-2D" data-brief="rotate"></div>
+    </section>
+    <section>
+      <header>skewX()方法</header>
+      <div class="translate-2D" data-brief="skewX"></div>
+    </section>
+    <section>
+      <header>skew()方法</header>
+      <div class="translate-2D" data-brief="skew"></div>
+    </section>
+    <section>
+      <header>matrix()方法</header>
+      <div class="translate-2D" data-brief="matrix"></div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

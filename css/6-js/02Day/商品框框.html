@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0;}
+        #box {
+            height: 70px;
+            width: 360px;
+            margin: 100px auto;
+            padding-top: 360px;
+            border: 1px solid #cccccc;
+            background: url("images1/01big.jpg") no-repeat;
+            /*图片不太规范,导致下边框被挡住了部分,切除超出的部分即可显示下边框*/
+            overflow: hidden;
+        }
+        ul {
+            border-top: 1px solid #cccccc;
+            list-style: none;
+        }
+        li {
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+//            方式一,较繁琐
+//
+//            var box = document.getElementById("box");
+//            document.getElementById("item1").onmouseover = function changeBgImg() {
+//                box.style.background = 'url("images1/01big.jpg")';
+//            };
+//            document.getElementById("item2").onmouseover = function changeBgImg() {
+//                box.style.background = 'url("images1/02big.jpg")';
+//            };
+//            document.getElementById("item3").onmouseover = function changeBgImg() {
+//                box.style.background = 'url("images1/03big.jpg")';
+//            };
+//            document.getElementById("item4").onmouseover = function changeBgImg() {
+//                box.style.background = 'url("images1/04big.jpg")';
+//            };
+//            document.getElementById("item5").onmouseover = function changeBgImg() {
+//                box.style.background = 'url("images1/05big.jpg")';
+//            };
+
+//            方式二:稍微简单
+            var box = document.getElementById("box");
+//            该函数的作用是为obj绑定鼠标浮动事件。起到封装作用。
+            function func(obj,url) {
+                var item = document.getElementById(obj);
+                item.onmouseover = function () {
+                    box.style.backgroundImage = url;
+                }
+            }
+            func("item1","url(images1/01big.jpg)");
+            func("item2","url(images1/02big.jpg)");
+            func("item3","url(images1/03big.jpg)");
+            func("item4","url(images1/04big.jpg)");
+            func("item5","url(images1/05big.jpg)");
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <ul id="items">
+            <li id="item1" ><img src="images1/01.jpg" alt=""></li>
+            <li id="item2"><img src="images1/02.jpg" alt=""></li>
+            <li id="item3"><img src="images1/03.jpg" alt=""></li>
+            <li id="item4"><img src="images1/04.jpg" alt=""></li>
+            <li id="item5"><img src="images1/05.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+</html>

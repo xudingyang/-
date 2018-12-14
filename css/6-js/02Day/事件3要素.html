@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件三要素</title>
+    <style>
+        #haha {
+            width: 100px;
+            height: 100px;
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<div id="haha">
+
+</div>
+
+<button onclick=changewidth("400px")>改变宽度</button>
+<button id="btn">改变高度</button>
+<script>
+// 事件三要素
+// 事件源: 要触发的对象,事件发起者
+// 事件: 动作
+// 事件处理程序: 发生了什么事,事件处理者
+// 使用方式:
+//    事件源.事件 = function() { ... }
+
+    function changewidth(width) {
+        document.getElementById("haha").style.width = width;
+    }
+    document.getElementById("btn").onclick = function () {
+        document.getElementById("haha").style.height = "600px";
+    }
+</script>
+</body>
+</html>

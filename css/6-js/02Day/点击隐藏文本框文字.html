@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击隐藏</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .search {
+            width: 300px;
+            height: 40px;
+            margin: 100px auto;
+        }
+        #text {
+            width: 215px;
+            height: 40px;
+            background: url("images1/left.jpg") no-repeat;
+            border: 0;
+            outline-style: none;
+            float: left;
+            color: #cccccc;
+            padding-left: 12px;
+        }
+        .btn {
+            width: 42px;
+            height: 40px;
+            border: 0;
+            background: url("images1/right.jpg") no-repeat;
+            outline-style: none;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            function $(id) {
+                return document.getElementById(id);
+            }
+            // 获得焦点
+            $("text").onfocus = function () {
+                if ($("text").value == "请输入...") {
+                    $("text").value = "";
+                    $("text").style.color = "#333333";
+                }
+            }
+            // 失去焦点
+            $("text").onblur = function () {
+                if ($("text").value == "") {
+                    $("text").value = "请输入...";
+                    $("text").style.color = "#cccccc";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="search">
+        <input type="text" id="text" value="请输入..." />
+        <button class="btn"></button>
+    </div>
+</body>
+</html>

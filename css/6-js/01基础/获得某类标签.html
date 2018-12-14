@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script>
-        window.onload = function(){
-            // getElementsByTagName  得到的是一个伪数组
-            var lis = document.getElementsByTagName("li");
-            // 这个i不在函数里,是局部变量,仅在for里面使用。
-            for(i=0; i<lis.length;i++)
-            {
-                lis[i].innerHTML = "abc";
-            }
-        }
-        function hehe() {
-            // 这个j在函数里面,是隐式全局变量
-            for (j = 0; j < 4; j++) {
+  <meta charset="UTF-8">
+  <title></title>
+  <script>
+    window.onload = function () {
+      // getElementsByTagName  得到的是一个伪数组
+      var lis = document.getElementsByTagName('li')
+      // 这个i不在函数里,是局部变量,仅在for里面使用。
+      for (i = 0; i < lis.length; i++) {
+        lis[i].innerHTML = 'abc'
+      }
+    }
 
-            }
-        }
-    </script>
+    function hehe () {
+      // 这个j在函数里面,是隐式全局变量
+      for (j = 0; j < 4; j++) {
+
+      }
+    }
+  </script>
 </head>
 <body>
 <ul id="btn">
-    <li>123</li>
-    <li>123</li>
-    <li>123</li>
-    <li>123</li>
-    <li>123</li>
+  <li>123</li>
+  <li>123</li>
+  <li>123</li>
+  <li>123</li>
+  <li>123</li>
 </ul>
 <script>
-    hehe();
-    alert(j);
+  hehe()
+  alert(j)
 </script>
 </body>
 </html>

@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        #box,#test {
-            width: 200px;
-            height: 200px;
-            background-color: #ff0000;
-            margin: 100px auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box, #test {
+      width: 200px;
+      height: 200px;
+      background-color: #ff0000;
+      margin: 100px auto;
+    }
+  </style>
 </head>
 <body>
-    <div id="box"></div>
-    <div id="test"></div>
-    <script>
-        <!--获取盒子的id,改变盒子的颜色:方式 1 -->
-//        var box = document.getElementById("box");
-//        var test = document.getElementById("test");
-//        box.style.backgroundColor = "blue";
-//        test.style.backgroundColor = "yellow";
+<div id="box"></div>
+<div id="test"></div>
+<script>
+  <!--获取盒子的id,改变盒子的颜色:方式 1 -->
+  //        var box = document.getElementById("box");
+  //        var test = document.getElementById("test");
+  //        box.style.backgroundColor = "blue";
+  //        test.style.backgroundColor = "yellow";
 
-//        方式 2
-        function $(id) {
-            return document.getElementById(id);
-        }
-        $("box").style.backgroundColor = "blue";
-        $("test").style.backgroundColor = "yellow";
-    </script>
+  //        方式 2
+  function $ (id) {
+    return document.getElementById(id)
+  }
+
+  $('box').style.backgroundColor = 'blue'
+  $('test').style.backgroundColor = 'yellow'
+</script>
 </body>
 </html>

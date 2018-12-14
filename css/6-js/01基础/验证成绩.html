@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>输入成绩</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        .box {
-            margin: 100px auto;
-            height: 40px;
-            text-align: center;
-        }
-        #text {
-            margin-left: 20px;
-            width: 300px;
-            height: 40px;
-            margin-right: 20px;
-            color: #cccccc;
-            outline-style: none;
-        }
-        #result {
-            display: inline-block;
-            width: 200px;
-            height: 40px;
-            line-height: 40px;
-            background-color: #cccccc;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>输入成绩</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .box {
+      margin: 100px auto;
+      height: 40px;
+      text-align: center;
+    }
+
+    #text {
+      margin-left: 20px;
+      width: 300px;
+      height: 40px;
+      margin-right: 20px;
+      color: #cccccc;
+      outline-style: none;
+    }
+
+    #result {
+      display: inline-block;
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      background-color: #cccccc;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 <div class="box">
-    语文: <input type="text" value="输入分数" id="text" /><span id="result">输入成绩</span>
+  语文: <input type="text" value="输入分数" id="text"/><span id="result">输入成绩</span>
 </div>
 <script>
-    function $(id) {
-        return document.getElementById(id);
+  function $ (id) {
+    return document.getElementById(id)
+  }
+
+  $('text').onfocus = function () {
+    if (this.value == '输入分数') {
+      this.value = ''
+      this.style.color = '#000000'
     }
-    $("text").onfocus = function () {
-        if (this.value == "输入分数") {
-            this.value = "";
-            this.style.color = "#000000";
-        }
+  }
+  $('text').onblur = function () {
+    if (this.value == '') {
+      this.value = '输入分数'
+      this.style.color = '#cccccc'
     }
-    $("text").onblur = function () {
-        if (this.value == "") {
-            this.value = "输入分数";
-            this.style.color = "#cccccc";
-        }
+  }
+  $('result').onclick = function () {
+    var num = $('text').value
+    if (num > 150 || num < 0) {
+      this.innerHTML = '范围输错啦'
+      this.style.backgroundColor = '#ff0000'
     }
-    $("result").onclick = function () {
-        var num = $("text").value;
-        if (num > 150 || num < 0) {
-            this.innerHTML = "范围输错啦";
-            this.style.backgroundColor = "#ff0000";
-        }
-        if (isNaN(num)) {
-            this.innerHTML = "你他么输入的是数?";
-            this.style.backgroundColor = "yellow";
-        }
-        if (num <=150 && num >= 0) {
-            this.innerHTML = "输入正确";
-            this.style.backgroundColor = "#00ff00";
-        }
+    if (isNaN(num)) {
+      this.innerHTML = '你他么输入的是数?'
+      this.style.backgroundColor = 'yellow'
     }
+    if (num <= 150 && num >= 0) {
+      this.innerHTML = '输入正确'
+      this.style.backgroundColor = '#00ff00'
+    }
+  }
 </script>
 </body>
 </html>

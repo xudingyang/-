@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>换肤</title>
-    <style>
-        body {
-            background: url("images/1.jpg") no-repeat top center;
-        }
-        .box {
-            height: 100px;
-            text-align: center;
-            background-color: rgba(255,255,255,0.3);
-            margin-top: 100px;
-            padding-top: 10px;
-        }
-        .box img {
-            cursor: pointer;
-        }
-    </style>
-    <script>
-        <!--入口函数。该函数会在网页加载完毕后调用-->
-        window.onload = function () {
-            var pic1 = document.getElementById("pic1");
-            var pic2 = document.getElementById("pic2");
-            var pic3 = document.getElementById("pic3");
-            pic1.onclick = function () {
-                document.body.style.background = 'url("images/1.jpg")';
-            }
-            pic2.onclick = function () {
-                document.body.style.background = 'url("images/2.jpg")';
-            }
-            pic3.onclick = function () {
-                document.body.style.background = 'url("images/3.jpg")';
-            }
-        } 
-    </script>
+  <meta charset="UTF-8">
+  <title>换肤</title>
+  <style>
+    body {
+      background: url("images/1.jpg") no-repeat top center;
+    }
+
+    .box {
+      height: 100px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin-top: 100px;
+      padding-top: 10px;
+    }
+
+    .box img {
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    <!--入口函数。该函数会在网页加载完毕后调用-->
+    window.onload = function () {
+      var pic1 = document.getElementById('pic1')
+      var pic2 = document.getElementById('pic2')
+      var pic3 = document.getElementById('pic3')
+      pic1.onclick = function () {
+        document.body.style.background = 'url("images/1.jpg")'
+      }
+      pic2.onclick = function () {
+        document.body.style.background = 'url("images/2.jpg")'
+      }
+      pic3.onclick = function () {
+        document.body.style.background = 'url("images/3.jpg")'
+      }
+    }
+  </script>
 </head>
 <body>
-    <div class="box">
-        <img src="images/1.jpg" alt="" width="150px" id="pic1">
-        <img src="images/2.jpg" alt="" width="150px" id="pic2">
-        <img src="images/3.jpg" alt="" width="150px" id="pic3">
-    </div>
+<div class="box">
+  <img src="images/1.jpg" alt="" width="150px" id="pic1">
+  <img src="images/2.jpg" alt="" width="150px" id="pic2">
+  <img src="images/3.jpg" alt="" width="150px" id="pic3">
+</div>
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="ul">
+  <li>123</li>
+  <li>123</li>
+  <li>123</li>
+</ul>
+
+<script>
+  /********************  childNodes 选择全部的孩子,有兼容性问题 ***********************************/
+  var ul = document.getElementById('ul')
+  var children = ul.childNodes  // 选择全部的孩子,亲的孩子
+  console.log(children.length)  // chrome打印出7,因为它把换行也算孩子。
+  // childNodes有兼容性问题。利用nodeType==1来获取元素节点
+  console.log(children)
+
+  for (var i = 0; i < children.length; i++) {
+    if (children[i].nodeType == 1) {
+      children[i].style.backgroundColor = 'blue'
+    }
+  }
+
+  /*******  children 选择全部的孩子,只有元素节点。基本没兼容问题。但是ie678会把注释也算进来 **********/
+  var children1 = ul.children
+  console.log(children1.length)
+</script>
+</body>
+</html>

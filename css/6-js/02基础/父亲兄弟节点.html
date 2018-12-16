@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      width: 400px;
+      margin: 100px auto;
+      border: 1px solid #cccccc;
+    }
+
+    li {
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      background-color: #cccccc;
+      border: 1px dotted #aaaaaa;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var four = document.getElementById('four')
+//            four.nextElementSibling.style.backgroundColor = "green";
+
+//            正常浏览器认识nextElementSibling, IE6 7 8认识nextSibling。这里要把nextElementSibling写前边,因为||运算的特征。
+      var div = four.nextElementSibling || four.nextSibling
+      div.style.backgroundColor = 'green'
+
+//          改变父亲的颜色
+      four.parentNode.style.backgroundColor = 'yellow'
+    }
+  </script>
+</head>
+<body>
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li id="four">4</li>
+  <li>5</li>
+  <li>6</li>
+  <li>7</li>
+  <li>8</li>
+  <li>9</li>
+  <li>10</li>
+</ul>
+</body>
+</html>

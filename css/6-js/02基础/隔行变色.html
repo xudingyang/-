@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>隔行变色</title>
+  <style>
+    ul {
+      width: 300px;
+      list-style: none;
+      margin: 0 auto;
+    }
+
+    li {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    span {
+      padding-left: 20px;
+    }
+
+    .current {
+      background-color: #23dfa8 !important;
+    }
+  </style>
+</head>
+<body>
+<ul>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+  <li><span>张三</span><span>湖北人</span><span>23岁</span></li>
+</ul>
+<script>
+  var arr = document.getElementsByTagName('li')
+  for (var i = 0; i < arr.length; i++) {
+    if (i % 2 == 0) {
+      // 用这种方式加的样式,是行内式,权重最高。所以在鼠标悬浮的时候,要在颜色后边加个!important,因为鼠标悬浮的时候用的是class
+      arr[i].style.backgroundColor = '#cccccc'
+    } else {
+      arr[i].style.backgroundColor = '#666666'
+    }
+
+    arr[i].onmousemove = function () {
+      this.className = 'current'
+    }
+    arr[i].onmouseout = function () {
+      this.className = ''
+    }
+  }
+</script>
+</body>
+</html>

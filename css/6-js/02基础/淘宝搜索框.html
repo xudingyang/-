@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>淘宝搜索框</title>
+  <style>
+    .search {
+      width: 300px;
+      height: 30px;
+      margin: 100px auto;
+      position: relative;
+    }
+
+    #txt {
+      widows: 200;
+      height: 25px;
+      outline-style: none;
+    }
+
+    .search label {
+      color: #cccccc;
+      font-size: 12px;
+      /*把label定位到输入框中*/
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      cursor: text;
+    }
+  </style>
+</head>
+<body>
+<div class="search">
+  <input type="text" id="txt">
+  <!--input一般搭配label-->
+  <!--label for="id",表示点击label,光标聚焦到id标签上-->
+  <!--这样,不管是点击input还是点击label,光标都能出现在输入框中-->
+  <!--我们要做的,就是在框框中输入的时候,label消失-->
+  <label for="txt" id="label">必买少儿图书</label>
+</div>
+<script>
+  var text = document.getElementById('txt')
+  var label = document.getElementById('label')
+  // 检测用户表单输入内容
+  // IE 6 7 8不支持oninput,只支持onpropertychange。大部分浏览器支持的是oninput
+  text.oninput = text.onpropertychange = function () {
+    if (this.value == '') {
+      label.style.display = 'block'
+    } else {
+      label.style.display = 'none'
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--下拉菜单只有有一个值-->
+<select name="" id="sele">
+  <option value="1">春天</option>
+  <option value="2">夏天</option>
+  <option value="3">秋天</option>
+  <option value="4">冬天</option>
+  <option value="5">四季</option>
+</select>
+
+<p id="p" style="width: 100px; height: 30px; border:1px solid #cccccc"></p>
+<script>
+  var sele = document.getElementById('sele')
+  var p = document.getElementById('p')
+  sele.onchange = function () {
+    p.innerHTML = this.value  // 得到 value的值 1 2 3 4 5
+    switch (this.value) {
+      case '1':
+        document.body.style.backgroundColor = 'green'
+        break
+      case '2':
+        document.body.style.backgroundColor = 'blue'
+        break
+      case '3':
+        document.body.style.backgroundColor = 'gold'
+        break
+      case '4':
+        document.body.style.backgroundColor = 'brown'
+        break
+      case '5':
+        document.body.style.backgroundColor = 'yellow'
+        break
+      default :
+        document.body.style.backgroundColor = 'white'
+    }
+  }
+</script>
+</body>
+</html>

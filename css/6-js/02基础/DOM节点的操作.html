@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="demo">
+  <div id="one"></div>
+  <div id="two"></div>
+</div>
+<script>
+  /***************     在div#demo中手动生成节点    *******************/
+  var demo = document.getElementById('demo')
+  var children = demo.children
+  var one = document.getElementById('one')
+  var two = document.getElementById('two')
+  // 创建节点
+  var firstDiv = document.createElement('div')
+  // 插入节点 方式 1 :
+  // appendChild();  添加孩子   放到盒子的 最后面。
+  demo.appendChild(firstDiv)
+
+  // 插入节点 方式 2 :
+  // 父亲.insertBefore(插入的节点，参照节点)
+  //    demo.insertBefore(firstDiv, two);   // 放到one前边
+  //    demo.insertBefore(firstDiv, children[0]);  // 放到最前边
+
+  // 如果第二个参数为null,则默认放到最后边。没有参照物就写null,不然报错
+  demo.insertBefore(firstDiv, null)
+
+  // 移除节点
+  //    demo.removeChild(two);
+  //    demo.removeChild(children[0]);
+
+  // 克隆节点
+  //  cloneNode();
+  // 括号里面可以跟参数,如果是true 深层复制,除了复制本盒子,还复制子节点;如果为false 浅层复制,只复制本节点,不复制子节点。
+  demo.appendChild(two.cloneNode(false))   // 给demo添加孩子
+
+  var clone = demo.cloneNode(true)  // 这里把demo的id一起复制了,使用的时候要注意
+  demo.parentNode.appendChild(clone)  // 给demo添加兄弟
+</script>
+</body>
+</html>

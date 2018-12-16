@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>全选反选</title>
+</head>
+<body>
+<div id="top">
+  <button>全选</button>
+  <button>取消</button>
+  <button>反选</button>
+</div>
+
+<div id="bottom">
+  <ul>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+    <li><input type="checkbox" name="haha" id="">选我</li>
+  </ul>
+</div>
+<script>
+  var btns = document.getElementsByTagName('button')
+  var inputs = document.getElementById('bottom').getElementsByTagName('input')
+
+  function choose (flag) {
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].checked = flag
+    }
+  }
+
+  btns[0].onclick = function () {
+    choose(true)
+  }
+  btns[1].onclick = function () {
+    choose(false)
+  }
+  btns[2].onclick = function () {
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].checked == true ? inputs[i].checked = false : inputs[i].checked = true
+    }
+  }
+</script>
+</body>
+</html>

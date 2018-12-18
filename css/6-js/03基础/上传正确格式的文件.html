@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="file" value="上传jpg或者png文件" id="file"><span></span>
+</body>
+</html>
+<script>
+  var file = document.getElementById('file')
+  file.onchange = function () {
+    // 得到文件路径
+    var path = this.value
+    // 得到最后一个点的下标
+    var index = path.lastIndexOf('.')
+    // 得到后缀名。后缀名有大小写区分,全部转为大写即可
+    var suxxif = path.substr(index).toUpperCase()
+    // 判断
+    if (suxxif == '.JPG' || suxxif == '.PNG') {
+      this.nextSibling.innerHTML = '格式正确'
+    } else {
+      this.nextSibling.innerHTML = '格式错误'
+    }
+  }
+</script>

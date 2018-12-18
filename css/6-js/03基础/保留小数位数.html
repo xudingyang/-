@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var PI = 3.148592653  //  常量大写
+  var str = PI + ''   // 因为数字没法进行字符操作  先转换
+  var index = str.indexOf('.') // 我们要返回当前字符的点的位置  indexOf(".")
+  console.log(index)
+  // 方法一:获得小数点的位置
+  console.log(str.substr(0, index + 3))  // 取两位小数。这里是从0开始截取,所以是(index + 1) + 2(位) => index + 3
+  console.log(str.substr(0, str.indexOf('.') + 3))
+  // 方法二:乘以100,除以100,取整
+  console.log(parseInt(PI * 100) / 100)
+  //1213.141592653 * 100  =  121314.1592653   取整   121314  /100
+  // 方法三:直接用内置函数
+  console.log(PI.toFixed(2)) // 该方法会产生四舍五入情况。前边的方法是直接切断。
+</script>
+</body>
+</html>

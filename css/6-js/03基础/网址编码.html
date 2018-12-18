@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>网址编码</title>
+</head>
+<body>
+<script>
+  var url = 'https://www.baidu.com/s?word=金丝猴'
+
+  // 编码,得到 https%3A%2F%2Fwww.baidu.com%2Fs%3Fword%3D%E9%87%91%E4%B8%9D%E7%8C%B4
+  // 后台认识的就是这个
+  console.log('编码-----------  ' + encodeURIComponent(url))  // 编码
+
+  var afterUrl = encodeURIComponent(url)
+  console.log('解码-----------   ' + decodeURIComponent(afterUrl))  // 解码
+</script>
+</body>
+</html>

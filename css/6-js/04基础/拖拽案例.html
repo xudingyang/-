@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拖拽案例</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav {
+      height: 30px;
+      background-color: #036663;
+      padding-left: 20px;
+      line-height: 30px;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .register-box {
+      width: 400px;
+      height: 300px;
+      border: 5px solid #eee;
+      box-shadow: 2px 2px 2px 2px #666;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /*这里设置了margin,但是offsetLeft不包含margin,所以使用的时候要注意加上或减去*/
+      margin-top: -150px;
+      margin-left: -200px;
+    }
+
+    .drop {
+      width: 100%;
+      height: 25px;
+      background-color: #7c9299;
+      border-bottom: 1px solid #369;
+      line-height: 25px;
+      color: white;
+      cursor: move;
+    }
+
+    .info {
+      background-color: #ffff00;
+    }
+
+    #close-btn {
+      float: right;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="nav" id="nav"><a href="javascript:show();">注册信息</a></div>
+<div class="register-box" id="box">
+  <div class="drop" id="drop">
+    注册信息 (可拖动)
+    <span id="close-btn">【关闭】</span>
+  </div>
+  <div class="info">
+    hello大家好
+  </div>
+</div>
+</body>
+</html>
+<script>
+  var closeBtn = document.getElementById('close-btn')
+  var drop = document.getElementById('drop')
+  var box = document.getElementById('box')
+  closeBtn.onclick = function () {
+    this.parentNode.parentNode.style.display = 'none'
+  }
+
+  function show () {
+//        这句真的好傻逼,直接用box不就行了,干嘛转那么多弯
+//        closeBtn.parentNode.parentNode.style.display = "block";
+    box.style.display = 'block'
+  }
+
+  // 点在drop上,移动的是整个box
+  drop.onmousedown = function (event) {
+    var event = event || window.event
+    // offsetLeft不包含margin,前边设置了margin-left,所以这里要减去   offsetLeft 获取的是相对于父对象的左边距
+    var startX = event.clientX - this.parentNode.offsetLeft - 200
+    var startY = event.clientY - this.parentNode.offsetTop - 150
+    var that = this
+    document.onmousemove = function (event) {
+      var event = event || window.event
+      var endX = event.clientX - startX
+      var endY = event.clientY - startY
+      if (endX < 200) {
+        endX = 200
+      }
+      if (endY < 150) {
+        endY = 150
+      }
+      that.parentNode.style.left = endX + 'px'
+      that.parentNode.style.top = endY + 'px'
+      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
+    }
+  }
+  document.onmouseup = function () {
+    document.onmousemove = null
+  }
+  document.onselectstart = function (e) {
+    return false
+  }
+</script>

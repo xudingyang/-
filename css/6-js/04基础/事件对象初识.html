@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      height: 8888px;
+    }
+  </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  document.onclick = function (event) {
+//        alert("haha");
+
+    // event不用声明的,但是为了兼容性,还是写上下边这句,而且括号里还要有形参
+    var event = event || window.event
+    console.log(event.pageX)
+    console.log(event.pageY)
+    console.log(event.clientX)
+    console.log(event.screenX)
+  }
+</script>

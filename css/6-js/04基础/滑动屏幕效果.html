@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    /*这两个都要写,不然子标签得不到100%的宽高*/
+    body, html {
+      width: 100%;
+      height: 100%;
+    }
+
+    ol, ul {
+      list-style: none;
+    }
+
+    ol {
+      position: fixed;
+      left: 50px;
+      top: 20px;
+      width: 50px;
+    }
+
+    ol li {
+      border: 1px solid black;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      margin-top: -1px;
+      cursor: pointer;
+    }
+
+    ul {
+      width: 100%;
+      height: 100%;
+    }
+
+    ul li {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<ol>
+  <li>红</li>
+  <li>黄</li>
+  <li>蓝</li>
+  <li>绿</li>
+  <li>紫</li>
+</ol>
+
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+</body>
+</html>
+<script src="dyJS.js" type="text/javascript"></script>
+<script>
+  var colors = ['red', 'yellow', 'blue', 'green', 'purple']
+  var ol = document.getElementsByTagName('ol')[0]
+  var ul = document.getElementsByTagName('ul')[0]
+  for (var i = 0; i < colors.length; i++) {
+    ol.children[i].style.backgroundColor = colors[i]
+    ul.children[i].style.backgroundColor = colors[i]
+    ol.children[i].index = i
+    var leader = 0, target = 0, timer = null
+    ol.children[i].onclick = function () {
+      clearInterval(timer)
+      target = ul.children[this.index].offsetTop
+      timer = setInterval(function () {
+        leader = leader + (target - leader) / 10
+        window.scrollTo(0, leader)
+      }, 30)
+    }
+  }
+</script>

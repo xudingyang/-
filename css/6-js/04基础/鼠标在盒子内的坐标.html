@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box {
+      width: 400px;
+      height: 400px;
+      background-color: #ff0000;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>
+<script>
+  var box = document.getElementById('box')
+  box.onclick = function (event) {
+    var event = event || window.event
+    var mouseX = event.clientX - this.offsetLeft
+    var mouseY = event.clientY - this.offsetTop
+    this.innerHTML = 'mouseX = ' + mouseX + '</br>' + 'mouseY = ' + mouseY
+  }
+</script>

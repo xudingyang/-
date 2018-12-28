@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>电商放大镜</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 350px;
+      height: 350px;
+      margin: 100px;
+      position: relative;
+      border: 1px solid #ccc;
+    }
+
+    .small {
+      /*会自动撑满宽度,高度通过内容撑满,所以这里不需要过多设置*/
+      position: relative;
+    }
+
+    .mask {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 0, 0.4);
+      top: 0;
+      left: 0;
+      cursor: move;
+    }
+
+    .big {
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 0;
+      left: 360px;
+      /*图片太大,设定个范围显示图片*/
+      overflow: hidden;
+      border: 1px dotted #cccccc;
+    }
+
+    .big img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <div class="small">
+    <img src="images/001.jpg" alt="">
+    <div class="mask"></div>
+  </div>
+  <div class="big">
+    <img src="images/0001.jpg" alt="">
+  </div>
+</div>
+</body>
+</html>
+<script>
+  var box = document.getElementById('box')
+  var small = box.children[0]
+  var big = box.children[1]
+  var mask = small.children[1]
+  var bigImg = big.children[0]
+  small.onmouseover = function () {
+    mask.style.display = 'block'
+    big.style.display = 'block'
+  }
+  small.onmouseout = function () {
+    mask.style.display = 'none'
+    big.style.display = 'none'
+  }
+  // mask在small中的x, y,即mask的left和top。若鼠标能移动,则鼠标位于mask的中心。
+  var maskX = 0
+  var maskY = 0
+  small.onmousemove = function (event) {
+    var event = event || window.event
+    // 这里的small是紧贴父盒子的,所offsetLeft为0,要注意。所以要用this.offsetParent.offsetLeft
+    maskX = event.clientX - mask.offsetWidth * 0.5 - this.offsetParent.offsetLeft
+    maskY = event.clientY - mask.offsetHeight * 0.5 - this.offsetParent.offsetTop
+    if (maskX <= 0) {
+      maskX = 0
+    }
+    if (maskX > this.offsetWidth - mask.offsetHeight) {
+      maskX = this.offsetWidth - mask.offsetHeight
+    }
+    if (maskY <= 0) {
+      maskY = 0
+    }
+    if (maskY > this.offsetHeight - mask.offsetHeight) {
+      maskY = this.offsetHeight - mask.offsetHeight
+    }
+    mask.style.left = maskX + 'px'
+    mask.style.top = maskY + 'px'
+
+    // 设定bigImg的x,y
+    // bigImg的宽高与small的小图是成比例的。
+    bigImg.style.left = -maskX * big.offsetWidth / small.offsetWidth + 'px'
+    bigImg.style.top = -maskY * big.offsetHeight / small.offsetHeight + 'px'
+  }
+</script>

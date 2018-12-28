@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>水平拖动条slider</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #slider {
+      width: 500px;
+      height: 22px;
+      margin: 100px auto;
+      background-color: #cccccc;
+      position: relative;
+    }
+
+    .btn {
+      position: absolute;
+      background-color: #336699;
+      width: 22px;
+      height: 44px;
+      top: -11px;
+      left: 0px;
+      cursor: pointer;
+    }
+
+    .mask {
+      background-color: #336699;
+      position: absolute;
+      width: 0;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<div id="slider">
+  <div class="btn"></div>
+  <div class="mask"></div>
+</div>
+<p id="txt" style="text-align: center"></p>
+</body>
+</html>
+<script>
+  var slider = document.getElementById('slider')
+  var btn = slider.children[0]
+  var mask = slider.children[1]
+  btn.onmousedown = function (event) {
+    var event = event || window.event
+    // 滑块距左边的初始距离
+    var leftVal = event.clientX - this.offsetLeft
+    var that = this
+    // 若用document.onmousemove,则鼠标离开btn后,还能拖动,这显然不对。
+    // 但是,如果用btn.onmousemove,则滑动速度过快时,鼠标会脱离滑块。有什么好办法解决?
+    // 2017-4-2更正:大型网站都是用document,即离开btn后还可以拖动,所以不必更改,估计也是不能更改。
+    document.onmousemove = function (event) {
+      var event = event || window.event
+      that.style.left = event.clientX - leftVal + 'px'
+      var temp = parseInt(that.style.left)
+      if (temp < 0) {
+        that.style.left = 0 + 'px'
+      } else if (temp > 478) {
+        that.style.left = 478 + 'px'
+      }
+      mask.style.width = that.style.left
+      var num = parseInt(that.style.left) / 478 * 100
+      num = num.toFixed(2)
+      document.getElementById('txt').innerHTML = num + '%'
+    }
+  }
+  //    btn.onmouseout = function () {
+  //        document.onmousemove = null;
+  //    }
+  // 弹起鼠标不做任何操作
+  document.onmouseup = function () {
+    document.onmousemove = null
+  }
+  // 防止选择拖动。拖动的时候能选择文字,复制、粘贴。这里显然不需要该功能
+  // 前一个是其他浏览器。后一种是IE浏览器
+  window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      height: 8888px;
+    }
+  </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  function scroll () {
+    if (window.pageYOffset != null) {
+      return {
+        left: window.pageXOffset,
+        top: window.pageYOffset
+      }
+    } else if (document.compatMode == 'CSS1Compat') { // 如果不是怪异模式
+      return {
+        left: document.documentElement.scrollLeft,
+        top: document.documentElement.scrollTop
+      }
+    } else {
+      return {
+        left: document.body.scrollLeft,
+        top: document.body.scrollTop
+      }
+    }
+  }
+
+  window.onscroll = function () {
+    document.title = scroll().top
+  }
+</script>

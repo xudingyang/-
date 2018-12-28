@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      height: 8888px;
+    }
+  </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  window.onscroll = function () {
+    console.log(11)
+    // IE9+ 以及其他新版浏览器认识 window.pageYOffset。
+    // chrome 认识 document.body.scrollTop。没有声明DTD的文档,也用这个。
+    // 其他浏览器认识 document.documentElement.scrollTop
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      || document.body.scrollTop || 0
+    document.title = scrollTop
+    console.log(scrollTop)
+  }
+</script>

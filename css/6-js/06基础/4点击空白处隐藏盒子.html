@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>点击空白处隐藏盒子</title>
+  <style>
+    body {
+      height: 2000px;
+    }
+
+    #mask {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      opacity: 0.4; /*设置 div 元素的不透明级别*/
+      filter: alpha(opacity=40); /*ie 6半透明*/
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+
+    #login {
+      width: 200px;
+      height: 200px;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      margin: -100px 0 0 -100px;
+      background-color: #fff;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<a href="javascript:;" id="zhuce">注册</a>
+<a href="javascript:;">登录</a>
+<div id="mask"></div>
+<div id="login"></div>
+</body>
+</html>
+<script>
+  var mask = document.getElementById('mask')
+  var login = document.getElementById('login')
+  var zhuceBtn = document.getElementById('zhuce')
+  zhuceBtn.onclick = function (event) {
+    mask.style.display = 'block'
+    login.style.display = 'block'
+    // 登录框出来的时候,隐藏滚动条
+    document.body.style.overflow = 'hidden'
+    // 下边是给document增加点击事件,如果不拦截,事件就会传到document上去
+    var event = event || window.event
+    if (event && event.stopPropagation) {
+      event.stopPropagation()
+    } else {
+      event.cancelBubble = true
+    }
+  }
+  document.onclick = function (event) {
+//        mask.style.display = "none";
+//        login.style.display = "none";
+    // 页面是很大的,元素很多,要判断是否点到了我们所要的对象
+    var event = event || window.event
+    // target.id 点击的某个对象的id
+    // srcElement.id 点击的某个对象的id    ie 678
+    var targetId = event.target ? event.target.id : event.srcElement.id
+//        alert(targetId);
+    if (targetId != 'login') { // 只要不点到登录框
+      mask.style.display = 'none'
+      login.style.display = 'none'
+      document.body.style.overflow = 'visible' // 显示滚动条
+    }
+  }
+</script>

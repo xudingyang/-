@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    div {
+      width: 200px;
+      height: 100px;
+      background-color: pink;
+      left: 10px;
+      position: absolute;
+      top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div id="box" style="left:30px;width: 100px;height: 200px;"></div>
+<div id="box1"></div>
+</body>
+</html>
+<script>
+  var box = document.getElementById('box')
+
+  // 只能访问到行内样式的属性。
+  console.log(box.style.left)
+  console.log(box.style['left'])
+
+  function fn (attr) {
+    console.log(box.style[attr])
+  }
+
+  fn('height')
+  fn('width')
+
+  // 得到内嵌和外链的样式(当前的样式)
+  console.log(window.getComputedStyle(box1, null).left)
+  //    console.log(box1.currentStyle.left);  // ie这么写
+</script>

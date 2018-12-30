@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: #ff0000;
+      position: absolute;
+      top: 100px;
+      left: 10px;
+    }
+  </style>
+</head>
+<body>
+<button id="btn">开始</button>
+<div id="box"></div>
+</body>
+</html>
+<script>
+  var box = document.getElementById('box')
+  var btn = document.getElementById('btn')
+  var target = 500, timer = null
+  btn.onclick = function () {
+    timer = setInterval(function () {
+      var step = (target - box.offsetLeft) / 10
+      console.log(step)
+      // step必须取整,不然产生小数后,永远达不到target==500的位置,定时器永远停不下来,盒子也到不了目的地
+      // step>0的时候,向上取整的目的是:
+      // 假设到了offsetLeft==391的位置,那么step就等于0.9,取整得1,left等于1+391=392
+      // 下一步offsetLeft==392,step==0.8,取整得1,left==1+392=393
+      // 也就是说,如果不向上取整,step就等于0,offsetLeft就一直原地踏步,显然不对。
+      // step<0的时候,同理。offsetLeft要一直减小,直到0,而不能原地踏步。
+      step = step > 0 ? Math.ceil(step) : Math.floor(step)
+      box.style.left = step + box.offsetLeft + 'px'
+      // 给个停止的条件
+      if (target == box.offsetLeft) {
+        clearInterval(timer)
+        alert('咱们到啦!')
+      }
+    }, 30)
+  }
+</script>

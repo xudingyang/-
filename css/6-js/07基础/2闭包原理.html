@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>闭包原理</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  function outFun () {
+    var num = 10
+
+    function inFun () {   //  内部的函数,可以使用,外部的函数的变量。那么把内部函数传出去,就可以间接使用函数内部的变量
+      console.log(num)
+    }
+
+    return inFun  // 不带括号
+  }
+
+  var obj = outFun()
+  // obj = function inFun() { console.log(num)}
+  obj()
+</script>

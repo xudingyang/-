@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  var num = 0
+  //        window.onresize = function () {  // ie8 等浏览器 每触发一次 ，执行两次该函数,很浪费效率。
+  //            num++;
+  //            document.title = window.innerWidth || document.documentElement.clientWidth; // 得到当前的屏幕宽度
+  //            console.log(num);
+  //        }
+
+  // 怎样弄成只执行一次呢?定时器啊!
+  //    window.onresize = function () {  // ie8 等浏览器 每触发一次 ，执行两次该函数,很浪费效率。
+  //        setTimeout(function () {
+  //            num++;
+  //            document.title = window.innerWidth || document.documentElement.clientWidth; // 得到当前的屏幕宽度
+  //            console.log(num);
+  //        },300);
+  //    }
+
+  // 这样类似block了。把函数作为参数传过去。这称为"节流",调速。节流就是让原本很快的操作慢下来,节省性能。
+  window.onresize = throttle(function () {
+    num++
+    document.title = window.innerWidth || document.documentElement.clientWidth // 得到当前的屏幕宽度
+    console.log(num)
+  }, 1000)
+
+  function throttle (fn, delay) {  // 闭包  节流
+    var timer = null
+    return function () {
+      clearTimeout(timer)
+      timer = setTimeout(fn, delay)
+    }
+  }
+
+  // 函数节流原理：用定时器，当触发一个事件时，先setTimout让这个事件延迟一会再执行，
+  // 如果在这个时间间隔内又触发了事件，那我们就clear掉原来的定时器，再setTimeout一个新的定时器延迟一会执行。
+</script>

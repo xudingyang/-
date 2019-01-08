@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>微博发布</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 520px;
+      height: auto;
+      margin: 100px auto;
+      border: 1px solid #cccccc;
+      padding: 10px;
+    }
+
+    #txt {
+      width: 380px;
+      resize: none; /*禁止用户拖动拉伸*/
+      font-size: 16px;
+    }
+
+    #box li {
+      list-style: none;
+      width: 100%;
+      height: auto;
+      line-height: 30px;
+      border: 1px dashed #cccccc;
+      margin-top: 5px;
+    }
+
+    #box li a {
+      text-decoration: none;
+      color: blue;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <span style="font-size: 16px;font-weight: bold;width: 50px;height: 30px;">微博内容:</span>
+  <textarea id="txt" name="" cols="30" rows="10"></textarea>  <!--有了宽度以后,这里的cols就没效了-->
+  <button id="btn" style="width: 50px; height: 30px; font-size: 16px; font-weight: bold;">发表</button>
+</div>
+</body>
+</html>
+<script>
+  var box = document.getElementById('box')
+  var txtArea = document.getElementById('txt')
+  var ul = document.createElement('ul')
+  box.appendChild(ul)
+  // 创建ul必须在函数外边。因为点击按钮后,是创建一个li。如果写函数里面,那么点击一次,就会把前边的ul清空了。
+  document.getElementById('btn').onclick = function () {
+    var txt = txtArea.value
+    if (txt == '') {
+      alert('不能为空')
+      return
+    }
+    var li = document.createElement('li')
+    li.innerHTML = txt + '<a href =\'javascript:;\'>删除</a>'
+    if (ul.children.length == 0) {
+      ul.appendChild(li)
+    } else {
+      ul.insertBefore(li, ul.children[0])
+    }
+    // 发布后,清空输入框
+    txtArea.value = ''
+
+    // 绑定a的事件必须放这个函数里面。
+    // 如果放外边,那么给a绑定事件的代码只会执行一次。而我们的a是动态增加的,必须跟着微博数的增加而一起改变。所以必须放里面。
+    var as = document.getElementsByTagName('a')
+    for (var i = 0; i < as.length; i++) {
+      as[i].onclick = function () {
+        ul.removeChild(this.parentNode)
+      }
+    }
+  }
+</script>

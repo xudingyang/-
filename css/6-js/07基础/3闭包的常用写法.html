@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  function outerFunc () {
+    var num = 10
+    return function innerFunc () {
+      console.log(num)
+    }
+  }
+
+  var inner = outerFunc()  // 此时返回内部函数体。即:把内部函数抠出来,赋给inner变量。
+  inner()  // 执行innerFunc()
+
+  // 其实，每个函数都算一个小闭包。只是外界的变量不是放在外界函数中,而是直接放在外界。只是对于内部函数来讲,外界与外界函数内部,不是一样么
+  var key = 10
+
+  function one () {
+    console.log(key)
+  }
+
+  // 计算器问题
+  //    function outAdd() {
+  //        var count = 0;
+  //        return function innerAdd() {
+  //            return ++count;
+  //        }
+  //    }
+  //    var add = outAdd();
+  //    alert(add());
+  //    alert(add());
+  //    alert(add());
+
+  // 下边的写法更装逼
+  var add = function () {
+    var count = 0
+    return function () {
+      return ++count
+    }
+  }()
+  alert(add())
+  alert(add())
+  alert(add())
+  // 关于计算器问题的思考
+  // 其实,计算器问题完全可以这样做:
+  // 外边搞个全局变量,再搞个自增运算的函数。
+  // 我们这里搞闭包,外层函数相当于外边,内部函数就是自增函数。
+  // 区别是,用闭包的话,整个外层函数就是一个计算器,外界直接调用就行了。
+  // 用全部变量加函数的话,那就是一个外界变量加一个函数,而全局变量是任何成员都可以改变的,而我们的要求是只有"该计算器"才能改变该值。
+</script>

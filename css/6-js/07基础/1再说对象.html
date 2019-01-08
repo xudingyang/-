@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  /* ----------------------   一个对象  -----------------------------*/
+  //       var obj = new Object();  // 声明对象  方法一
+  var obj = {}  // 声明对象  方法二
+  obj.name = '刘德华'  // 属性
+  obj.age = 55
+  obj.showName = function () {   // 声明方法    方法一定带有 ()
+    alert('俺是刘德华')
+  }
+  obj.showAge = function () {
+    alert('俺今年18岁')
+  }
+  console.log(obj.name)  // 调用属性
+  console.log(obj.age)
+  obj.showName()   //  调用方法
+  obj.showAge()
+
+  /* ----------------------   多个对象  -----------------------------*/
+  function Person (name, age) {
+    var obj = {}  // 声明对象
+    obj.name = name
+    obj.age = age
+    obj.showName = function () {
+      alert('我的名字是' + name)
+    }
+    obj.showAge = function () {
+      alert('我的年龄是' + age)
+    }
+    return obj  // 返回对象  this
+  }
+
+  var xiaoming = Person('小明', 12)   // 对象一。直接用 函数创建
+  console.log(xiaoming.name)
+  console.log(xiaoming.age)
+  xiaoming.showName()
+  var zhangsan = Person('张三', 12)    // 对象二。直接用 函数创建
+  zhangsan.showName()
+
+  var wangwu = new Person('王五', 25)     // 对象三。用new关键字声明
+  wangwu.showAge()
+
+  /* ----------------------   prototype原型  -----------------------------*/
+  var arr = []  // 数组对象
+  arr.run = function () {       // 直接添加自定义方法
+    alert('我给arr添加方法run')
+  }
+  arr.run()
+  var arr1 = []
+  //    arr1.run();     // arr1没有run方法。run只添加给了arr
+
+  Array.prototype.add1 = function () {
+    alert('我给所有数组添加了add1方法')
+  }
+  // arr.add();  // arr在prototype之前,所以加不上add()方法
+
+  var arr2 = []
+  arr2.add1()   // 可以执行
+
+</script>

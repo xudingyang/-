@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background-color: #ff00ff;
+      left: 100px;
+    }
+  </style>
+</head>
+<body>
+<button id="btn1">往左20</button>
+<button id="btn2">往右20</button>
+<div id="box"></div>
+</body>
+</html>
+<script>
+  var btn1 = document.getElementById('btn1')
+  var btn2 = document.getElementById('btn2')
+  var box = document.getElementById('box')
+  /* ----------------   普通方式  -------------------*/
+  //    btn1.onclick = function () {
+  //        box.style.left = box.offsetLeft - 20 + "px";
+  //    }
+  //    btn2.onclick = function () {
+  //        box.style.left = box.offsetLeft + 20 + "px";
+  //    }
+  // 点评:如果有100个按钮,就他么写100遍这种代码
+
+  /* ----------------   封装普通方式  -------------------*/
+  //    function move(obj,step) {
+  //        obj.style.left = obj.offsetLeft + step + "px";
+  //    }
+  //    btn1.onclick = function () {
+  //        move(box,-20);
+  //    }
+  //    btn2.onclick = function () {
+  //        move(box,20);
+  //    }
+  // 点评:还是麻烦了
+
+  /* ----------------   普通方式,浪费了js的闭包  -------------------*/
+  //    function move(obj1,obj2,step) {
+  //        obj1.onclick = function () {
+  //            obj2.style.left = obj2.offsetLeft + step + "px";
+  //        }
+  //    }
+  //    move(btn1,box,-20);
+  //    move(btn2,box,20);
+  // 点评:如果是别的语言,这封装的几乎完美。但是JS有闭包特性,岂不是浪费了。
+
+  /* ----------------   闭包传递参数方式  -------------------*/
+  function move (obj, step) {
+    return function () {
+      obj.style.left = obj.offsetLeft + step + 'px'
+    }
+  }
+
+  btn1.onclick = move(box, -5)
+  btn2.onclick = move(box, 5)
+</script>

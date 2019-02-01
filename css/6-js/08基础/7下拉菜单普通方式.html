@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    .all {
+      width: 330px;
+      height: 30px;
+      background: url(images/bg.jpg) no-repeat;
+      margin: 100px auto;
+      line-height: 30px;
+      text-align: center;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    .all ul li {
+      width: 100px;
+      height: 30px;
+      background: url(images/libg.jpg);
+      float: left;
+      margin-right: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .all ul ul {
+      position: absolute;
+      left: 0;
+      top: 30px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="all" id="list">
+  <ul>
+    <li>一级菜单
+      <ul>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+      </ul>
+    </li>
+    <li>一级菜单
+      <ul>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+      </ul>
+    </li>
+    <li>一级菜单
+      <ul>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
+<script>
+  var list = document.getElementById('list') // 大的导航条
+  var list_ul = list.children[0]  // 最外层的ul
+  // 遍历list_ul的所有孩子(一级菜单),为之绑定事件
+  for (var i = 0; i < list_ul.children.length; i++) {
+    list_ul.children[i].index = i
+    list_ul.children[i].onmouseover = function () {
+      this.children[0].style.display = 'block'
+    }
+    list_ul.children[i].onmouseout = function () {
+      this.children[0].style.display = 'none'
+    }
+  }
+</script>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    #box {
+      width: 730px;
+      height: 454px;
+      margin: 100px auto;
+      /*overflow: hidden;*/
+      position: relative;
+    }
+
+    .img-list {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .img-list li {
+      float: left;
+    }
+
+    .circles {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      margin-left: -300px;
+    }
+
+    .circles span {
+      float: left;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #cccccc;
+      text-align: center;
+      line-height: 20px;
+      cursor: pointer;
+      margin-right: 10px;
+      color: #ffffff;
+    }
+
+    .circles .last {
+      margin-right: 0;
+    }
+
+    .circles .current {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <ul class="img-list">
+    <li><img src="images/11.jpg" alt=""></li>
+    <li><img src="images/22.jpg" alt=""></li>
+    <li><img src="images/33.jpg" alt=""></li>
+    <li><img src="images/44.jpg" alt=""></li>
+    <li><img src="images/55.jpg" alt=""></li>
+    <li><img src="images/66.jpg" alt=""></li>
+    <li><img src="images/66.jpg" alt=""></li>
+    <li><img src="images/66.jpg" alt=""></li>
+  </ul>
+</div>
+</body>
+</html>
+<script>
+  var box = document.getElementById('box')
+  var lis = box.children[0].children
+  var circles = document.createElement('div')
+  box.appendChild(circles)
+  circles.setAttribute('class', 'circles')
+  var span
+  for (var i = 0; i < lis.length; i++) {
+    span = document.createElement('span')
+    span.innerHTML = i + 1
+    circles.appendChild(span)
+  }
+  circles.children[0].className = 'current'
+  circles.children[lis.length - 1].setAttribute('class', 'last')
+  circles.style.margin = '0 0 0 ' + (-0.5 * circles.offsetWidth) + 'px'
+
+  // 鼠标悬浮小圆点,切换图片
+  var spans = circles.children
+  for (var i = 0; i < spans.length; i++) {
+    spans[i].index = i
+    /*
+     spans[i].onmouseover = function () {
+     for (var j = 0; j < spans.length; j++) {
+     spans[j].className = "";
+     lis[j].style.display = "none";
+     }
+     this.className = "current";
+     lis[this.index].style.display = "block";
+     }
+     */
+
+    // 节流
+//        下边是错误的版本。this指向谁?
+//        spans[i].onmouseover = throttle(function () {
+//            for (var j = 0; j < spans.length; j++) {
+//                spans[j].className = "";
+//                lis[j].style.display = "none";
+//            }
+//            this.className = "current";
+//            lis[this.index].style.display = "block";
+//        },100)();
+
+    var timer = null
+    spans[i].onmouseover = function (num, arg) {
+//            alert(this);
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(function () {
+          for (var j = 0; j < spans.length; j++) {
+            spans[j].className = ''
+            lis[j].style.display = 'none'
+          }
+          spans[num].className = 'current'
+          lis[num].style.display = 'block'
+        }, 300)
+      }
+    }(i, this)  // 这里的参数传this也不对。因为这里的this指向window,不是指向spans[i]
+
+    // 若不清除timer,那么鼠标从1拖到6的时候,1到6会依次变色,我们要的是6立即变色,中间的不变。不符合我们的要求。
+    spans[i].onmouseout = function () {
+      clearTimeout(timer)
+    }
+
+  }
+
+  //    function throttle(fn, delay, num) {  // 闭包  节流
+  //        var timer = null;
+  //        return function () {
+  //            clearTimeout(timer);
+  //            timer = setTimeout(fn, delay);
+  //        }
+  //    }
+</script>

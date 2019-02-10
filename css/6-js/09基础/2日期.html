@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      width: 800px;
+      height: 100px;
+      border: 1px solid #cccccc;
+    }
+  </style>
+</head>
+<body>
+<div id="box1"></div>
+<div id="box2"></div>
+<div id="box3"></div>
+</body>
+</html>
+<script>
+  var box1 = document.getElementById('box1')
+  var box2 = document.getElementById('box2')
+  var box3 = document.getElementById('box3')
+
+  // 一、日期的创建方式。都是自动转为本地时区
+  var d1 = new Date()   // Thu Oct 13 2016 11:17:52 GMT+0800 (CST)    当前时间
+  var d2 = new Date(1476320401030)  // Thu Oct 13 2016 09:00:01 GMT+0800 (CST)
+  var d3 = new Date('2015-9-10 12:34:45')   // 默认情况下,中文习惯下,这逼只认识这格式的。或者用英文的UTC格式表示
+  new Date('2015/12/12')   // 反斜杠也认识
+  new Date(2015, 12, 12)   // 逗号隔开,不加引号
+  var d4 = new Date(2015, 11, 21, 12, 13, 56, 59)  // Mon Dec 21 2015 12:13:56 GMT+0800 (CST)
+
+  box1.innerHTML = 'new Date() ------------------------ ' + d1 + '</br>'
+    + 'new Date(1476320401030) ------------------- ' + d2 + '</br>'
+    + 'new Date(2016-9-23) ------------------ ' + d3 + '</br>'
+    + 'new Date(2015, 11, 21, 12, 13, 56, 59) ---- ' + d4
+
+  // 二、获取1970至今的毫秒数。本地时区  getTime()或者valueOf()或者Date.now()或者+new Date(),提倡getTime()
+  box2.innerHTML = '1970至今的毫秒数:' + d1.getTime() + '</br>'
+  console.log(+new Date())
+  console.log(Date.now())
+  console.log('当前的毫秒数' + d1.getMilliseconds())  // 当前时间的毫秒。时:分:秒:毫秒
+  // 三、日历
+  var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  console.log(week[d1.getDay()])   // getDay()  返回星期的下标
+  console.log(d1.getDate())        // getDate()  返回日期中的"日"
+
+  // 四、获取时间组件
+  var h = d1.getHours()
+  var m = d1.getMinutes()
+  var s = d1.getSeconds()
+  console.log('时分秒是:' + h + ',' + m + ',' + s)   // 打印 14,15,11
+  var ms = d1.getMilliseconds()  // 537
+  var month = d1.getMonth()      // 9   月份从0开始计数[0,1,...,11]
+  var day = d1.getDate()         // 13  日期从1开始计数
+  var fullYear = d1.getFullYear() // 2016    从 Date 对象以四位数字返回年份。getYear已废弃,最好不要使用。
+  console.log(ms + ',' + month + ',' + day + ',' + 'year' + ',' + fullYear)
+
+  // 五、定时器:计算今天距2018年元旦还有多久
+  var endTime = new Date('2018/1/1 0:0:0').getTime()
+  var timer = null
+  var startTime = 0
+  timer = setInterval(function () {
+    startTime = new Date().getTime()
+    var delta = endTime - startTime
+    var second = parseInt(delta / 1000) % 60
+    var minute = parseInt(delta / 1000 / 60) % 60
+    var hour = parseInt(delta / 1000 / 3600) % 24
+    var day = parseInt(delta / 1000 / 3600 / 24)
+    box3.innerHTML = '距离2018年元旦还有' + day + '天' + hour + '时' + minute + '分' + second + '秒'
+  }, 1000)
+  if (endTime <= startTime) {
+    clearInterval(timer)
+  }
+</script>
